@@ -34,14 +34,27 @@ CREATE TABLE IF NOT EXISTS usuario
     contraseña varchar(20),
     PRIMARY KEY (ci)
 );
+CREATE TABLE IF NOT EXISTS figurita
+(
+    numero int,
+    pais   varchar(3),
+    foto   bytea,
+    CONSTRAINT figurita_uniq_idx PRIMARY KEY (numero, pais),
+    FOREIGN KEY (pais) REFERENCES pais_figurita (pais)
+);
 CREATE TABLE IF NOT EXISTS publicacion
 (
-    ci_usuario bigint,
-    fecha      timestamp,
-    estado     varchar(20),
+    ci_usuario      bigint,
+    fecha           timestamp,
+    estado          varchar(20),
+    numero_figurita int,
+    pais_figurita   varchar(3),
+    estado_figurita varchar(20),
     CONSTRAINT publicacion_uniq_idx PRIMARY KEY (ci_usuario, fecha),
     FOREIGN KEY (ci_usuario) REFERENCES usuario (ci),
-    FOREIGN KEY (estado) REFERENCES estado_publicacion (estado)
+    FOREIGN KEY (estado) REFERENCES estado_publicacion (estado),
+    FOREIGN KEY (numero_figurita, pais_figurita) REFERENCES figurita (numero, pais),
+    FOREIGN KEY (estado_figurita) REFERENCES estado_figurita (estado)
 );
 CREATE TABLE IF NOT EXISTS oferta
 (
@@ -60,35 +73,16 @@ CREATE TABLE IF NOT EXISTS oferta
     FOREIGN KEY (tipo) REFERENCES tipo_oferta (tipo),
     FOREIGN KEY (estado) REFERENCES estado_oferta (estado)
 );
-CREATE TABLE IF NOT EXISTS figurita
-(
-    numero int,
-    pais   varchar(3),
-    foto   bytea,
-    CONSTRAINT figurita_uniq_idx PRIMARY KEY (numero, pais),
-    FOREIGN KEY (pais) REFERENCES pais_figurita (pais)
-);
 
-CREATE TABLE IF NOT EXISTS publicacion_tiene_ofertada_figurita
-(
-    ci_usuario        bigint,
-    numero_figurita   int,
-    pais_figurita     varchar(3),
-    fecha_publicacion timestamp,
-    estado_figurita   varchar(20),
-    CONSTRAINT pub_tiene_ofertada_fig_uniq_idx PRIMARY KEY (ci_usuario, fecha_publicacion),
-    FOREIGN KEY (ci_usuario, fecha_publicacion) REFERENCES publicacion (ci_usuario, fecha),
-    FOREIGN KEY (numero_figurita, pais_figurita) REFERENCES figurita (numero, pais),
-    FOREIGN KEY (estado_figurita) REFERENCES estado_figurita (estado)
-);
 CREATE TABLE IF NOT EXISTS publicacion_tiene_interesada_figurita
 (
-    ci_usuario        bigint,
-    numero_figurita   int,
-    pais_figurita     varchar(3),
-    fecha_publicacion timestamp,
-    CONSTRAINT pub_tiene_interesada_fig_uniq_idx PRIMARY KEY (ci_usuario, numero_figurita, pais_figurita, fecha_publicacion),
-    FOREIGN KEY (ci_usuario, fecha_publicacion) REFERENCES publicacion (ci_usuario, fecha),
+    ci_usuario_publicacion bigint,
+    numero_figurita        int,
+    pais_figurita          varchar(3),
+    fecha_publicacion      timestamp,
+    CONSTRAINT pub_tiene_interesada_fig_uniq_idx PRIMARY KEY (ci_usuario_publicacion, numero_figurita, pais_figurita,
+                                                              fecha_publicacion),
+    FOREIGN KEY (ci_usuario_publicacion, fecha_publicacion) REFERENCES publicacion (ci_usuario, fecha),
     FOREIGN KEY (numero_figurita, pais_figurita) REFERENCES figurita (numero, pais)
 );
 CREATE TABLE IF NOT EXISTS oferta_tiene_figurita
@@ -110,51 +104,87 @@ CREATE TABLE IF NOT EXISTS oferta_tiene_figurita
     FOREIGN KEY (estado_figurita) REFERENCES estado_figurita (estado)
 );
 
+--datos fijos
 INSERT INTO estado_figurita
-VALUES ('nueva'),
-       ('doblada'),
-       ('rota');
+VALUES ('NUEVA'),
+       ('DOBLADA'),
+       ('ROTA');
 INSERT INTO estado_oferta
-VALUES ('rechazada'),
-       ('contraofertada'),
-       ('aceptada');
+VALUES ('RECHAZADA'),
+       ('CONTRAOFERTADA'),
+       ('PENDIENTE'),
+       ('ACEPTADA');
 INSERT INTO estado_publicacion
-VALUES ('activa'),
-       ('no_activa');
+VALUES ('ACTIVA'),
+       ('INACTIVA');
 INSERT INTO tipo_oferta
-VALUES ('oferta'),
-       ('contraoferta');
+VALUES ('OFERTA'),
+       ('CONTRAOFERTA');
 INSERT INTO pais_figurita
-VALUES ('qat'),
-       ('ecu'),
-       ('sen'),
-       ('ned'),
-       ('eng'),
-       ('irn'),
-       ('usa'),
-       ('wal'),
-       ('arg'),
-       ('ksa'),
-       ('mex'),
-       ('pol'),
-       ('fra'),
-       ('aus'),
-       ('den'),
-       ('tun'),
-       ('esp'),
-       ('crc'),
-       ('ger'),
-       ('jpn'),
-       ('bel'),
-       ('can'),
-       ('mar'),
-       ('cro'),
-       ('bra'),
-       ('srb'),
-       ('sui'),
-       ('cmr'),
-       ('por'),
-       ('gha'),
-       ('uru'),
-       ('kor'),
-       ('fwc');
+VALUES ('QAT'),
+       ('ECU'),
+       ('SEN'),
+       ('NED'),
+       ('ENG'),
+       ('IRN'),
+       ('USA'),
+       ('WAL'),
+       ('ARG'),
+       ('KSA'),
+       ('MEX'),
+       ('POL'),
+       ('FRA'),
+       ('AUS'),
+       ('DEN'),
+       ('TUN'),
+       ('ESP'),
+       ('CRC'),
+       ('GER'),
+       ('JPN'),
+       ('BEL'),
+       ('CAN'),
+       ('MAR'),
+       ('CRO'),
+       ('BRA'),
+       ('SRB'),
+       ('SUI'),
+       ('CMR'),
+       ('POR'),
+       ('GHA'),
+       ('URU'),
+       ('KOR'),
+       ('FWC');
+
+--datos de prueba
+    --falta hashear password
+INSERT INTO usuario
+VALUES (51630541, 'Lautaro', 'da Rosa', '098334659', 'lautaro.darosa@correo.ucu.edu.uy', 'contraseña'),
+       (12345678, 'Nicolas', 'Velazquez', '00000000', 'nicolas.velazquez@correo.ucu.edu.uy', 'contraseña'),
+       (87654321, 'Martin', 'Perciante', '11111111', 'martin.perciante@correo.ucu.edu.uy', 'contraseña');
+    --falta agregar foto, convert to URI
+INSERT INTO figurita
+VALUES (9, 'URU', ''),
+       (10, 'ARG', ''),
+       (10, 'BRA', '');
+INSERT INTO publicacion
+VALUES (51630541, '2022-11-05 22:22:22', 'ACTIVA', 10, 'ARG', 'NUEVA');
+INSERT INTO publicacion_tiene_interesada_figurita
+VALUES (51630541, 9, 'URU', '2022-11-05 22:22:22'),
+       (51630541, 10, 'BRA', '2022-11-05 22:22:22');
+INSERT INTO oferta
+VALUES (12345678, 51630541, '2022-11-05 23:00:00', '2022-11-05 22:22:22', 'OFERTA', 'PENDIENTE', null, null),
+       (87654321, 51630541, '2022-11-06 02:00:00', '2022-11-05 22:22:22', 'OFERTA', 'PENDIENTE', null, null);
+INSERT INTO oferta_tiene_figurita
+VALUES (51630541, '2022-11-05 22:22:22', 12345678, '2022-11-05 23:00:00', 9, 'URU', 'DOBLADA'),
+       (51630541, '2022-11-05 22:22:22', 12345678, '2022-11-05 23:00:00', 10, 'BRA', 'ROTA'),
+       (51630541, '2022-11-05 22:22:22', 87654321, '2022-11-06 02:00:00', 9, 'URU', 'NUEVA');
+INSERT INTO oferta
+VALUES (51630541, 51630541, '2022-11-07 15:00:00', '2022-11-05 22:22:22', 'CONTRAOFERTA', 'PENDIENTE', null, null);
+UPDATE oferta
+SET ci_usuario_contraoferta = 51630541,
+    fecha_contraoferta      = '2022-11-07 15:00:00',
+    estado                  = 'CONTRAOFERTADA'
+WHERE ci_usuario_oferta = 12345678
+  AND ci_usuario_publicacion = 51630541
+  AND fecha_oferta = '2022-11-05 23:00:00'
+  AND fecha_publicacion = '2022-11-05 22:22:22';

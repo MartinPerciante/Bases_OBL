@@ -1,0 +1,56 @@
+JFDML JFormDesigner: "8.0.0.0.194" Java: "11.0.14.1" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class java.awt.BorderLayout ) ) {
+			name: "this"
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.BorderLayout ) ) {
+				name: "dialogPane"
+				"border": new javax.swing.border.EmptyBorder( 12, 12, 12, 12 )
+				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+					"$horizontalGroup": "par l {seq t {space :p:47:p, par t {comp loginButton::::255:x, seq {par l {comp passwordLabel::::75:x, comp documentLabel:::::x}, space u:::p, par l {comp documentTextField:::p:168:p, comp passwordTextField:::p:168:p}}}, space :p:72:p}}"
+					"$verticalGroup": "par l {seq {space :p:44:p, par b {comp documentTextField::b:p::p, comp documentLabel::b:p::p}, space s:::p, par b {comp passwordTextField::b:p::p, comp passwordLabel::b:p::p}, space ::61:x, comp loginButton:::p::p}}"
+				} ) {
+					name: "contentPanel"
+					add( new FormComponent( "javax.swing.JTextField" ) {
+						name: "documentTextField"
+					} )
+					add( new FormComponent( "javax.swing.JTextField" ) {
+						name: "passwordTextField"
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "documentLabel"
+						"text": "Documento"
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "passwordLabel"
+						"text": "Contraseña"
+					} )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "loginButton"
+						"text": "INGRESAR"
+					} )
+				}, new FormLayoutConstraints( class java.lang.String ) {
+					"value": "Center"
+				} )
+				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.GridBagLayout ) {
+					"$columnSpecs": "0:1.0, 80"
+					"$rowSpecs": "0"
+					"$hGap": 5
+					"$vGap": 5
+				} ) {
+					name: "buttonBar"
+					"border": new javax.swing.border.EmptyBorder( 12, 0, 0, 0 )
+				}, new FormLayoutConstraints( class java.lang.String ) {
+					"value": "South"
+				} )
+			}, new FormLayoutConstraints( class java.lang.String ) {
+				"value": "Center"
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 50, 40 )
+			"size": new java.awt.Dimension( 400, 300 )
+		} )
+	}
+}
