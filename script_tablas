@@ -26,12 +26,12 @@ CREATE TABLE IF NOT EXISTS estado_publicacion
 
 CREATE TABLE IF NOT EXISTS usuario
 (
-    ci         bigint,
-    nombre     varchar(30),
-    apellido   varchar(30),
-    telefono   varchar(15),
-    email      varchar(50),
-    contraseña varchar(20),
+    ci       bigint,
+    nombre   varchar(30),
+    apellido varchar(30),
+    telefono varchar(15),
+    email    varchar(50),
+    password varchar(20),
     PRIMARY KEY (ci)
 );
 CREATE TABLE IF NOT EXISTS figurita
@@ -160,24 +160,41 @@ VALUES ('QAT'),
 INSERT INTO usuario
 VALUES (51630541, 'Lautaro', 'da Rosa', '098334659', 'lautaro.darosa@correo.ucu.edu.uy', 'contraseña'),
        (12345678, 'Nicolas', 'Velazquez', '00000000', 'nicolas.velazquez@correo.ucu.edu.uy', 'contraseña'),
-       (87654321, 'Martin', 'Perciante', '11111111', 'martin.perciante@correo.ucu.edu.uy', 'contraseña');
+       (87654321, 'Martin', 'Perciante', '11111111', 'martin.perciante@correo.ucu.edu.uy', 'contraseña'),
+       (14327694, 'Maria', 'Ferreira', '095346387', 'maria.ferreira@hotmail.com', 'contraseña'),
+       (23874987, 'Julieta', 'Toledo', '091314739', 'julieta.toledo@gmail.com', 'contraseña');
     --falta agregar foto, convert to URI
 INSERT INTO figurita
-VALUES (9, 'URU', ''),
-       (10, 'ARG', ''),
-       (10, 'BRA', '');
+VALUES (1, 'URU', ''),
+       (1, 'ARG', ''),
+       (1, 'BRA', ''),
+       (2, 'BRA', ''),
+       (3, 'BRA', ''),
+       (4, 'BRA', ''),
+       (5, 'BRA', ''),
+       (6, 'BRA', ''),
+       (7, 'BRA', '');
 INSERT INTO publicacion
-VALUES (51630541, '2022-11-05 22:22:22', 'ACTIVA', 10, 'ARG', 'NUEVA');
+VALUES (51630541, '2022-11-05 22:22:22', 'ACTIVA', 1, 'ARG', 'NUEVA'),
+       (14327694, '2022-12-09 21:00:15', 'ACTIVA', 1, 'URU', 'DOBLADA'),
+       (23874987, '2022-12-18 11:13:56', 'ACTIVA', 1, 'BRA', 'ROTA');
 INSERT INTO publicacion_tiene_interesada_figurita
-VALUES (51630541, 9, 'URU', '2022-11-05 22:22:22'),
-       (51630541, 10, 'BRA', '2022-11-05 22:22:22');
+VALUES (51630541, 1, 'URU', '2022-11-05 22:22:22'),
+       (51630541, 1, 'BRA', '2022-11-05 22:22:22'),
+       (14327694, 2, 'BRA', '2022-12-09 21:00:15'),
+       (14327694, 3, 'BRA', '2022-12-09 21:00:15'),
+       (14327694, 4, 'BRA', '2022-12-09 21:00:15');
 INSERT INTO oferta
 VALUES (12345678, 51630541, '2022-11-05 23:00:00', '2022-11-05 22:22:22', 'OFERTA', 'PENDIENTE', null, null),
-       (87654321, 51630541, '2022-11-06 02:00:00', '2022-11-05 22:22:22', 'OFERTA', 'PENDIENTE', null, null);
+       (87654321, 51630541, '2022-11-06 02:00:00', '2022-11-05 22:22:22', 'OFERTA', 'PENDIENTE', null, null),
+       (12345678, 14327694, '2022-12-26 02:00:15', '2022-12-09 21:00:15', 'OFERTA', 'RECHAZADA', null, null),
+       (87654321, 14327694, '2022-12-26 05:10:20', '2022-12-09 21:00:15', 'OFERTA', 'ACEPTADA', null, null);
 INSERT INTO oferta_tiene_figurita
-VALUES (51630541, '2022-11-05 22:22:22', 12345678, '2022-11-05 23:00:00', 9, 'URU', 'DOBLADA'),
-       (51630541, '2022-11-05 22:22:22', 12345678, '2022-11-05 23:00:00', 10, 'BRA', 'ROTA'),
-       (51630541, '2022-11-05 22:22:22', 87654321, '2022-11-06 02:00:00', 9, 'URU', 'NUEVA');
+VALUES (51630541, '2022-11-05 22:22:22', 12345678, '2022-11-05 23:00:00', 1, 'URU', 'DOBLADA'),
+       (51630541, '2022-11-05 22:22:22', 12345678, '2022-11-05 23:00:00', 1, 'BRA', 'ROTA'),
+       (51630541, '2022-11-05 22:22:22', 87654321, '2022-11-06 02:00:00', 1, 'URU', 'NUEVA'),
+       (14327694, '2022-12-09 21:00:15', 12345678, '2022-12-26 02:00:15', 3, 'BRA', 'NUEVA'),
+       (14327694, '2022-12-09 21:00:15', 87654321, '2022-12-26 05:10:20', 4, 'BRA', 'DOBLADA');
 INSERT INTO oferta
 VALUES (51630541, 51630541, '2022-11-07 15:00:00', '2022-11-05 22:22:22', 'CONTRAOFERTA', 'PENDIENTE', null, null);
 UPDATE oferta
