@@ -1,3 +1,4 @@
+--tablas de atributos multivaluados
 CREATE TABLE IF NOT EXISTS estado_figurita
 (
     estado varchar(20),
@@ -24,6 +25,7 @@ CREATE TABLE IF NOT EXISTS estado_publicacion
     PRIMARY KEY (estado)
 );
 
+--tablas de entidades
 CREATE TABLE IF NOT EXISTS usuario
 (
     ci       bigint,
@@ -31,7 +33,7 @@ CREATE TABLE IF NOT EXISTS usuario
     apellido varchar(30),
     telefono varchar(15),
     email    varchar(50),
-    password varchar(20),
+    password varchar(70),
     PRIMARY KEY (ci)
 );
 CREATE TABLE IF NOT EXISTS figurita
@@ -74,6 +76,7 @@ CREATE TABLE IF NOT EXISTS oferta
     FOREIGN KEY (estado) REFERENCES estado_oferta (estado)
 );
 
+--tablas de relaciones entre entidades
 CREATE TABLE IF NOT EXISTS publicacion_tiene_interesada_figurita
 (
     ci_usuario_publicacion bigint,
@@ -156,24 +159,22 @@ VALUES ('QAT'),
        ('FWC');
 
 --datos de prueba
-    --falta hashear password
 INSERT INTO usuario
-VALUES (51630541, 'Lautaro', 'da Rosa', '098334659', 'lautaro.darosa@correo.ucu.edu.uy', 'contraseña'),
-       (12345678, 'Nicolas', 'Velazquez', '00000000', 'nicolas.velazquez@correo.ucu.edu.uy', 'contraseña'),
-       (87654321, 'Martin', 'Perciante', '11111111', 'martin.perciante@correo.ucu.edu.uy', 'contraseña'),
-       (14327694, 'Maria', 'Ferreira', '095346387', 'maria.ferreira@hotmail.com', 'contraseña'),
-       (23874987, 'Julieta', 'Toledo', '091314739', 'julieta.toledo@gmail.com', 'contraseña');
-    --falta agregar foto, convert to URI
+VALUES (51630541, 'Lautaro', 'da Rosa', '098334659', 'lautaro.darosa@correo.ucu.edu.uy', 'edf9cf90718610ee7de53c0dcc250739239044de9ba115bb0ca6026c3e4958a5'),
+       (12345678, 'Nicolas', 'Velazquez', '00000000', 'nicolas.velazquez@correo.ucu.edu.uy', '96cae35ce8a9b0244178bf28e4966c2ce1b8385723a96a6b838858cdd6ca0a1e'),
+       (87654321, 'Martin', 'Perciante', '11111111', 'martin.perciante@correo.ucu.edu.uy', '5fd924625f6ab16a19cc9807c7c506ae1813490e4ba675f843d5a10e0baacdb8'),
+       (14327694, 'Maria', 'Ferreira', '095346387', 'maria.ferreira@hotmail.com', 'd988874ac3e352b5953bf1e05c2e14e0d271e6f16446f74cc0ffdad8788e68c9'),
+       (23874987, 'Julieta', 'Toledo', '091314739', 'julieta.toledo@gmail.com', '2aea9c0b23308c47f0a1da7582a60c02dfeea0240f7422bb8670d393e7d44cd6');
 INSERT INTO figurita
-VALUES (1, 'URU', ''),
-       (1, 'ARG', ''),
-       (1, 'BRA', ''),
-       (2, 'BRA', ''),
-       (3, 'BRA', ''),
-       (4, 'BRA', ''),
-       (5, 'BRA', ''),
-       (6, 'BRA', ''),
-       (7, 'BRA', '');
+VALUES (1, 'URU', 'luis-suarez.png'),
+       (1, 'ARG', 'lionel-messi.png'),
+       (1, 'BRA', 'vinicius-jr.png'),
+       (2, 'BRA', 'thiago-silva.png'),
+       (3, 'BRA', 'ederson.png'),
+       (4, 'BRA', 'allison.png'),
+       (5, 'BRA', 'gabriel-jesus.png'),
+       (6, 'BRA', 'raphinha.png'),
+       (7, 'BRA', 'neymar-jr.png');
 INSERT INTO publicacion
 VALUES (51630541, '2022-11-05 22:22:22', 'ACTIVA', 1, 'ARG', 'NUEVA'),
        (14327694, '2022-12-09 21:00:15', 'ACTIVA', 1, 'URU', 'DOBLADA'),
