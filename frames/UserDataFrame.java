@@ -1,0 +1,173 @@
+/*
+ * Created by JFormDesigner on Thu Nov 10 18:18:54 UYT 2022
+ */
+
+package frames;
+
+import java.awt.*;
+import javax.swing.*;
+import javax.swing.GroupLayout;
+import javax.swing.LayoutStyle;
+import javax.swing.border.*;
+
+/**
+ * @author unknown
+ */
+public class UserDataFrame extends JFrame {
+    public UserDataFrame() {
+        initComponents();
+    }
+
+    private void initComponents() {
+        // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
+        dialogPane = new JPanel();
+        contentPanel = new JPanel();
+        documentLabel = new JLabel();
+        documentTextField = new JTextField();
+        lastNameLabel = new JLabel();
+        lastNameField = new JTextField();
+        firstNameLabel = new JLabel();
+        firstNameTextField = new JTextField();
+        emailLabel = new JLabel();
+        emailTextField = new JTextField();
+        phoneTextField = new JTextField();
+        phoneLabel = new JLabel();
+        changePasswordButton = new JButton();
+        saveButton = new JButton();
+
+        //======== this ========
+        var contentPane = getContentPane();
+        contentPane.setLayout(new BorderLayout());
+
+        //======== dialogPane ========
+        {
+            dialogPane.setBorder(new EmptyBorder(12, 12, 12, 12));
+            dialogPane.setLayout(new BorderLayout());
+
+            //======== contentPanel ========
+            {
+
+                //---- documentLabel ----
+                documentLabel.setText("Documento");
+
+                //---- lastNameLabel ----
+                lastNameLabel.setText("Apellido");
+
+                //---- firstNameLabel ----
+                firstNameLabel.setText("Nombre");
+
+                //---- emailLabel ----
+                emailLabel.setText("Email");
+
+                //---- phoneLabel ----
+                phoneLabel.setText("Tel\u00e9fono");
+
+                //---- changePasswordButton ----
+                changePasswordButton.setText("CAMBIAR CONTRASE\u00d1A");
+
+                //---- saveButton ----
+                saveButton.setText("GUARDAR");
+
+                GroupLayout contentPanelLayout = new GroupLayout(contentPanel);
+                contentPanel.setLayout(contentPanelLayout);
+                contentPanelLayout.setHorizontalGroup(
+                    contentPanelLayout.createParallelGroup()
+                        .addGroup(contentPanelLayout.createSequentialGroup()
+                            .addGroup(contentPanelLayout.createParallelGroup()
+                                .addGroup(contentPanelLayout.createSequentialGroup()
+                                    .addGap(23, 23, 23)
+                                    .addGroup(contentPanelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING, false)
+                                        .addGroup(contentPanelLayout.createSequentialGroup()
+                                            .addComponent(phoneLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addGap(12, 12, 12)
+                                            .addComponent(phoneTextField, GroupLayout.PREFERRED_SIZE, 78, GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(contentPanelLayout.createSequentialGroup()
+                                            .addComponent(firstNameLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addGap(12, 12, 12)
+                                            .addComponent(firstNameTextField, GroupLayout.PREFERRED_SIZE, 78, GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(contentPanelLayout.createSequentialGroup()
+                                            .addComponent(documentLabel)
+                                            .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addComponent(documentTextField, GroupLayout.PREFERRED_SIZE, 78, GroupLayout.PREFERRED_SIZE)))
+                                    .addGap(18, 18, 18)
+                                    .addGroup(contentPanelLayout.createParallelGroup()
+                                        .addGroup(contentPanelLayout.createSequentialGroup()
+                                            .addComponent(lastNameLabel, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
+                                            .addGap(12, 12, 12)
+                                            .addComponent(lastNameField, GroupLayout.PREFERRED_SIZE, 78, GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(contentPanelLayout.createSequentialGroup()
+                                            .addComponent(emailLabel, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
+                                            .addGap(12, 12, 12)
+                                            .addComponent(emailTextField, GroupLayout.PREFERRED_SIZE, 78, GroupLayout.PREFERRED_SIZE)))
+                                    .addGap(0, 0, Short.MAX_VALUE))
+                                .addGroup(contentPanelLayout.createSequentialGroup()
+                                    .addContainerGap()
+                                    .addComponent(changePasswordButton, GroupLayout.PREFERRED_SIZE, 243, GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(saveButton, GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)))
+                            .addContainerGap())
+                );
+                contentPanelLayout.setVerticalGroup(
+                    contentPanelLayout.createParallelGroup()
+                        .addGroup(contentPanelLayout.createSequentialGroup()
+                            .addContainerGap()
+                            .addGroup(contentPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                .addComponent(documentTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(documentLabel))
+                            .addGap(18, 18, 18)
+                            .addGroup(contentPanelLayout.createParallelGroup()
+                                .addGroup(contentPanelLayout.createSequentialGroup()
+                                    .addGap(7, 7, 7)
+                                    .addComponent(firstNameLabel)
+                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED))
+                                .addGroup(contentPanelLayout.createParallelGroup()
+                                    .addGroup(GroupLayout.Alignment.TRAILING, contentPanelLayout.createSequentialGroup()
+                                        .addComponent(firstNameTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18))
+                                    .addGroup(contentPanelLayout.createSequentialGroup()
+                                        .addGroup(contentPanelLayout.createParallelGroup()
+                                            .addGroup(contentPanelLayout.createSequentialGroup()
+                                                .addGap(7, 7, 7)
+                                                .addComponent(lastNameLabel))
+                                            .addComponent(lastNameField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                        .addGap(18, 18, 18))))
+                            .addGroup(contentPanelLayout.createParallelGroup()
+                                .addComponent(emailTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(phoneTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                .addGroup(contentPanelLayout.createSequentialGroup()
+                                    .addGap(7, 7, 7)
+                                    .addGroup(contentPanelLayout.createParallelGroup()
+                                        .addComponent(emailLabel)
+                                        .addComponent(phoneLabel))))
+                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
+                            .addGroup(contentPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                .addComponent(changePasswordButton, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(saveButton, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE))
+                            .addContainerGap())
+                );
+            }
+            dialogPane.add(contentPanel, BorderLayout.CENTER);
+        }
+        contentPane.add(dialogPane, BorderLayout.CENTER);
+        pack();
+        setLocationRelativeTo(getOwner());
+        // JFormDesigner - End of component initialization  //GEN-END:initComponents  @formatter:on
+    }
+
+    // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables  @formatter:off
+    private JPanel dialogPane;
+    private JPanel contentPanel;
+    private JLabel documentLabel;
+    private JTextField documentTextField;
+    private JLabel lastNameLabel;
+    private JTextField lastNameField;
+    private JLabel firstNameLabel;
+    private JTextField firstNameTextField;
+    private JLabel emailLabel;
+    private JTextField emailTextField;
+    private JTextField phoneTextField;
+    private JLabel phoneLabel;
+    private JButton changePasswordButton;
+    private JButton saveButton;
+    // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
+}

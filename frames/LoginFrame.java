@@ -1,6 +1,10 @@
 package frames;
 
+import controller.UserController;
+
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.*;
 import javax.swing.GroupLayout;
 import javax.swing.LayoutStyle;
@@ -24,12 +28,19 @@ public class LoginFrame extends JFrame {
         dialogPane = new JPanel();
         contentPanel = new JPanel();
         documentTextField = new JTextField();
-        passwordTextField = new JTextField();
         documentLabel = new JLabel();
         passwordLabel = new JLabel();
         loginButton = new JButton();
-        buttonBar = new JPanel();
+        passwordTextField = new JPasswordField();
 
+        userController = new UserController();
+
+        loginButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                userController.isInfoLogOk(documentLabel.getText(), passwordLabel.getText());
+            }
+        });
         //======== this ========
         var contentPane = getContentPane();
         contentPane.setLayout(new BorderLayout());
@@ -55,24 +66,24 @@ public class LoginFrame extends JFrame {
                 contentPanel.setLayout(contentPanelLayout);
                 contentPanelLayout.setHorizontalGroup(
                     contentPanelLayout.createParallelGroup()
-                        .addGroup(GroupLayout.Alignment.TRAILING, contentPanelLayout.createSequentialGroup()
-                            .addGap(47, 47, 47)
-                            .addGroup(contentPanelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                                .addComponent(loginButton, GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE)
+                        .addGroup(contentPanelLayout.createSequentialGroup()
+                            .addGap(48, 48, 48)
+                            .addGroup(contentPanelLayout.createParallelGroup()
+                                .addComponent(loginButton, GroupLayout.PREFERRED_SIZE, 276, GroupLayout.PREFERRED_SIZE)
                                 .addGroup(contentPanelLayout.createSequentialGroup()
-                                    .addGroup(contentPanelLayout.createParallelGroup()
-                                        .addComponent(passwordLabel, GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE)
-                                        .addComponent(documentLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addGroup(contentPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(documentLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(passwordLabel, GroupLayout.PREFERRED_SIZE, 96, GroupLayout.PREFERRED_SIZE))
                                     .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addGroup(contentPanelLayout.createParallelGroup()
-                                        .addComponent(documentTextField, GroupLayout.PREFERRED_SIZE, 168, GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(contentPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(documentTextField)
                                         .addComponent(passwordTextField, GroupLayout.PREFERRED_SIZE, 168, GroupLayout.PREFERRED_SIZE))))
-                            .addGap(72, 72, 72))
+                            .addContainerGap(50, Short.MAX_VALUE))
                 );
                 contentPanelLayout.setVerticalGroup(
                     contentPanelLayout.createParallelGroup()
                         .addGroup(contentPanelLayout.createSequentialGroup()
-                            .addGap(44, 44, 44)
+                            .addGap(46, 46, 46)
                             .addGroup(contentPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                                 .addComponent(documentTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                                 .addComponent(documentLabel))
@@ -80,20 +91,12 @@ public class LoginFrame extends JFrame {
                             .addGroup(contentPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                                 .addComponent(passwordTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                                 .addComponent(passwordLabel))
-                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
-                            .addComponent(loginButton))
+                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
+                            .addComponent(loginButton)
+                            .addGap(18, 18, 18))
                 );
             }
             dialogPane.add(contentPanel, BorderLayout.CENTER);
-
-            //======== buttonBar ========
-            {
-                buttonBar.setBorder(new EmptyBorder(12, 0, 0, 0));
-                buttonBar.setLayout(new GridBagLayout());
-                ((GridBagLayout)buttonBar.getLayout()).columnWidths = new int[] {0, 80};
-                ((GridBagLayout)buttonBar.getLayout()).columnWeights = new double[] {1.0, 0.0};
-            }
-            dialogPane.add(buttonBar, BorderLayout.SOUTH);
         }
         contentPane.add(dialogPane, BorderLayout.CENTER);
         pack();
@@ -105,10 +108,9 @@ public class LoginFrame extends JFrame {
     private JPanel dialogPane;
     private JPanel contentPanel;
     private JTextField documentTextField;
-    private JTextField passwordTextField;
     private JLabel documentLabel;
     private JLabel passwordLabel;
     private JButton loginButton;
-    private JPanel buttonBar;
+    private JPasswordField passwordTextField;
     // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
 }

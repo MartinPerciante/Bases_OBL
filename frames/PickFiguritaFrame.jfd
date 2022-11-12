@@ -1,0 +1,51 @@
+JFDML JFormDesigner: "8.0.0.0.194" Java: "11.0.14.1" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class java.awt.BorderLayout ) ) {
+			name: "this"
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.BorderLayout ) ) {
+				name: "dialogPane"
+				"border": new javax.swing.border.EmptyBorder( 12, 12, 12, 12 )
+				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+					"$horizontalGroup": "par l {comp scrollPane1::::699:x, seq {comp numberLabel:::p:67:p, space :::p, comp numberComboBox:::p::p, space s:::p, comp countryLabel:::p:31:p, space s:::p, comp countryComboBox:::p::p, space :p:29:p, comp filterButton:::p:95:p, space :0:277:x}}"
+					"$verticalGroup": "par l {seq l {space :::p, par l {par b {comp numberComboBox::b:p::p, comp numberLabel::b:p::p}, par b {comp countryComboBox::b:p::p, comp filterButton::b:p::p, comp countryLabel::b:p::p}}, space :p:18:p, comp scrollPane1:::p:384:p, space :::x}}"
+				} ) {
+					name: "contentPanel"
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "numberLabel"
+						"text": "Numero"
+					} )
+					add( new FormComponent( "javax.swing.JComboBox" ) {
+						name: "numberComboBox"
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "countryLabel"
+						"text": "País"
+					} )
+					add( new FormComponent( "javax.swing.JComboBox" ) {
+						name: "countryComboBox"
+					} )
+					add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+						name: "scrollPane1"
+						add( new FormComponent( "javax.swing.JTable" ) {
+							name: "figuritasTable"
+						} )
+					} )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "filterButton"
+						"text": "FILTRAR"
+					} )
+				}, new FormLayoutConstraints( class java.lang.String ) {
+					"value": "Center"
+				} )
+			}, new FormLayoutConstraints( class java.lang.String ) {
+				"value": "Center"
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 0 )
+			"size": new java.awt.Dimension( 725, 490 )
+		} )
+	}
+}

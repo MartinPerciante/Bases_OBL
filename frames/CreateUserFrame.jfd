@@ -1,0 +1,78 @@
+JFDML JFormDesigner: "8.0.0.0.194" Java: "11.0.14.1" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class java.awt.BorderLayout ) ) {
+			name: "this"
+			"title": "CREAR USUARIO"
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.BorderLayout ) ) {
+				name: "dialogPane"
+				"border": new javax.swing.border.EmptyBorder( 12, 12, 12, 12 )
+				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+					"$horizontalGroup": "par l {seq {space :::p, par l {seq {par l {seq l {comp documentLabel:::p::p, space :12:12:p, comp documentTextField:::p:78:p, space s:::p, comp passwordLabel::::72:x}, seq l {comp firstNameLabel:::p:62:p, space :12:12:p, comp firstNameTextField:::p:78:p, space :18:18:p, comp lastNameLabel:::p:50:p}, seq l {comp phoneLabel:::p:62:p, space :12:12:p, comp phoneTextField:::p:78:p, space :18:18:p, comp emailLabel:::p:50:p}}, space :p:18:p}, seq l {comp cancelButton:::p:80:p, space ::180:x}}, par l {comp passwordTextField::l:p:78:p, comp lastNameField::l:p:78:p, comp emailTextField::l:p:78:p, comp createUserButton:::p:80:p}, space :p:28:p}}"
+					"$verticalGroup": "par l {seq {space :::p, par l {seq l {par l {comp documentTextField:::p::p, seq {space :7:7:p, par l {comp documentLabel:::p::p, comp passwordLabel:::p::p}}}, space :p:18:p, par l {comp firstNameTextField:::p::p, seq l {space :7:7:p, par l {comp firstNameLabel:::p::p, comp lastNameLabel:::p::p}}}, space :18:18:p, par l {comp phoneTextField:::p::p, seq l {space :7:7:p, par l {comp phoneLabel:::p::p, comp emailLabel:::p::p}}}}, seq l {comp passwordTextField:::p::p, space :p:18:p, comp lastNameField:::p::p, space :18:18:p, comp emailTextField:::p::p}}, space ::77:x, par b {comp cancelButton::b:p::p, comp createUserButton::b:p::p}, space :::p}}"
+				} ) {
+					name: "contentPanel"
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "documentLabel"
+						"text": "Documento"
+					} )
+					add( new FormComponent( "javax.swing.JTextField" ) {
+						name: "documentTextField"
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "firstNameLabel"
+						"text": "Nombre"
+					} )
+					add( new FormComponent( "javax.swing.JTextField" ) {
+						name: "firstNameTextField"
+					} )
+					add( new FormComponent( "javax.swing.JTextField" ) {
+						name: "lastNameField"
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "lastNameLabel"
+						"text": "Apellido"
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "phoneLabel"
+						"text": "Teléfono"
+					} )
+					add( new FormComponent( "javax.swing.JTextField" ) {
+						name: "phoneTextField"
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "emailLabel"
+						"text": "Email"
+					} )
+					add( new FormComponent( "javax.swing.JTextField" ) {
+						name: "emailTextField"
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "passwordLabel"
+						"text": "Contraseña"
+					} )
+					add( new FormComponent( "javax.swing.JTextField" ) {
+						name: "passwordTextField"
+					} )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "createUserButton"
+						"text": "CREAR"
+					} )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "cancelButton"
+						"text": "CANCELAR"
+					} )
+				}, new FormLayoutConstraints( class java.lang.String ) {
+					"value": "Center"
+				} )
+			}, new FormLayoutConstraints( class java.lang.String ) {
+				"value": "Center"
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 0 )
+			"size": new java.awt.Dimension( 400, 300 )
+		} )
+	}
+}
