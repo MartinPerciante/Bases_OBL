@@ -36,7 +36,7 @@ public class Queries {
     }
 
     public static String findByColumn(String tableName, String condition) {
-        return "SELECT * FROM " + SCHEMA + "." + tableName + " WHERE " + condition;
+        return "SELECT * FROM " + tableName + " WHERE " + condition;
     }
 
     public static String getTablesNames() {

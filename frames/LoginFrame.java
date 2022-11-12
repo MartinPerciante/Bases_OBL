@@ -23,6 +23,8 @@ public class LoginFrame extends JFrame {
         initComponents();
     }
 
+    UserController userController;
+
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
         dialogPane = new JPanel();
