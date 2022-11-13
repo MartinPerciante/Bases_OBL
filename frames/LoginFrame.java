@@ -34,6 +34,7 @@ public class LoginFrame extends JFrame {
         passwordLabel = new JLabel();
         loginButton = new JButton();
         passwordTextField = new JPasswordField();
+        registerButton = new JButton();
 
         userController = new UserController();
 
@@ -64,15 +65,19 @@ public class LoginFrame extends JFrame {
                 //---- loginButton ----
                 loginButton.setText("INGRESAR");
 
+                //---- registerButton ----
+                registerButton.setText("REGISTRARSE");
+
                 GroupLayout contentPanelLayout = new GroupLayout(contentPanel);
                 contentPanel.setLayout(contentPanelLayout);
                 contentPanelLayout.setHorizontalGroup(
                     contentPanelLayout.createParallelGroup()
                         .addGroup(contentPanelLayout.createSequentialGroup()
                             .addGap(48, 48, 48)
-                            .addGroup(contentPanelLayout.createParallelGroup()
-                                .addComponent(loginButton, GroupLayout.PREFERRED_SIZE, 276, GroupLayout.PREFERRED_SIZE)
-                                .addGroup(contentPanelLayout.createSequentialGroup()
+                            .addGroup(contentPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+                                .addComponent(registerButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(loginButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(GroupLayout.Alignment.TRAILING, contentPanelLayout.createSequentialGroup()
                                     .addGroup(contentPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
                                         .addComponent(documentLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(passwordLabel, GroupLayout.PREFERRED_SIZE, 96, GroupLayout.PREFERRED_SIZE))
@@ -93,9 +98,11 @@ public class LoginFrame extends JFrame {
                             .addGroup(contentPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                                 .addComponent(passwordTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                                 .addComponent(passwordLabel))
-                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
+                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                             .addComponent(loginButton)
-                            .addGap(18, 18, 18))
+                            .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(registerButton)
+                            .addGap(17, 17, 17))
                 );
             }
             dialogPane.add(contentPanel, BorderLayout.CENTER);
@@ -114,5 +121,6 @@ public class LoginFrame extends JFrame {
     private JLabel passwordLabel;
     private JButton loginButton;
     private JPasswordField passwordTextField;
+    private JButton registerButton;
     // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
 }

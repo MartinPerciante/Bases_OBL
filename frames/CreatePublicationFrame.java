@@ -28,6 +28,7 @@ public class CreatePublicationFrame extends JFrame {
             figuritaStateComboBox.addItem(resultSet.getString("estado"));
         }
         figuritaImageLabel = new JLabel();
+        figuritaImageLabel.setText("Haga click para seleccionar una figurita");
         figuritaImageLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -62,26 +63,24 @@ public class CreatePublicationFrame extends JFrame {
                 pickFiguritaFrame.setVisible(true);
             }
         });
-        documentValueLabel = new JLabel("123354678");
         initComponents();
     }
 
-    private void initComponents() {
+    public void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
         dialogPane = new JPanel();
         contentPanel = new JPanel();
         documentLabel = new JLabel();
         offeredFiguritaLabel = new JLabel();
         interestedFiguritasLabel = new JLabel();
-        figuritaImageLabel = new JLabel();
-        scrollPane1 = new JScrollPane();
-        table1 = new JTable();
-        figuritasStateLabel = new JLabel();
         documentValueLabel = new JLabel();
-        figuritaStateComboBox = new JComboBox();
+        scrollPane1 = new JScrollPane();
+
+        figuritasStateLabel = new JLabel();
+
+
         cancelButton = new JButton();
         createButton = new JButton();
-        addFiguritaButton = new JButton();
 
         //======== this ========
         var contentPane = getContentPane();
@@ -199,6 +198,11 @@ public class CreatePublicationFrame extends JFrame {
     private JLabel documentLabel;
     private JLabel offeredFiguritaLabel;
     private JLabel interestedFiguritasLabel;
+
+    public JLabel getFiguritaImageLabel() {
+        return figuritaImageLabel;
+    }
+
     private JLabel figuritaImageLabel;
     private JScrollPane scrollPane1;
     private JTable table1;

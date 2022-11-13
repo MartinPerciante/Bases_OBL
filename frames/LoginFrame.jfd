@@ -9,8 +9,8 @@ new FormModel {
 				name: "dialogPane"
 				"border": new javax.swing.border.EmptyBorder( 12, 12, 12, 12 )
 				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-					"$horizontalGroup": "par l {seq l {space :p:48:p, par l {comp loginButton::l:p:276:p, seq l {par l:::p {comp documentLabel:::::x, comp passwordLabel:::p:96:p}, space u:::p, par l:::p {comp documentTextField:::::x, comp passwordTextField:::p:168:p}}}, space ::50:x}}"
-					"$verticalGroup": "par l {seq l {space :p:46:p, par b {comp documentTextField::b:p::p, comp documentLabel::b:p::p}, space s:::p, par b {comp passwordTextField::b:p::p, comp passwordLabel::b:p::p}, space ::73:x, comp loginButton:::p::p, space :p:18:p}}"
+					"$horizontalGroup": "par l {seq l {space :p:48:p, par l:::p {comp registerButton:::::x, comp loginButton::l:::x, seq t {par l:::p {comp documentLabel:::::x, comp passwordLabel:::p:96:p}, space u:::p, par l:::p {comp documentTextField:::::x, comp passwordTextField:::p:168:p}}}, space ::50:x}}"
+					"$verticalGroup": "par l {seq l {space :p:46:p, par b {comp documentTextField::b:p::p, comp documentLabel::b:p::p}, space s:::p, par b {comp passwordTextField::b:p::p, comp passwordLabel::b:p::p}, space ::32:x, comp loginButton:::p::p, space u:::p, comp registerButton:::p::p, space :p:17:p}}"
 				} ) {
 					name: "contentPanel"
 					add( new FormComponent( "javax.swing.JTextField" ) {
@@ -30,6 +30,10 @@ new FormModel {
 					} )
 					add( new FormComponent( "javax.swing.JPasswordField" ) {
 						name: "passwordTextField"
+					} )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "registerButton"
+						"text": "REGISTRARSE"
 					} )
 				}, new FormLayoutConstraints( class java.lang.String ) {
 					"value": "Center"

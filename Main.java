@@ -1,3 +1,5 @@
+import controller.PublicationController;
+import controller.UserController;
 import frames.CreatePublicationFrame;
 import frames.LoginFrame;
 
@@ -80,9 +82,11 @@ public class Main {
 //        CreatePublicationFrame createPublicationFrame = new CreatePublicationFrame();
 //        createPublicationFrame.setSize(1366, 768);
 //        createPublicationFrame.setVisible(true);
+//        PublicationController.getInstance().setCreatePublicationFrame(createPublicationFrame);
 
         LoginFrame loginFrame = new LoginFrame();
         loginFrame.setSize(500, 500);
         loginFrame.setVisible(true);
+        UserController.getInstance().setLoginFrame(loginFrame);
     }
 }
