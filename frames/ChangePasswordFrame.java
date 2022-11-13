@@ -15,6 +15,7 @@ import javax.swing.border.*;
 public class ChangePasswordFrame extends JFrame {
     public ChangePasswordFrame() {
         initComponents();
+        buttonActions();
     }
 
     private void initComponents() {
@@ -120,6 +121,24 @@ public class ChangePasswordFrame extends JFrame {
         // JFormDesigner - End of component initialization  //GEN-END:initComponents  @formatter:on
     }
 
+    private void buttonActions() {
+
+        UserController userController = UserController.getInstance();
+
+        cancelButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                userController.goToMenuFromChangePassword();
+            }
+        });
+
+        saveButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+               // userController.changePassword(User.getInstance().getUsername(), actualPasswordTextField.getText(), newPasswordTextField.getText());
+            }
+        });
+    }
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables  @formatter:off
     private JPanel dialogPane;
     private JPanel contentPanel;

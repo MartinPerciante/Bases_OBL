@@ -1,13 +1,19 @@
 /*
- * Created by JFormDesigner on Thu Nov 10 18:37:14 UYT 2022
+ * Created by JFormDesigner on Sun Nov 13 17:58:13 UYT 2022
  */
 
 package frames;
 
+import controller.UserController;
+
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.*;
 import javax.swing.GroupLayout;
+import javax.swing.LayoutStyle;
 import javax.swing.border.*;
+import java.lang.NumberFormatException;
 
 /**
  * @author unknown
@@ -15,6 +21,8 @@ import javax.swing.border.*;
 public class CreateUserFrame extends JFrame {
     public CreateUserFrame() {
         initComponents();
+        buttonActions();
+        errorLabel.setVisible(false);
     }
 
     private void initComponents() {
@@ -25,7 +33,7 @@ public class CreateUserFrame extends JFrame {
         documentTextField = new JTextField();
         firstNameLabel = new JLabel();
         firstNameTextField = new JTextField();
-        lastNameField = new JTextField();
+        lastNameTextField = new JTextField();
         lastNameLabel = new JLabel();
         phoneLabel = new JLabel();
         phoneTextField = new JTextField();
@@ -35,6 +43,7 @@ public class CreateUserFrame extends JFrame {
         passwordTextField = new JTextField();
         createUserButton = new JButton();
         cancelButton = new JButton();
+        errorLabel = new JLabel();
 
         //======== this ========
         setTitle("CREAR USUARIO");
@@ -87,7 +96,7 @@ public class CreateUserFrame extends JFrame {
                                             .addGap(12, 12, 12)
                                             .addComponent(documentTextField, GroupLayout.PREFERRED_SIZE, 78, GroupLayout.PREFERRED_SIZE)
                                             .addGap(18, 18, 18)
-                                            .addComponent(passwordLabel, GroupLayout.DEFAULT_SIZE, 72, Short.MAX_VALUE))
+                                            .addComponent(passwordLabel, GroupLayout.DEFAULT_SIZE, 71, Short.MAX_VALUE))
                                         .addGroup(contentPanelLayout.createSequentialGroup()
                                             .addComponent(firstNameLabel, GroupLayout.PREFERRED_SIZE, 62, GroupLayout.PREFERRED_SIZE)
                                             .addGap(12, 12, 12)
@@ -106,10 +115,14 @@ public class CreateUserFrame extends JFrame {
                                     .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 180, Short.MAX_VALUE)))
                             .addGroup(contentPanelLayout.createParallelGroup()
                                 .addComponent(passwordTextField, GroupLayout.PREFERRED_SIZE, 78, GroupLayout.PREFERRED_SIZE)
-                                .addComponent(lastNameField, GroupLayout.PREFERRED_SIZE, 78, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lastNameTextField, GroupLayout.PREFERRED_SIZE, 78, GroupLayout.PREFERRED_SIZE)
                                 .addComponent(emailTextField, GroupLayout.PREFERRED_SIZE, 78, GroupLayout.PREFERRED_SIZE)
                                 .addComponent(createUserButton, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE))
                             .addGap(28, 28, 28))
+                        .addGroup(contentPanelLayout.createSequentialGroup()
+                            .addGap(52, 52, 52)
+                            .addComponent(errorLabel, GroupLayout.PREFERRED_SIZE, 247, GroupLayout.PREFERRED_SIZE)
+                            .addContainerGap(75, Short.MAX_VALUE))
                 );
                 contentPanelLayout.setVerticalGroup(
                     contentPanelLayout.createParallelGroup()
@@ -143,10 +156,12 @@ public class CreateUserFrame extends JFrame {
                                 .addGroup(contentPanelLayout.createSequentialGroup()
                                     .addComponent(passwordTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                                     .addGap(18, 18, 18)
-                                    .addComponent(lastNameField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lastNameTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                                     .addGap(18, 18, 18)
                                     .addComponent(emailTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 77, Short.MAX_VALUE)
+                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                            .addComponent(errorLabel, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
                             .addGroup(contentPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                                 .addComponent(cancelButton)
                                 .addComponent(createUserButton))
@@ -161,6 +176,47 @@ public class CreateUserFrame extends JFrame {
         // JFormDesigner - End of component initialization  //GEN-END:initComponents  @formatter:on
     }
 
+    private void buttonActions() {
+
+        UserController userController = UserController.getInstance();
+
+        createUserButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                errorLabel.setVisible(false);
+                if (documentTextField.getText() != null && firstNameTextField.getText() != null &&
+                        lastNameTextField.getText() != null && phoneTextField.getText() != null &&
+                        emailTextField.getText() != null && passwordTextField.getText() != null) {
+                        try {
+                            Integer.parseInt(documentTextField.getText());
+                            Integer.parseInt(phoneTextField.getText());
+                            userController.register(documentTextField.getText(), firstNameTextField.getText(),
+                                    lastNameTextField.getText(), phoneTextField.getText(),
+                                    emailTextField.getText(), passwordTextField.getText());
+                            //Salto al frame de creación de usuario
+                            LoginFrame a = new LoginFrame();
+                            setVisible(false);
+                            a.setVisible(true);
+                        } catch (NumberFormatException h) {
+                            errorLabel.setText("El documento o teléfono tiene caracteres no numéricos");
+                            errorLabel.setVisible(true);
+                        }
+                } else {
+                    errorLabel.setText("Debe rellenar todos los campos");
+                    errorLabel.setVisible(true);
+                }
+            }
+        });
+
+        cancelButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Salto al frame de creación de usuario
+                userController.goToLoginScreenFromRegistration();
+            }
+        });
+    }
+
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables  @formatter:off
     private JPanel dialogPane;
     private JPanel contentPanel;
@@ -168,7 +224,7 @@ public class CreateUserFrame extends JFrame {
     private JTextField documentTextField;
     private JLabel firstNameLabel;
     private JTextField firstNameTextField;
-    private JTextField lastNameField;
+    private JTextField lastNameTextField;
     private JLabel lastNameLabel;
     private JLabel phoneLabel;
     private JTextField phoneTextField;
@@ -178,5 +234,6 @@ public class CreateUserFrame extends JFrame {
     private JTextField passwordTextField;
     private JButton createUserButton;
     private JButton cancelButton;
+    private JLabel errorLabel;
     // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
 }

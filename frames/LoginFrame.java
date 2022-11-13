@@ -44,6 +44,15 @@ public class LoginFrame extends JFrame {
                 userController.isInfoLogOk(documentLabel.getText(), passwordLabel.getText());
             }
         });
+
+        registerButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Salto al frame de creación de usuario
+                userController.goToRegistrationScreenFromLogin();
+            }
+        });
+
         //======== this ========
         var contentPane = getContentPane();
         contentPane.setLayout(new BorderLayout());

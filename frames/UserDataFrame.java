@@ -16,6 +16,7 @@ import javax.swing.border.*;
 public class UserDataFrame extends JFrame {
     public UserDataFrame() {
         initComponents();
+        buttonActions();
     }
 
     private void initComponents() {
@@ -154,6 +155,17 @@ public class UserDataFrame extends JFrame {
         // JFormDesigner - End of component initialization  //GEN-END:initComponents  @formatter:on
     }
 
+    private void buttonActions() {
+        changePasswordButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ChangePasswordFrame a = new ChangePasswordFrame();
+               // a.setUsername(documentTextField.getText());
+                setVisible(false);
+                a.setVisible(true);
+            }
+        });
+    }
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables  @formatter:off
     private JPanel dialogPane;
     private JPanel contentPanel;
