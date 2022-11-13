@@ -1,6 +1,7 @@
 package frames;
 
 import controller.UserController;
+import entities.User;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -23,8 +24,6 @@ public class LoginFrame extends JFrame {
         initComponents();
     }
 
-    UserController userController;
-
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
         dialogPane = new JPanel();
@@ -36,12 +35,12 @@ public class LoginFrame extends JFrame {
         passwordTextField = new JPasswordField();
         registerButton = new JButton();
 
-        userController = new UserController();
+        UserController userController = UserController.getInstance();
 
         loginButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                userController.isInfoLogOk(documentLabel.getText(), passwordLabel.getText());
+                userController.login(documentTextField.getText(), passwordTextField.getText());
             }
         });
 

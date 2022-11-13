@@ -5,6 +5,8 @@
 package frames;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.*;
 import javax.swing.GroupLayout;
 import javax.swing.border.*;
@@ -25,6 +27,17 @@ public class MenuFrame extends JFrame {
         listPublicationsButton = new JButton();
         createUserButton = new JButton();
         myProfileButton = new JButton();
+
+        myProfileButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                UserDataFrame a = new UserDataFrame();
+                setVisible(false);
+                a.setVisible(true);
+            }
+        });
+
+
 
         //======== this ========
         setTitle("MENU PRINCIPAL");

@@ -4,7 +4,12 @@
 
 package frames;
 
+import controller.UserController;
+import entities.User;
+
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.*;
 import javax.swing.GroupLayout;
 import javax.swing.border.*;
@@ -13,6 +18,7 @@ import javax.swing.border.*;
  * @author unknown
  */
 public class ChangePasswordFrame extends JFrame {
+
     public ChangePasswordFrame() {
         initComponents();
         buttonActions();

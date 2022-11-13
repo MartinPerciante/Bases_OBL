@@ -21,7 +21,7 @@ public class Queries {
     }
 
     public static String update(String tableName, List<String> attributesList, String condition) {
-        StringBuilder sqlQuery = new StringBuilder("UPDATE " + SCHEMA + "." + tableName + " SET ");
+        StringBuilder sqlQuery = new StringBuilder("UPDATE " + tableName + " SET ");
         populateQueryWithAttributes(sqlQuery, attributesList);
         sqlQuery.append(" WHERE " + condition + ";");
         return sqlQuery.toString();
@@ -51,8 +51,7 @@ public class Queries {
     private static void populateQueryWithAttributes(StringBuilder sqlQuery, List<String> attributesList) {
         if (attributesList != null) {
             for (int i = 0; i < attributesList.size(); i++) {
-                String attribute = attributesList.get(i).replace("-", "");
-                sqlQuery.append(attribute);
+                sqlQuery.append(attributesList.get(i));
                 if (i != attributesList.size() - 1) {
                     sqlQuery.append(", ");
                 }
