@@ -4,6 +4,8 @@
 
 package frames;
 
+import controller.UserController;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -97,12 +99,11 @@ public class MenuFrame extends JFrame {
     }
 
     private void buttonActions() {
+        UserController userController = UserController.getInstance();
         myProfileButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                UserDataFrame a = new UserDataFrame();
-                setVisible(false);
-                a.setVisible(true);
+                userController.goToUserDataFrameFromMenu();
             }
         });
     }

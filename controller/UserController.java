@@ -12,7 +12,6 @@ import java.util.List;
 @Data
 public class UserController {
 
-
     private static UserController instance;
     private LoginFrame loginFrame;
     private ChangePasswordFrame changePasswordFrame;
@@ -79,6 +78,8 @@ public class UserController {
     public void goToMenuFromChangePassword() {
         goToFrom(menuFrame, changePasswordFrame);
     }
+
+    public void goToUserDataFrameFromMenu() { goToFrom(userDataFrame, menuFrame);}
 
     public void goToMenuFromUserDataFrame() { goToFrom(menuFrame, userDataFrame);}
 
