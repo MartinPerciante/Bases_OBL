@@ -194,9 +194,7 @@ public class CreateUserFrame extends JFrame {
                                     lastNameTextField.getText(), phoneTextField.getText(),
                                     emailTextField.getText(), passwordTextField.getText());
                             //Salto al frame de creación de usuario
-                            LoginFrame a = new LoginFrame();
-                            setVisible(false);
-                            a.setVisible(true);
+                            userController.goToLoginScreenFromRegistration();
                         } catch (NumberFormatException h) {
                             errorLabel.setText("El documento o teléfono tiene caracteres no numéricos");
                             errorLabel.setVisible(true);

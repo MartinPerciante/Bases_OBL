@@ -66,6 +66,10 @@ public class CreatePublicationFrame extends JFrame {
         initComponents();
     }
 
+    public JLabel getFiguritaImageLabel() {
+        return figuritaImageLabel;
+    }
+
     public void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
         dialogPane = new JPanel();
@@ -73,14 +77,15 @@ public class CreatePublicationFrame extends JFrame {
         documentLabel = new JLabel();
         offeredFiguritaLabel = new JLabel();
         interestedFiguritasLabel = new JLabel();
-        documentValueLabel = new JLabel();
+        figuritaImageLabel = new JLabel();
         scrollPane1 = new JScrollPane();
-
+        table1 = new JTable();
         figuritasStateLabel = new JLabel();
-
-
+        documentValueLabel = new JLabel();
+        figuritaStateComboBox = new JComboBox();
         cancelButton = new JButton();
         createButton = new JButton();
+        addFiguritaButton = new JButton();
 
         //======== this ========
         var contentPane = getContentPane();
@@ -151,7 +156,7 @@ public class CreatePublicationFrame extends JFrame {
                                     .addGroup(contentPanelLayout.createParallelGroup()
                                         .addGroup(contentPanelLayout.createSequentialGroup()
                                             .addComponent(addFiguritaButton)
-                                            .addGap(371, 371, 371)
+                                            .addGap(425, 425, 425)
                                             .addComponent(interestedFiguritasLabel, GroupLayout.PREFERRED_SIZE, 122, GroupLayout.PREFERRED_SIZE))
                                         .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 1005, GroupLayout.PREFERRED_SIZE))))
                             .addContainerGap())
@@ -159,10 +164,10 @@ public class CreatePublicationFrame extends JFrame {
                 contentPanelLayout.setVerticalGroup(
                     contentPanelLayout.createParallelGroup()
                         .addGroup(contentPanelLayout.createSequentialGroup()
-                            .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addContainerGap(9, Short.MAX_VALUE)
                             .addGroup(contentPanelLayout.createParallelGroup()
                                 .addComponent(documentValueLabel, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)
-                                .addComponent(documentLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(documentLabel, GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE))
                             .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                             .addGroup(contentPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                                 .addComponent(offeredFiguritaLabel)
@@ -177,7 +182,7 @@ public class CreatePublicationFrame extends JFrame {
                                     .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
                                     .addComponent(figuritaImageLabel, GroupLayout.PREFERRED_SIZE, 497, GroupLayout.PREFERRED_SIZE))
                                 .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 547, GroupLayout.PREFERRED_SIZE))
-                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
                             .addGroup(contentPanelLayout.createParallelGroup()
                                 .addComponent(createButton)
                                 .addComponent(cancelButton))
@@ -198,11 +203,6 @@ public class CreatePublicationFrame extends JFrame {
     private JLabel documentLabel;
     private JLabel offeredFiguritaLabel;
     private JLabel interestedFiguritasLabel;
-
-    public JLabel getFiguritaImageLabel() {
-        return figuritaImageLabel;
-    }
-
     private JLabel figuritaImageLabel;
     private JScrollPane scrollPane1;
     private JTable table1;

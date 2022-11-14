@@ -4,6 +4,8 @@
 
 package frames;
 
+import controller.UserController;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -37,6 +39,7 @@ public class UserDataFrame extends JFrame {
         phoneLabel = new JLabel();
         changePasswordButton = new JButton();
         saveButton = new JButton();
+        returnButton = new JButton();
 
         //======== this ========
         var contentPane = getContentPane();
@@ -71,6 +74,9 @@ public class UserDataFrame extends JFrame {
                 //---- saveButton ----
                 saveButton.setText("GUARDAR");
 
+                //---- returnButton ----
+                returnButton.setText("VOLVER");
+
                 GroupLayout contentPanelLayout = new GroupLayout(contentPanel);
                 contentPanel.setLayout(contentPanelLayout);
                 contentPanelLayout.setHorizontalGroup(
@@ -101,14 +107,15 @@ public class UserDataFrame extends JFrame {
                                         .addGroup(contentPanelLayout.createSequentialGroup()
                                             .addComponent(emailLabel, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
                                             .addGap(12, 12, 12)
-                                            .addComponent(emailTextField, GroupLayout.PREFERRED_SIZE, 78, GroupLayout.PREFERRED_SIZE)))
-                                    .addGap(0, 0, Short.MAX_VALUE))
+                                            .addComponent(emailTextField, GroupLayout.PREFERRED_SIZE, 78, GroupLayout.PREFERRED_SIZE))))
                                 .addGroup(contentPanelLayout.createSequentialGroup()
                                     .addContainerGap()
-                                    .addComponent(changePasswordButton, GroupLayout.PREFERRED_SIZE, 243, GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(changePasswordButton, GroupLayout.PREFERRED_SIZE, 157, GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(saveButton, GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)))
-                            .addContainerGap())
+                                    .addComponent(saveButton, GroupLayout.PREFERRED_SIZE, 94, GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(returnButton, GroupLayout.PREFERRED_SIZE, 93, GroupLayout.PREFERRED_SIZE)))
+                            .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 );
                 contentPanelLayout.setVerticalGroup(
                     contentPanelLayout.createParallelGroup()
@@ -145,7 +152,8 @@ public class UserDataFrame extends JFrame {
                             .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
                             .addGroup(contentPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                                 .addComponent(changePasswordButton, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
-                                .addComponent(saveButton, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE))
+                                .addComponent(saveButton, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(returnButton))
                             .addContainerGap())
                 );
             }
@@ -158,13 +166,19 @@ public class UserDataFrame extends JFrame {
     }
 
     private void buttonActions() {
+        UserController userController = UserController.getInstance();
+
         changePasswordButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ChangePasswordFrame a = new ChangePasswordFrame();
-               // a.setUsername(documentTextField.getText());
-                setVisible(false);
-                a.setVisible(true);
+                userController.goToChangePasswordFromUserDataFrame();
+            }
+        });
+
+        returnButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                userController.goToMenuFromUserDataFrame();
             }
         });
     }
@@ -183,5 +197,6 @@ public class UserDataFrame extends JFrame {
     private JLabel phoneLabel;
     private JButton changePasswordButton;
     private JButton saveButton;
+    private JButton returnButton;
     // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
 }

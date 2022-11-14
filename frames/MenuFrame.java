@@ -17,6 +17,7 @@ import javax.swing.border.*;
 public class MenuFrame extends JFrame {
     public MenuFrame() {
         initComponents();
+        buttonActions();
     }
 
     private void initComponents() {
@@ -27,17 +28,7 @@ public class MenuFrame extends JFrame {
         listPublicationsButton = new JButton();
         createUserButton = new JButton();
         myProfileButton = new JButton();
-
-        myProfileButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                UserDataFrame a = new UserDataFrame();
-                setVisible(false);
-                a.setVisible(true);
-            }
-        });
-
-
+        logOutButton = new JButton();
 
         //======== this ========
         setTitle("MENU PRINCIPAL");
@@ -64,31 +55,37 @@ public class MenuFrame extends JFrame {
                 //---- myProfileButton ----
                 myProfileButton.setText("Mi perfil");
 
+                //---- logOutButton ----
+                logOutButton.setText("Cerrar sesi\u00f3n");
+
                 GroupLayout contentPanelLayout = new GroupLayout(contentPanel);
                 contentPanel.setLayout(contentPanelLayout);
                 contentPanelLayout.setHorizontalGroup(
                     contentPanelLayout.createParallelGroup()
                         .addGroup(GroupLayout.Alignment.TRAILING, contentPanelLayout.createSequentialGroup()
-                            .addContainerGap(124, Short.MAX_VALUE)
+                            .addContainerGap(125, Short.MAX_VALUE)
                             .addGroup(contentPanelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                                .addComponent(logOutButton, GroupLayout.PREFERRED_SIZE, 128, GroupLayout.PREFERRED_SIZE)
                                 .addComponent(myProfileButton, GroupLayout.PREFERRED_SIZE, 128, GroupLayout.PREFERRED_SIZE)
                                 .addComponent(createUserButton, GroupLayout.PREFERRED_SIZE, 128, GroupLayout.PREFERRED_SIZE)
                                 .addComponent(listPublicationsButton)
                                 .addComponent(createPublicationButton))
-                            .addGap(122, 122, 122))
+                            .addGap(121, 121, 121))
                 );
                 contentPanelLayout.setVerticalGroup(
                     contentPanelLayout.createParallelGroup()
                         .addGroup(GroupLayout.Alignment.TRAILING, contentPanelLayout.createSequentialGroup()
-                            .addContainerGap(37, Short.MAX_VALUE)
+                            .addContainerGap(25, Short.MAX_VALUE)
                             .addComponent(createPublicationButton)
-                            .addGap(18, 18, 18)
+                            .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
                             .addComponent(listPublicationsButton)
-                            .addGap(18, 18, 18)
+                            .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
                             .addComponent(createUserButton)
-                            .addGap(18, 18, 18)
+                            .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
                             .addComponent(myProfileButton)
-                            .addGap(34, 34, 34))
+                            .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(logOutButton)
+                            .addGap(22, 22, 22))
                 );
             }
             dialogPane.add(contentPanel, BorderLayout.CENTER);
@@ -99,6 +96,16 @@ public class MenuFrame extends JFrame {
         // JFormDesigner - End of component initialization  //GEN-END:initComponents  @formatter:on
     }
 
+    private void buttonActions() {
+        myProfileButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                UserDataFrame a = new UserDataFrame();
+                setVisible(false);
+                a.setVisible(true);
+            }
+        });
+    }
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables  @formatter:off
     private JPanel dialogPane;
     private JPanel contentPanel;
@@ -106,5 +113,6 @@ public class MenuFrame extends JFrame {
     private JButton listPublicationsButton;
     private JButton createUserButton;
     private JButton myProfileButton;
+    private JButton logOutButton;
     // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
 }

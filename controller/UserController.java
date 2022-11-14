@@ -79,4 +79,9 @@ public class UserController {
     public void goToMenuFromChangePassword() {
         goToFrom(menuFrame, changePasswordFrame);
     }
+
+    public void goToMenuFromUserDataFrame() { goToFrom(menuFrame, userDataFrame);}
+
+    public void goToChangePasswordFromUserDataFrame() { goToFrom(changePasswordFrame, userDataFrame);}
+
 }

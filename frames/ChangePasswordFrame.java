@@ -144,6 +144,8 @@ public class ChangePasswordFrame extends JFrame {
                // userController.changePassword(User.getInstance().getUsername(), actualPasswordTextField.getText(), newPasswordTextField.getText());
             }
         });
+
+
     }
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables  @formatter:off
     private JPanel dialogPane;

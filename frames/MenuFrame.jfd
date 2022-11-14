@@ -1,4 +1,4 @@
-JFDML JFormDesigner: "8.0.0.0.194" Java: "11.0.14.1" encoding: "UTF-8"
+JFDML JFormDesigner: "8.0.0.0.194" Java: "17.0.4.1" encoding: "UTF-8"
 
 new FormModel {
 	contentType: "form/swing"
@@ -10,8 +10,8 @@ new FormModel {
 				name: "dialogPane"
 				"border": new javax.swing.border.EmptyBorder( 12, 12, 12, 12 )
 				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-					"$horizontalGroup": "par l {seq t {space ::124:x, par t {comp myProfileButton:::p:128:p, comp createUserButton:::p:128:p, comp listPublicationsButton:::p::p, comp createPublicationButton::t:p::p}, space :p:122:p}}"
-					"$verticalGroup": "par l {seq t {space ::37:x, comp createPublicationButton:::p::p, space s:::p, comp listPublicationsButton:::p::p, space s:::p, comp createUserButton:::p::p, space s:::p, comp myProfileButton:::p::p, space :p:34:p}}"
+					"$horizontalGroup": "par l {seq t {space ::125:x, par t {comp logOutButton::t:p:128:p, comp myProfileButton::t:p:128:p, comp createUserButton::t:p:128:p, comp listPublicationsButton::t:p::p, comp createPublicationButton::t:p::p}, space :p:121:p}}"
+					"$verticalGroup": "par l {seq t {space ::25:x, comp createPublicationButton:::p::p, space u:::p, comp listPublicationsButton:::p::p, space u:::p, comp createUserButton:::p::p, space u:::p, comp myProfileButton:::p::p, space u:::p, comp logOutButton:::p::p, space :p:22:p}}"
 				} ) {
 					name: "contentPanel"
 					add( new FormComponent( "javax.swing.JButton" ) {
@@ -29,6 +29,10 @@ new FormModel {
 					add( new FormComponent( "javax.swing.JButton" ) {
 						name: "myProfileButton"
 						"text": "Mi perfil"
+					} )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "logOutButton"
+						"text": "Cerrar sesión"
 					} )
 				}, new FormLayoutConstraints( class java.lang.String ) {
 					"value": "Center"
