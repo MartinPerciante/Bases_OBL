@@ -24,7 +24,6 @@ public class UserController {
     public boolean isInfoLogOk(String username, String password) {
         String condition = "ci = '" + username + "' AND " + "password = '" + password + "'";
         String query = Queries.findByColumn("usuario", condition);
-        System.out.println(query);
         ResultSet result = DBService.executeQuery(query);
 
         int counter = 0;
@@ -71,8 +70,7 @@ public class UserController {
         if (isInfoLogOk(username, oldPassword)) {
             String condition = "ci = '" + username + "' AND " + "password = '" + oldPassword + "'";
             String query = Queries.update("usuario", List.of("password = '" + newPassword + "'"), condition);
-            System.out.println(query);
-            ResultSet result = DBService.executeQuery(query);
+            DBService.executeUpdate(query);
             return true;
         }
         return false;

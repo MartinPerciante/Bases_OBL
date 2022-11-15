@@ -43,7 +43,6 @@ public class PublicationController {
         label.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                PickFiguritaFrame pickFiguritaFrame;
                 try {
                     pickFiguritaFrame = new PickFiguritaFrame();
                 } catch (SQLException ex) {
@@ -59,7 +58,6 @@ public class PublicationController {
         createPublicationFrame.getAddFiguritaButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                PickFiguritaFrame pickFiguritaFrame;
                 try {
                     pickFiguritaFrame = new PickFiguritaFrame();
                 } catch (SQLException ex) {

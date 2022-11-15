@@ -3,6 +3,7 @@ package controller;
 import frames.*;
 
 import javax.swing.*;
+import java.sql.SQLException;
 
 public class ViewController {
 
@@ -45,6 +46,14 @@ public class ViewController {
         return createUserFrame;
     }
 
+    private CreatePublicationFrame createPublicationFrame;
+    public CreatePublicationFrame getCreatePublicationFrame() throws SQLException {
+        if (createPublicationFrame == null){
+            createPublicationFrame = new CreatePublicationFrame();
+        }
+        return createPublicationFrame;
+    }
+
     public static ViewController getInstance() {
         if (instance == null) {
             instance = new ViewController();
@@ -54,6 +63,10 @@ public class ViewController {
     public static void goToFrom(JFrame to, JFrame from) {
         from.setVisible(false);
         to.setVisible(true);
+    }
+
+    public void goToCreatePublication(JFrame origin) throws SQLException {
+        goToFrom(getCreatePublicationFrame(), origin);
     }
     public void goToLogin(JFrame origin){
         goToFrom(getLoginFrame(), origin);

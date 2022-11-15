@@ -12,6 +12,7 @@ public class DBService {
     }
 
     public static ResultSet executeQuery(String query) {
+        System.out.println(query);
         try (Connection conn = DBService.connect()) {
             Statement statement = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
             return statement.executeQuery(query);
@@ -23,6 +24,7 @@ public class DBService {
     }
 
     public static long executeUpdate(String query) {
+        System.out.println(query);
         long id = 0;
         try (Connection conn = DBService.connect()) {
             Statement statement = conn.createStatement();
