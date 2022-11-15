@@ -4,11 +4,13 @@ import database.DBService;
 import database.Queries;
 import entities.User;
 import lombok.Data;
+import frames.*;
+
+import javax.swing.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-@Data
 public class UserController {
 
     private static UserController instance;
