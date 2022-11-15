@@ -2,23 +2,16 @@ package controller;
 
 import database.DBService;
 import database.Queries;
-import frames.*;
+import entities.User;
 import lombok.Data;
-
-import javax.swing.*;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 @Data
 public class UserController {
 
     private static UserController instance;
-    private LoginFrame loginFrame;
-    private ChangePasswordFrame changePasswordFrame;
-    private MenuFrame menuFrame;
-    private UserDataFrame userDataFrame;
-    private CreateUserFrame createUserFrame;
-
     public static UserController getInstance() {
         if (instance == null) {
             instance = new UserController();
@@ -29,19 +22,40 @@ public class UserController {
     public boolean isInfoLogOk(String username, String password) {
         String condition = "ci = '" + username + "' AND " + "password = '" + password + "'";
         String query = Queries.findByColumn("usuario", condition);
-
+        System.out.println(query);
         ResultSet result = DBService.executeQuery(query);
 
-        return !(result == null);
+        int counter = 0;
+        if (result != null){
+            while (true){
+                try {
+                    if (!result.next()) break;
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+                try {
+                    if (result.first()){
+                        String usernameDb = result.getString("ci");
+                        String passwordDb = result.getString("password");
+                        //Se ingresaron datos para inyeccion SQL
+                        if (!(usernameDb.equals(username) && passwordDb.equals(passwordDb))){
+                            counter = -1;
+                            break;
+                        }
+                    }
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+                counter++;
+            };
+        }
+
+        return (counter > 0);
     }
 
     public boolean login(String username, String password) {
         boolean result = isInfoLogOk(username, password);
-        if (result) {
-            //Salto a la pantalla ya logeado
-            loginFrame.setVisible(false);
-            menuFrame.setVisible(true);
-        }
+        if (result) User.getInstance().setUsername(username);
         return result;
     }
 
@@ -51,38 +65,21 @@ public class UserController {
                 telefono + ",'" + email + "','" + password + "')");
     }
 
-    public void changePassword(String username, String oldPassword, String newPassword) {
+    public boolean changePassword(String username, String oldPassword, String newPassword) {
         if (isInfoLogOk(username, oldPassword)) {
             String condition = "ci = '" + username + "' AND " + "password = '" + oldPassword + "'";
             String query = Queries.update("usuario", List.of("password = '" + newPassword + "'"), condition);
-
+            System.out.println(query);
             ResultSet result = DBService.executeQuery(query);
+            return true;
         }
-        goToMenuFromChangePassword();
+        return false;
     }
 
 
-    public static void goToFrom(JFrame to, JFrame from) {
-        from.setVisible(false);
-        to.setVisible(true);
-    }
 
-    public void goToRegistrationScreenFromLogin() {
-        goToFrom(createUserFrame, loginFrame);
-    }
 
-    public void goToLoginScreenFromRegistration() {
-        goToFrom(loginFrame, createUserFrame);
-    }
 
-    public void goToMenuFromChangePassword() {
-        goToFrom(menuFrame, changePasswordFrame);
-    }
 
-    public void goToUserDataFrameFromMenu() { goToFrom(userDataFrame, menuFrame);}
-
-    public void goToMenuFromUserDataFrame() { goToFrom(menuFrame, userDataFrame);}
-
-    public void goToChangePasswordFromUserDataFrame() { goToFrom(changePasswordFrame, userDataFrame);}
 
 }

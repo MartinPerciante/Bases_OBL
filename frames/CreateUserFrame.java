@@ -5,6 +5,7 @@
 package frames;
 
 import controller.UserController;
+import controller.ViewController;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -194,7 +195,7 @@ public class CreateUserFrame extends JFrame {
                                     lastNameTextField.getText(), phoneTextField.getText(),
                                     emailTextField.getText(), passwordTextField.getText());
                             //Salto al frame de creación de usuario
-                            userController.goToLoginScreenFromRegistration();
+                            ViewController.getInstance().goToLogin(CreateUserFrame.this);
                         } catch (NumberFormatException h) {
                             errorLabel.setText("El documento o teléfono tiene caracteres no numéricos");
                             errorLabel.setVisible(true);
@@ -210,7 +211,7 @@ public class CreateUserFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Salto al frame de creación de usuario
-                userController.goToLoginScreenFromRegistration();
+                ViewController.getInstance().goToLogin(CreateUserFrame.this);
             }
         });
     }

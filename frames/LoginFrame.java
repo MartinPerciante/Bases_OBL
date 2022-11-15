@@ -1,6 +1,7 @@
 package frames;
 
 import controller.UserController;
+import controller.ViewController;
 import entities.User;
 
 import java.awt.*;
@@ -122,7 +123,7 @@ public class LoginFrame extends JFrame {
         registerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                userController.goToRegistrationScreenFromLogin();
+                ViewController.getInstance().goToRegistration(LoginFrame.this);
             }
         });
 
@@ -132,7 +133,10 @@ public class LoginFrame extends JFrame {
                 Boolean bool = userController.login(documentTextField.getText(), passwordTextField.getText());
                 if(!bool) {
                     errorLabel.setVisible(true);
+                } else{
+                    ViewController.getInstance().goToMenu(LoginFrame.this);
                 }
+
             }
         });
     }

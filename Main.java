@@ -1,5 +1,6 @@
 import controller.PublicationController;
 import controller.UserController;
+import controller.ViewController;
 import frames.CreatePublicationFrame;
 import frames.LoginFrame;
 
@@ -84,9 +85,6 @@ public class Main {
 //        createPublicationFrame.setVisible(true);
 //        PublicationController.getInstance().setCreatePublicationFrame(createPublicationFrame);
 
-        LoginFrame loginFrame = new LoginFrame();
-        loginFrame.setSize(500, 500);
-        loginFrame.setVisible(true);
-        UserController.getInstance().setLoginFrame(loginFrame);
+        ViewController.getInstance().getLoginFrame();
     }
 }
