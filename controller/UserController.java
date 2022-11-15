@@ -3,13 +3,11 @@ package controller;
 import database.DBService;
 import database.Queries;
 import frames.*;
-import lombok.Data;
 
 import javax.swing.*;
 import java.sql.ResultSet;
 import java.util.List;
 
-@Data
 public class UserController {
 
     private static UserController instance;
@@ -79,10 +77,16 @@ public class UserController {
         goToFrom(menuFrame, changePasswordFrame);
     }
 
-    public void goToUserDataFrameFromMenu() { goToFrom(userDataFrame, menuFrame);}
+    public void goToUserDataFrameFromMenu() {
+        goToFrom(userDataFrame, menuFrame);
+    }
 
-    public void goToMenuFromUserDataFrame() { goToFrom(menuFrame, userDataFrame);}
+    public void goToMenuFromUserDataFrame() {
+        goToFrom(menuFrame, userDataFrame);
+    }
 
-    public void goToChangePasswordFromUserDataFrame() { goToFrom(changePasswordFrame, userDataFrame);}
+    public void goToChangePasswordFromUserDataFrame() {
+        goToFrom(changePasswordFrame, userDataFrame);
+    }
 
 }

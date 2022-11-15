@@ -5,15 +5,11 @@
 package frames;
 
 import controller.PublicationController;
-import database.DBService;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
@@ -21,72 +17,11 @@ import java.sql.SQLException;
  */
 public class PickFiguritaFrame extends JFrame {
     public PickFiguritaFrame() throws SQLException {
-        ResultSet resultSet = DBService.executeQuery("SELECT pais FROM pais_figurita");
-        countryComboBox = new JComboBox();
-        while (resultSet.next()) {
-            countryComboBox.addItem(resultSet.getString("pais"));
-        }
-        numberComboBox = new JComboBox();
-        //agregar num de figurita oficiales, no se si son 30, tambien podria ser una query a la tabla de figurita
-        //que agarra los num sin repetir
-        for (int i = 1; i <= 30; i++) {
-            numberComboBox.addItem(i);
-        }
-        figuritasTable = new JTable() {
-            public Class getColumnClass(int column) {
-                return Icon.class;
-            }
-        };
-        figuritasTable.setTableHeader(null);
-        figuritasTable.setRowHeight(312);
-        figuritasTable.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                PublicationController.getInstance().setPublicationFiguritaImageSelected((ImageIcon) figuritasTable.getValueAt(figuritasTable.getSelectedRow(), figuritasTable.getSelectedColumn()));
-                setVisible(false);
-            }
-        });
-        filterButton = new JButton();
-        filterButton.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                try{
-                    populateFilteredFiguritasTable();
-                } catch (Exception exception){
-                    exception.printStackTrace();
-                }
-            }
-        });
-        populateFilteredFiguritasTable();
         initComponents();
+        PublicationController.getInstance().setPickFiguritaFrameData();
     }
 
-    private void populateFilteredFiguritasTable() throws SQLException {
-        ResultSet resultSet = DBService.executeQuery("SELECT foto FROM figurita WHERE pais = '" + countryComboBox.getSelectedItem().toString() + "' AND numero = " + Integer.parseInt(numberComboBox.getSelectedItem().toString()));
-        if(resultSet != null) {
-            defaultTableModel = new DefaultTableModel(0, 5);
-            int column = 0;
-            Icon[] data = new Icon[5];
-            while (resultSet.next()) {
-                byte[] bytes = resultSet.getBytes("foto");
-                if (bytes != null) {
-                    ImageIcon icon = new ImageIcon(new ImageIcon(bytes).getImage().getScaledInstance(232, 312, Image.SCALE_DEFAULT));
-                    data[column] = icon;
-                    column++;
-                    if (column == 5) {
-                        column = 0;
-                        defaultTableModel.addRow(data);
-                        data = new Icon[]{};
-                    }
-                }
-            }
-            if(data[0] != null){
-                defaultTableModel.addRow(data);
-            }
-            figuritasTable.setModel(defaultTableModel);
-        }
-    }
-
+    //borrar lineas numberComboBox, countryComboBox, figuritasTable, filterButton
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
         dialogPane = new JPanel();
@@ -96,7 +31,11 @@ public class PickFiguritaFrame extends JFrame {
         countryLabel = new JLabel();
         countryComboBox = new JComboBox();
         scrollPane1 = new JScrollPane();
-        figuritasTable = new JTable();
+        figuritasTable = new JTable() {
+            public Class getColumnClass(int column) {
+                return Icon.class;
+            }
+        };
         filterButton = new JButton();
         cancelButton = new JButton();
 
@@ -132,38 +71,38 @@ public class PickFiguritaFrame extends JFrame {
                 GroupLayout contentPanelLayout = new GroupLayout(contentPanel);
                 contentPanel.setLayout(contentPanelLayout);
                 contentPanelLayout.setHorizontalGroup(
-                    contentPanelLayout.createParallelGroup()
-                        .addComponent(scrollPane1, GroupLayout.DEFAULT_SIZE, 699, Short.MAX_VALUE)
-                        .addGroup(contentPanelLayout.createSequentialGroup()
-                            .addComponent(numberLabel, GroupLayout.PREFERRED_SIZE, 67, GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(numberComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(countryLabel, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(countryComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                            .addGap(29, 29, 29)
-                            .addComponent(filterButton, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 177, Short.MAX_VALUE)
-                            .addComponent(cancelButton)
-                            .addContainerGap())
+                        contentPanelLayout.createParallelGroup()
+                                .addComponent(scrollPane1, GroupLayout.DEFAULT_SIZE, 699, Short.MAX_VALUE)
+                                .addGroup(contentPanelLayout.createSequentialGroup()
+                                        .addComponent(numberLabel, GroupLayout.PREFERRED_SIZE, 67, GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(numberComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(countryLabel, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(countryComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                        .addGap(29, 29, 29)
+                                        .addComponent(filterButton, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 177, Short.MAX_VALUE)
+                                        .addComponent(cancelButton)
+                                        .addContainerGap())
                 );
                 contentPanelLayout.setVerticalGroup(
-                    contentPanelLayout.createParallelGroup()
-                        .addGroup(contentPanelLayout.createSequentialGroup()
-                            .addContainerGap()
-                            .addGroup(contentPanelLayout.createParallelGroup()
-                                .addGroup(contentPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                    .addComponent(numberComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(numberLabel))
-                                .addGroup(contentPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                    .addComponent(countryComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(filterButton)
-                                    .addComponent(countryLabel)
-                                    .addComponent(cancelButton)))
-                            .addGap(18, 18, 18)
-                            .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 384, GroupLayout.PREFERRED_SIZE)
-                            .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        contentPanelLayout.createParallelGroup()
+                                .addGroup(contentPanelLayout.createSequentialGroup()
+                                        .addContainerGap()
+                                        .addGroup(contentPanelLayout.createParallelGroup()
+                                                .addGroup(contentPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                                        .addComponent(numberComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(numberLabel))
+                                                .addGroup(contentPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                                        .addComponent(countryComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(filterButton)
+                                                        .addComponent(countryLabel)
+                                                        .addComponent(cancelButton)))
+                                        .addGap(18, 18, 18)
+                                        .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 384, GroupLayout.PREFERRED_SIZE)
+                                        .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 );
             }
             dialogPane.add(contentPanel, BorderLayout.CENTER);
@@ -178,6 +117,23 @@ public class PickFiguritaFrame extends JFrame {
     private JPanel dialogPane;
     private JPanel contentPanel;
     private JLabel numberLabel;
+
+    public JComboBox getNumberComboBox() {
+        return numberComboBox;
+    }
+
+    public JComboBox getCountryComboBox() {
+        return countryComboBox;
+    }
+
+    public JTable getFiguritasTable() {
+        return figuritasTable;
+    }
+
+    public JButton getFilterButton() {
+        return filterButton;
+    }
+
     private JComboBox numberComboBox;
     private JLabel countryLabel;
     private JComboBox countryComboBox;
@@ -185,6 +141,11 @@ public class PickFiguritaFrame extends JFrame {
     private JTable figuritasTable;
     private JButton filterButton;
     private JButton cancelButton;
+
+    public DefaultTableModel getDefaultTableModel() {
+        return defaultTableModel;
+    }
+
     // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
     private DefaultTableModel defaultTableModel;
 }
