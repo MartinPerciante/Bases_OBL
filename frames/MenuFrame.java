@@ -5,6 +5,7 @@
 package frames;
 
 import controller.UserController;
+import controller.ViewController;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -28,7 +29,6 @@ public class MenuFrame extends JFrame {
         contentPanel = new JPanel();
         createPublicationButton = new JButton();
         listPublicationsButton = new JButton();
-        createUserButton = new JButton();
         myProfileButton = new JButton();
         logOutButton = new JButton();
 
@@ -51,9 +51,6 @@ public class MenuFrame extends JFrame {
                 //---- listPublicationsButton ----
                 listPublicationsButton.setText("Ver publicaciones");
 
-                //---- createUserButton ----
-                createUserButton.setText("Crear usuario");
-
                 //---- myProfileButton ----
                 myProfileButton.setText("Mi perfil");
 
@@ -67,27 +64,24 @@ public class MenuFrame extends JFrame {
                         .addGroup(GroupLayout.Alignment.TRAILING, contentPanelLayout.createSequentialGroup()
                             .addContainerGap(125, Short.MAX_VALUE)
                             .addGroup(contentPanelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                                .addComponent(logOutButton, GroupLayout.PREFERRED_SIZE, 128, GroupLayout.PREFERRED_SIZE)
-                                .addComponent(myProfileButton, GroupLayout.PREFERRED_SIZE, 128, GroupLayout.PREFERRED_SIZE)
-                                .addComponent(createUserButton, GroupLayout.PREFERRED_SIZE, 128, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(createPublicationButton)
                                 .addComponent(listPublicationsButton)
-                                .addComponent(createPublicationButton))
+                                .addComponent(myProfileButton, GroupLayout.PREFERRED_SIZE, 128, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(logOutButton, GroupLayout.PREFERRED_SIZE, 128, GroupLayout.PREFERRED_SIZE))
                             .addGap(121, 121, 121))
                 );
                 contentPanelLayout.setVerticalGroup(
                     contentPanelLayout.createParallelGroup()
                         .addGroup(GroupLayout.Alignment.TRAILING, contentPanelLayout.createSequentialGroup()
-                            .addContainerGap(25, Short.MAX_VALUE)
+                            .addContainerGap(33, Short.MAX_VALUE)
                             .addComponent(createPublicationButton)
-                            .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addGap(18, 18, 18)
                             .addComponent(listPublicationsButton)
-                            .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(createUserButton)
-                            .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addGap(18, 18, 18)
                             .addComponent(myProfileButton)
-                            .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addGap(18, 18, 18)
                             .addComponent(logOutButton)
-                            .addGap(22, 22, 22))
+                            .addGap(38, 38, 38))
                 );
             }
             dialogPane.add(contentPanel, BorderLayout.CENTER);
@@ -99,11 +93,16 @@ public class MenuFrame extends JFrame {
     }
 
     private void buttonActions() {
-        UserController userController = UserController.getInstance();
         myProfileButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                userController.goToUserDataFrameFromMenu();
+                ViewController.getInstance().goToUserData(MenuFrame.this);
+            }
+        });
+        logOutButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ViewController.getInstance().goToLogin(MenuFrame.this);
             }
         });
     }
@@ -112,7 +111,6 @@ public class MenuFrame extends JFrame {
     private JPanel contentPanel;
     private JButton createPublicationButton;
     private JButton listPublicationsButton;
-    private JButton createUserButton;
     private JButton myProfileButton;
     private JButton logOutButton;
     // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on

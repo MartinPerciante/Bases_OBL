@@ -5,6 +5,7 @@
 package frames;
 
 import controller.UserController;
+import controller.ViewController;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -171,14 +172,14 @@ public class UserDataFrame extends JFrame {
         changePasswordButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                userController.goToChangePasswordFromUserDataFrame();
+                ViewController.getInstance().goToChangePassword(UserDataFrame.this);
             }
         });
 
         returnButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                userController.goToMenuFromUserDataFrame();
+                ViewController.getInstance().goToMenu(UserDataFrame.this);
             }
         });
     }
