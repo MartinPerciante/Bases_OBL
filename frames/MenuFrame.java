@@ -94,11 +94,13 @@ public class MenuFrame extends JFrame {
     }
 
     private void buttonActions() {
+        ViewController viewController = ViewController.getInstance();
+
         createPublicationButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    ViewController.getInstance().goToCreatePublication(MenuFrame.this);
+                    viewController.goToCreatePublication(MenuFrame.this);
                 } catch (SQLException ex) {
                     throw new RuntimeException(ex);
                 }
@@ -107,13 +109,13 @@ public class MenuFrame extends JFrame {
         myProfileButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ViewController.getInstance().goToUserData(MenuFrame.this);
+                viewController.goToUserData(MenuFrame.this);
             }
         });
         logOutButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ViewController.getInstance().goToLogin(MenuFrame.this);
+                viewController.goToLogin(MenuFrame.this);
             }
         });
     }

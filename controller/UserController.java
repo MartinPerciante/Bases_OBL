@@ -22,8 +22,8 @@ public class UserController {
         return instance;
     }
 
-    public boolean isInfoLogOk(String username, String password) {
-        String condition = "ci = '" + username + "' AND " + "password = '" + password + "'";
+    public boolean isInfoLogOk(String ci, String password) {
+        String condition = "ci = '" + ci + "' AND " + "password = '" + password + "'";
         String query = Queries.findByColumn("usuario", condition);
         ResultSet result = DBService.executeQuery(query);
 
@@ -40,7 +40,7 @@ public class UserController {
                         String usernameDb = result.getString("ci");
                         String passwordDb = result.getString("password");
                         //Se ingresaron datos para inyeccion SQL
-                        if (!(usernameDb.equals(username) && passwordDb.equals(passwordDb))){
+                        if (!(usernameDb.equals(ci) && passwordDb.equals(passwordDb))){
                             counter = -1;
                             break;
                         }
@@ -55,9 +55,9 @@ public class UserController {
         return (counter > 0);
     }
 
-    public boolean login(String username, String password) {
-        boolean result = isInfoLogOk(username, password);
-        if (result) User.getInstance().setUsername(username);
+    public boolean login(String ci, String password) {
+        boolean result = isInfoLogOk(ci, password);
+        if (result) User.getInstance().setUsername(ci);
         return result;
     }
 
@@ -98,26 +98,29 @@ public class UserController {
         return new ArrayList<>();
     }
 
-    public void register(String ci, String nombre, String apellido, String telefono, String email, String password) {
+    public void register(String ci, String username, String lastname, String telefono, String email, String password) {
         DBService.executeUpdate("INSERT INTO usuario (ci, nombre, apellido, telefono, email, password) " +
-                "VALUES (" + ci + ",'" + nombre + "','" + apellido + "'," +
-                telefono + ",'" + email + "','" + password + "')");
+                "VALUES ('" + ci + "','" + username + "','" + lastname + "','" +
+                telefono + "','" + email + "','" + password + "')");
     }
 
-    public boolean changePassword(String username, String oldPassword, String newPassword) {
-        if (isInfoLogOk(username, oldPassword)) {
-            String condition = "ci = '" + username + "' AND " + "password = '" + oldPassword + "'";
+    public boolean changePassword(String ci, String oldPassword, String newPassword) {
+        if (isInfoLogOk(ci, oldPassword)) {
+            String condition = "ci = '" + ci + "' AND " + "password = '" + oldPassword + "'";
             String query = Queries.update("usuario", List.of("password = '" + newPassword + "'"), condition);
             DBService.executeUpdate(query);
             return true;
         }
+
         return false;
     }
 
-
-
-
-
-
-
+    public void updateInfo(String ci, String username, String lastname, String telefono, String email) {
+        String condition = "ci = '" + ci + "'";
+        String query = Queries.update("usuario", List.of("nombre = '" + username + "'",
+                                                          "apellido = '" + lastname + "'",
+                                                          "telefono = '" + telefono + "'",
+                                                          "email = '" + email + "'"), condition);
+        DBService.executeUpdate(query);
+    }
 }

@@ -183,19 +183,27 @@ public class UserDataFrame extends JFrame {
 
     private void buttonActions() {
         UserController userController = UserController.getInstance();
+        ViewController viewController = ViewController.getInstance();
 
         changePasswordButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                ViewController.getInstance().goToChangePassword(UserDataFrame.this);
-            }
+            public void actionPerformed(ActionEvent e) {viewController.goToChangePassword(UserDataFrame.this);}
         });
 
         returnButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ViewController.getInstance().goToMenu(UserDataFrame.this);
+                viewController.goToMenu(UserDataFrame.this);
             }
+        });
+
+        saveButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) { userController.updateInfo(documentTextField.getText(),
+                                                                                    firstNameTextField.getText(),
+                                                                                    lastNameTextField.getText(),
+                                                                                    phoneTextField.getText(),
+                                                                                    emailTextField.getText());}
         });
     }
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables  @formatter:off
