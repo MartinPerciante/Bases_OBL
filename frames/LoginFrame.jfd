@@ -1,16 +1,17 @@
-JFDML JFormDesigner: "8.0.0.0.194" Java: "17.0.4.1" encoding: "UTF-8"
+JFDML JFormDesigner: "8.0.0.0.194" Java: "11.0.14.1" encoding: "UTF-8"
 
 new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class java.awt.BorderLayout ) ) {
 			name: "this"
+			"resizable": false
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.BorderLayout ) ) {
 				name: "dialogPane"
 				"border": new javax.swing.border.EmptyBorder( 12, 12, 12, 12 )
 				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-					"$horizontalGroup": "par l {seq {par l {seq {space :p:48:p, par l:::p {comp registerButton:::::x, comp loginButton::l:::x, seq t {par l:::p {comp documentLabel:::::x, comp passwordLabel:::p:96:p}, space u:::p, par l:::p {comp documentTextField:::::x, comp passwordTextField:::p:168:p}}}}, seq l {space :p:87:p, comp errorLabel:::p::p}}, space ::50:x}}"
-					"$verticalGroup": "par l {seq l {space :p:18:p, comp errorLabel:::p::p, space s:::p, par b {comp documentTextField::b:p::p, comp documentLabel::b:p::p}, space s:::p, par b {comp passwordTextField::b:p::p, comp passwordLabel::b:p::p}, space ::26:x, comp loginButton:::p::p, space u:::p, comp registerButton:::p::p, space :p:17:p}}"
+					"$horizontalGroup": "par l {seq {par l {seq l {space :p:87:p, comp errorLabel:::p::p}, seq l {space :p:48:p, par l {seq {par l:::p {comp documentLabel:::::x, comp passwordLabel:::p:96:p}, space u:::p, par l:::p {comp documentTextField:::::x, comp passwordTextField:::p:168:p}}, par l:::p {comp registerButton::::276:x, comp loginButton::l:::x}}}}, space :p:50:p}}"
+					"$verticalGroup": "par l {seq l {space :p:18:p, comp errorLabel:::p::p, space :p:36:p, par b {comp documentTextField::b:p::p, comp documentLabel::b:p::p}, space s:::p, par b {comp passwordTextField::b:p::p, comp passwordLabel::b:p::p}, space ::67:x, comp loginButton:::p::p, space u:::p, comp registerButton:::p::p, space :p:17:p}}"
 				} ) {
 					name: "contentPanel"
 					add( new FormComponent( "javax.swing.JTextField" ) {
@@ -47,7 +48,7 @@ new FormModel {
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 50, 40 )
-			"size": new java.awt.Dimension( 400, 300 )
+			"size": new java.awt.Dimension( 400, 335 )
 		} )
 	}
 }

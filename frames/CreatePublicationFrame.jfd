@@ -31,7 +31,7 @@ new FormModel {
 					add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
 						name: "scrollPane1"
 						add( new FormComponent( "javax.swing.JTable" ) {
-							name: "table1"
+							name: "interestedFiguritasTable"
 						} )
 					} )
 					add( new FormComponent( "javax.swing.JLabel" ) {
@@ -64,8 +64,9 @@ new FormModel {
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 0 )
-			"size": new java.awt.Dimension( 1355, 735 )
+			"size": new java.awt.Dimension( 945, 735 )
 		} )
 	}
 }
+
 

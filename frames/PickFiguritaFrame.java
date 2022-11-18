@@ -5,11 +5,18 @@
 package frames;
 
 import controller.PublicationController;
+import controller.ViewController;
+import enums.EPickFigurita;
+import lombok.SneakyThrows;
+import utils.Utils;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
@@ -18,10 +25,93 @@ import java.sql.SQLException;
 public class PickFiguritaFrame extends JFrame {
     public PickFiguritaFrame() throws SQLException {
         initComponents();
-        PublicationController.getInstance().setPickFiguritaFrameData();
+        buttonActions();
+        loadComboBoxData();
+
+
+        //esto va en el init
+        figuritasTable.setTableHeader(null);
+        figuritasTable.setRowHeight(312);
     }
 
-    //borrar lineas numberComboBox, countryComboBox, figuritasTable, filterButton
+    private void loadComboBoxData() throws SQLException {
+        ResultSet resultSet = PublicationController.getInstance().getFiguritasCountry();
+        countryComboBox.addItem(Utils.EMPTY_ITEM);
+        while (resultSet.next()) {
+            countryComboBox.addItem(resultSet.getString("pais"));
+        }
+        //agregar num de figurita oficiales, no se si son 30, tambien podria ser una query a la tabla de figurita
+        //que agarra los num sin repetir
+        numberComboBox.addItem(Utils.EMPTY_ITEM);
+        for (int i = 1; i <= 30; i++) {
+            numberComboBox.addItem(i);
+        }
+    }
+
+    private void buttonActions() {
+        figuritasTable.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                EPickFigurita eAddFiguritaOptions = PublicationController.getInstance().getStatusEnum();
+                switch (eAddFiguritaOptions) {
+                    case PUBLICATED: {
+                        try {
+                            if (figuritasTable.getValueAt(figuritasTable.getSelectedRow(), figuritasTable.getSelectedColumn()) != null) {
+                                PublicationController.getInstance().setPublicationOfferedFiguritaImageSelected((ImageIcon) figuritasTable.getValueAt(figuritasTable.getSelectedRow(), figuritasTable.getSelectedColumn()));
+                                PickFiguritaFrame.this.setVisible(false);
+                            }
+                        } catch (SQLException ex) {
+                            throw new RuntimeException(ex);
+                        }
+                        break;
+                    }
+                    case INTERESTED: {
+                        try {
+                            PublicationController.getInstance().setPublicationInterestedFiguritaImageSelected((ImageIcon) figuritasTable.getValueAt(figuritasTable.getSelectedRow(), figuritasTable.getSelectedColumn()));
+                        } catch (SQLException ex) {
+                            throw new RuntimeException(ex);
+                        }
+                        break;
+                    }
+                }
+                try {
+                    ViewController.getInstance().goToCreatePublication(PickFiguritaFrame.this);
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+        });
+
+        filterButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                try {
+                    ResultSet resultSet = PublicationController.getInstance().getFiguritasPhotos(countryComboBox.getSelectedItem().toString(), numberComboBox.getSelectedItem().toString());
+                    if (resultSet != null) {
+                        Icon[] iconsRows = new Icon[5];
+                        int index = 0;
+                        DefaultTableModel defaultTableModel = new DefaultTableModel(0, 5);
+                        while (resultSet.next()) {
+                            iconsRows[index] = new ImageIcon(new ImageIcon(resultSet.getBytes("foto")).getImage().getScaledInstance(232, 312, Image.SCALE_DEFAULT));
+                            index++;
+                            if (index == 5) {
+                                defaultTableModel.addRow(iconsRows);
+                                iconsRows = new Icon[5];
+                                index = 0;
+                            }
+                        }
+                        if (index != 0) {
+                            defaultTableModel.addRow(iconsRows);
+                        }
+                        figuritasTable.setModel(defaultTableModel);
+                    }
+                } catch (Exception exception) {
+                    exception.printStackTrace();
+                }
+            }
+        });
+    }
+
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
         dialogPane = new JPanel();
@@ -31,11 +121,18 @@ public class PickFiguritaFrame extends JFrame {
         countryLabel = new JLabel();
         countryComboBox = new JComboBox();
         scrollPane1 = new JScrollPane();
-        figuritasTable = new JTable() {
+        figuritasTable = new JTable(0, 5) {
             public Class getColumnClass(int column) {
                 return Icon.class;
             }
         };
+        figuritasTable.setTableHeader(null);
+        figuritasTable.setRowHeight(312);
+        figuritasTable.setRowMargin(5);
+//        figuritasTable.setColumnModel(new DefaultTableColumnModel(){
+//            @Override
+//
+//        });
         filterButton = new JButton();
         cancelButton = new JButton();
 
@@ -118,22 +215,6 @@ public class PickFiguritaFrame extends JFrame {
     private JPanel contentPanel;
     private JLabel numberLabel;
 
-    public JComboBox getNumberComboBox() {
-        return numberComboBox;
-    }
-
-    public JComboBox getCountryComboBox() {
-        return countryComboBox;
-    }
-
-    public JTable getFiguritasTable() {
-        return figuritasTable;
-    }
-
-    public JButton getFilterButton() {
-        return filterButton;
-    }
-
     private JComboBox numberComboBox;
     private JLabel countryLabel;
     private JComboBox countryComboBox;
@@ -141,11 +222,5 @@ public class PickFiguritaFrame extends JFrame {
     private JTable figuritasTable;
     private JButton filterButton;
     private JButton cancelButton;
-
-    public DefaultTableModel getDefaultTableModel() {
-        return defaultTableModel;
-    }
-
     // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
-    private DefaultTableModel defaultTableModel;
 }
