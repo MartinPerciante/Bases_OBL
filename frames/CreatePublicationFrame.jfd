@@ -1,4 +1,4 @@
-JFDML JFormDesigner: "8.0.0.0.194" Java: "17.0.4.1" encoding: "UTF-8"
+JFDML JFormDesigner: "8.0.0.0.194" Java: "11.0.14.1" encoding: "UTF-8"
 
 new FormModel {
 	contentType: "form/swing"
@@ -9,8 +9,8 @@ new FormModel {
 				name: "dialogPane"
 				"border": new javax.swing.border.EmptyBorder( 12, 12, 12, 12 )
 				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-					"$horizontalGroup": "par l {seq l {space :::p, par l {seq l {space :p:6:p, comp cancelButton:::p:106:p, space ::1091:x, comp createButton:::p:114:p}, seq t {par l {comp figuritaImageLabel::::294:x, seq l {comp documentLabel:::p:137:p, space s:::p, comp documentValueLabel::::139:x}, seq {par l {seq {comp figuritasStateLabel:::p:53:p, space u:::p, comp figuritaStateComboBox:::p:114:p}, comp offeredFiguritaLabel::l:p:122:p}, space :0:115:x}}, space s:::p, par l {seq {comp addFiguritaButton:::p::p, space :p:425:p, comp interestedFiguritasLabel:::p:122:p}, comp scrollPane1:::p:1005:p}}}, space :::p}}"
-					"$verticalGroup": "par l {seq l {space ::9:x, par l {comp documentValueLabel:::p:22:p, comp documentLabel::::24:x}, space :::p, par b {comp offeredFiguritaLabel::b:p::p, comp interestedFiguritasLabel::b:p::p, comp addFiguritaButton::b:p::p}, space u:::p, par l {seq {par b {comp figuritasStateLabel::b:p::p, comp figuritaStateComboBox::b:p::p}, space u:::p, comp figuritaImageLabel:::p:497:p}, comp scrollPane1:::p:547:p}, space ::16:x, par l {comp createButton:::p::p, comp cancelButton:::p::p}, space :::p}}"
+					"$horizontalGroup": "par l {seq l {space :::p, par l {seq l {par l {comp figuritaImageLabel::::204:x, seq l {comp documentLabel:::p:137:p, space s:::p, comp documentValueLabel::::49:x}, seq {par l {seq {comp figuritasStateLabel:::p:53:p, space u:::p, comp figuritaStateComboBox:::p:114:p}, comp offeredFiguritaLabel::l:p:122:p}, space :0:25:x}}, space s:::p, par l {seq {comp addFiguritaButton:::p::p, space :p:185:p, comp interestedFiguritasLabel:::p:122:p}, comp scrollPane1:::p:650:p}}, seq l {space :p:6:p, comp cancelButton:::p:106:p, space ::646:x, comp createButton:::p:114:p}}, space :::p}}"
+					"$verticalGroup": "par l {seq l {space ::13:x, par l {comp documentValueLabel:::p:22:p, comp documentLabel::::28:x}, space :::p, par b {comp offeredFiguritaLabel::b:p::p, comp addFiguritaButton::b:p::p, comp interestedFiguritasLabel::b:p::p}, space u:::p, par l {seq {par b {comp figuritasStateLabel::b:p::p, comp figuritaStateComboBox::b:p::p}, space u:::p, comp figuritaImageLabel:::p:497:p}, comp scrollPane1::l:p:547:p}, space ::20:x, par b {comp cancelButton::b:p::p, comp createButton::b:p::p}, space :::p}}"
 				} ) {
 					name: "contentPanel"
 					add( new FormComponent( "javax.swing.JLabel" ) {
@@ -68,5 +68,4 @@ new FormModel {
 		} )
 	}
 }
-
 

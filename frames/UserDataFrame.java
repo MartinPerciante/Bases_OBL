@@ -6,10 +6,13 @@ package frames;
 
 import controller.UserController;
 import controller.ViewController;
+import entities.User;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.*;
 import javax.swing.GroupLayout;
 import javax.swing.LayoutStyle;
@@ -22,6 +25,18 @@ public class UserDataFrame extends JFrame {
     public UserDataFrame() {
         initComponents();
         buttonActions();
+        loadInfo();
+        documentTextField.setEnabled(false);
+    }
+
+    private void loadInfo(){
+        ArrayList<String> fieldList = UserController.getInstance().loadInfoUser(User.getInstance().getUsername());
+
+        documentTextField.setText(fieldList.get(0));
+        firstNameTextField.setText(fieldList.get(1));
+        lastNameTextField.setText(fieldList.get(2));
+        emailTextField.setText(fieldList.get(3));
+        phoneTextField.setText(fieldList.get(4));
     }
 
     private void initComponents() {
@@ -31,7 +46,7 @@ public class UserDataFrame extends JFrame {
         documentLabel = new JLabel();
         documentTextField = new JTextField();
         lastNameLabel = new JLabel();
-        lastNameField = new JTextField();
+        lastNameTextField = new JTextField();
         firstNameLabel = new JLabel();
         firstNameTextField = new JTextField();
         emailLabel = new JLabel();
@@ -104,7 +119,7 @@ public class UserDataFrame extends JFrame {
                                         .addGroup(contentPanelLayout.createSequentialGroup()
                                             .addComponent(lastNameLabel, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
                                             .addGap(12, 12, 12)
-                                            .addComponent(lastNameField, GroupLayout.PREFERRED_SIZE, 78, GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(lastNameTextField, GroupLayout.PREFERRED_SIZE, 78, GroupLayout.PREFERRED_SIZE))
                                         .addGroup(contentPanelLayout.createSequentialGroup()
                                             .addComponent(emailLabel, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
                                             .addGap(12, 12, 12)
@@ -140,7 +155,7 @@ public class UserDataFrame extends JFrame {
                                             .addGroup(contentPanelLayout.createSequentialGroup()
                                                 .addGap(7, 7, 7)
                                                 .addComponent(lastNameLabel))
-                                            .addComponent(lastNameField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(lastNameTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                                         .addGap(18, 18, 18))))
                             .addGroup(contentPanelLayout.createParallelGroup()
                                 .addComponent(emailTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
@@ -189,7 +204,7 @@ public class UserDataFrame extends JFrame {
     private JLabel documentLabel;
     private JTextField documentTextField;
     private JLabel lastNameLabel;
-    private JTextField lastNameField;
+    private JTextField lastNameTextField;
     private JLabel firstNameLabel;
     private JTextField firstNameTextField;
     private JLabel emailLabel;

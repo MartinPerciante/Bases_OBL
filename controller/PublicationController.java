@@ -13,6 +13,12 @@ public class PublicationController {
 
     private static PublicationController instance;
 
+    private EPickFigurita statusEnum;
+
+    public EPickFigurita getStatusEnum(){
+        return this.statusEnum;
+    }
+
     public static PublicationController getInstance() {
         if (instance == null) {
             instance = new PublicationController();
@@ -47,5 +53,14 @@ public class PublicationController {
             stringBuilderQuery.append("WHERE numero = " + number);
         }
         return DBService.executeQuery(stringBuilderQuery.toString());
+    }
+
+    public void gotToPickFigurita(JFrame origin, EPickFigurita enumValue){
+        statusEnum = enumValue;
+        try {
+            ViewController.getInstance().goToPickFigurita(origin);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

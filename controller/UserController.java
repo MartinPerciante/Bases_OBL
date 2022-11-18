@@ -9,6 +9,7 @@ import frames.*;
 import javax.swing.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserController {
@@ -58,6 +59,43 @@ public class UserController {
         boolean result = isInfoLogOk(username, password);
         if (result) User.getInstance().setUsername(username);
         return result;
+    }
+
+
+    public ArrayList<String> loadInfoUser(String ci) {
+        String condition = "ci = '" + ci + "'";
+        String query = Queries.findByColumn("usuario", condition);
+        ResultSet result = DBService.executeQuery(query);
+        if (result != null){
+            while (true){
+                try {
+                    if (!result.next()) break;
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+                try {
+                    if (result.first()){
+                        String ciDb = result.getString("ci");
+                        String nombreDb = result.getString("nombre");
+                        String apellidoDb = result.getString("apellido");
+                        String telefonoDb = result.getString("telefono");
+                        String emailDb = result.getString("email");
+
+                        ArrayList<String> list =  new ArrayList<>();
+                        list.add(ciDb);
+                        list.add(nombreDb);
+                        list.add(apellidoDb);
+                        list.add(emailDb);
+                        list.add(telefonoDb);
+
+                        return list;
+                    }
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
+        return new ArrayList<>();
     }
 
     public void register(String ci, String nombre, String apellido, String telefono, String email, String password) {

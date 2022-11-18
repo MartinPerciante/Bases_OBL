@@ -1,5 +1,6 @@
 package controller;
 
+import enums.EPickFigurita;
 import frames.*;
 
 import javax.swing.*;
