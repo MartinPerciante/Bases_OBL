@@ -99,46 +99,45 @@ public class CreateUserFrame extends JFrame {
                 contentPanelLayout.setHorizontalGroup(
                     contentPanelLayout.createParallelGroup()
                         .addGroup(contentPanelLayout.createSequentialGroup()
+                            .addComponent(cancelButton, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(createUserButton, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE))
+                        .addGroup(contentPanelLayout.createSequentialGroup()
                             .addGroup(contentPanelLayout.createParallelGroup()
                                 .addGroup(contentPanelLayout.createSequentialGroup()
-                                    .addComponent(cancelButton, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE)
+                                    .addGap(15, 15, 15)
+                                    .addGroup(contentPanelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                                        .addGroup(contentPanelLayout.createSequentialGroup()
+                                            .addComponent(emailLabel, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(emailTextField, GroupLayout.PREFERRED_SIZE, 130, GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(contentPanelLayout.createSequentialGroup()
+                                            .addComponent(phoneLabel, GroupLayout.PREFERRED_SIZE, 52, GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(phoneTextField, GroupLayout.PREFERRED_SIZE, 130, GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(contentPanelLayout.createSequentialGroup()
+                                            .addComponent(firstNameLabel, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(firstNameTextField, GroupLayout.PREFERRED_SIZE, 130, GroupLayout.PREFERRED_SIZE)))
+                                    .addGap(12, 12, 12)
+                                    .addGroup(contentPanelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                                        .addComponent(lastNameLabel, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(passwordLabel, GroupLayout.PREFERRED_SIZE, 67, GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(repeatPasswordLabel, GroupLayout.PREFERRED_SIZE, 109, GroupLayout.PREFERRED_SIZE))
                                     .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(errorLabel, GroupLayout.PREFERRED_SIZE, 287, GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(createUserButton, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE))
-                                .addGroup(contentPanelLayout.createSequentialGroup()
                                     .addGroup(contentPanelLayout.createParallelGroup()
-                                        .addGroup(contentPanelLayout.createSequentialGroup()
-                                            .addGap(15, 15, 15)
-                                            .addGroup(contentPanelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                                                .addGroup(contentPanelLayout.createSequentialGroup()
-                                                    .addComponent(emailLabel, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)
-                                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                                    .addComponent(emailTextField, GroupLayout.PREFERRED_SIZE, 130, GroupLayout.PREFERRED_SIZE))
-                                                .addGroup(contentPanelLayout.createSequentialGroup()
-                                                    .addComponent(phoneLabel, GroupLayout.PREFERRED_SIZE, 52, GroupLayout.PREFERRED_SIZE)
-                                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                                    .addComponent(phoneTextField, GroupLayout.PREFERRED_SIZE, 130, GroupLayout.PREFERRED_SIZE))
-                                                .addGroup(contentPanelLayout.createSequentialGroup()
-                                                    .addComponent(firstNameLabel, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE)
-                                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                                    .addComponent(firstNameTextField, GroupLayout.PREFERRED_SIZE, 130, GroupLayout.PREFERRED_SIZE)))
-                                            .addGap(12, 12, 12)
-                                            .addGroup(contentPanelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                                                .addComponent(lastNameLabel, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(passwordLabel, GroupLayout.PREFERRED_SIZE, 67, GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(repeatPasswordLabel, GroupLayout.PREFERRED_SIZE, 109, GroupLayout.PREFERRED_SIZE))
-                                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                            .addGroup(contentPanelLayout.createParallelGroup()
-                                                .addComponent(lastNameTextField, GroupLayout.PREFERRED_SIZE, 130, GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(repeatPasswordField, GroupLayout.PREFERRED_SIZE, 130, GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(passwordField, GroupLayout.PREFERRED_SIZE, 130, GroupLayout.PREFERRED_SIZE)))
-                                        .addGroup(contentPanelLayout.createSequentialGroup()
-                                            .addGap(150, 150, 150)
-                                            .addComponent(documentLabel)
-                                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(documentTextField, GroupLayout.PREFERRED_SIZE, 130, GroupLayout.PREFERRED_SIZE)))
-                                    .addGap(0, 0, Short.MAX_VALUE)))
+                                        .addComponent(lastNameTextField, GroupLayout.PREFERRED_SIZE, 130, GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(repeatPasswordField, GroupLayout.PREFERRED_SIZE, 130, GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(passwordField, GroupLayout.PREFERRED_SIZE, 130, GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(contentPanelLayout.createSequentialGroup()
+                                    .addGap(150, 150, 150)
+                                    .addComponent(documentLabel)
+                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(documentTextField, GroupLayout.PREFERRED_SIZE, 130, GroupLayout.PREFERRED_SIZE)))
+                            .addGap(0, 18, Short.MAX_VALUE))
+                        .addGroup(GroupLayout.Alignment.TRAILING, contentPanelLayout.createSequentialGroup()
+                            .addContainerGap(103, Short.MAX_VALUE)
+                            .addComponent(errorLabel, GroupLayout.PREFERRED_SIZE, 375, GroupLayout.PREFERRED_SIZE)
                             .addContainerGap())
                 );
                 contentPanelLayout.setVerticalGroup(
@@ -169,15 +168,11 @@ public class CreateUserFrame extends JFrame {
                                 .addComponent(repeatPasswordField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                                 .addComponent(repeatPasswordLabel))
                             .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(errorLabel, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                             .addGroup(contentPanelLayout.createParallelGroup()
-                                .addGroup(contentPanelLayout.createSequentialGroup()
-                                    .addGap(0, 36, Short.MAX_VALUE)
-                                    .addGroup(contentPanelLayout.createParallelGroup()
-                                        .addComponent(createUserButton, GroupLayout.Alignment.TRAILING)
-                                        .addComponent(cancelButton, GroupLayout.Alignment.TRAILING)))
-                                .addGroup(contentPanelLayout.createSequentialGroup()
-                                    .addComponent(errorLabel, GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
-                                    .addContainerGap())))
+                                .addComponent(createUserButton, GroupLayout.Alignment.TRAILING)
+                                .addComponent(cancelButton, GroupLayout.Alignment.TRAILING)))
                 );
             }
             dialogPane.add(contentPanel, BorderLayout.CENTER);
@@ -231,16 +226,6 @@ public class CreateUserFrame extends JFrame {
                 viewController.goToLogin(CreateUserFrame.this);
             }
         });
-    }
-
-    public void vaciar() {
-        documentTextField.setText("");
-        firstNameTextField.setText("");
-        lastNameTextField.setText("");
-        phoneTextField.setText("");
-        passwordField.setText("");
-        repeatPasswordField.setText("");
-        emailTextField.setText("");
     }
 
     private boolean anyNull() {

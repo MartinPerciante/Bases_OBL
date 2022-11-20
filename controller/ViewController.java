@@ -11,93 +11,93 @@ public class ViewController {
     private LoginFrame loginFrame;
 
     public LoginFrame getLoginFrame() {
-        if (loginFrame == null) {
+        //if (loginFrame == null) {
             loginFrame = new LoginFrame();
             loginFrame.setBounds(500, 200, 435, 320);
             loginFrame.setVisible(true);
-        }
+        //}
         return loginFrame;
     }
 
     private ChangePasswordFrame changePasswordFrame;
 
     public ChangePasswordFrame getChangePasswordFrame() {
-        if (changePasswordFrame == null) {
+        //if (changePasswordFrame == null) {
             changePasswordFrame = new ChangePasswordFrame();
-        }
+        //}
         return changePasswordFrame;
     }
 
     private MenuFrame menuFrame;
 
     public MenuFrame getMenuFrame() {
-        if (menuFrame == null) {
+        //if (menuFrame == null) {
             menuFrame = new MenuFrame();
-        }
+        //}
         return menuFrame;
     }
 
     private UserDataFrame userDataFrame;
 
     public UserDataFrame getUserDataFrame() {
-        if (userDataFrame == null) {
+        //if (userDataFrame == null) {
             userDataFrame = new UserDataFrame();
-        }
+        //}
         return userDataFrame;
     }
 
     private CreateUserFrame createUserFrame;
 
     public CreateUserFrame getCreateUserFrame() {
-        if (createUserFrame == null) {
+        //if (createUserFrame == null) {
             createUserFrame = new CreateUserFrame();
-        }
+        //}
         return createUserFrame;
     }
 
     private CreatePublicationFrame createPublicationFrame;
 
     public CreatePublicationFrame getCreatePublicationFrame() throws SQLException {
-        if (createPublicationFrame == null) {
+        //if (createPublicationFrame == null) {
             createPublicationFrame = new CreatePublicationFrame();
             createPublicationFrame.setSize(955, 750);
-        }
+        //}
         return createPublicationFrame;
     }
 
     private PickFiguritaFrame pickFiguritaFrame;
 
     public PickFiguritaFrame getPickFiguritaFrame() throws SQLException {
-        if (pickFiguritaFrame == null) {
+        //if (pickFiguritaFrame == null) {
             pickFiguritaFrame = new PickFiguritaFrame();
-        }
+        //}
         return pickFiguritaFrame;
     }
 
     private ShowPublicationsFrame showPublicationsFrame;
 
     public ShowPublicationsFrame getShowPublicationsFrame() throws SQLException {
-        if (showPublicationsFrame == null) {
+        //if (showPublicationsFrame == null) {
             showPublicationsFrame = new ShowPublicationsFrame();
-        }
+        //}
         return showPublicationsFrame;
     }
 
     private CreateOfferFrame createOfferFrame;
 
     public CreateOfferFrame getCreateOfferFrame() {
-        if (createOfferFrame == null) {
+        //if (createOfferFrame == null) {
             createOfferFrame = new CreateOfferFrame();
-        }
+        //}
         return createOfferFrame;
     }
 
     private MyPublicationsFrame myPublicationsFrame;
 
     public MyPublicationsFrame getMyPublicationsFrame() throws SQLException {
-        if (myPublicationsFrame == null) {
+        //if (myPublicationsFrame == null) {
             myPublicationsFrame = new MyPublicationsFrame();
-        }
+        //}
         return myPublicationsFrame;
     }
 
@@ -134,7 +134,6 @@ public class ViewController {
     }
 
     public void goToRegistration(JFrame origin) {
-        getCreateUserFrame().vaciar();
         goToFrom(getCreateUserFrame(), origin);
     }
 
