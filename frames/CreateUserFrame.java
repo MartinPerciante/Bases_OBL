@@ -101,9 +101,9 @@ public class CreateUserFrame extends JFrame {
                         .addGroup(contentPanelLayout.createSequentialGroup()
                             .addGroup(contentPanelLayout.createParallelGroup()
                                 .addGroup(contentPanelLayout.createSequentialGroup()
-                                    .addComponent(cancelButton, GroupLayout.PREFERRED_SIZE, 92, GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cancelButton, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(errorLabel, GroupLayout.PREFERRED_SIZE, 299, GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(errorLabel, GroupLayout.PREFERRED_SIZE, 287, GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(createUserButton, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE))
                                 .addGroup(contentPanelLayout.createSequentialGroup()
@@ -145,39 +145,39 @@ public class CreateUserFrame extends JFrame {
                     contentPanelLayout.createParallelGroup()
                         .addGroup(contentPanelLayout.createSequentialGroup()
                             .addContainerGap()
+                            .addGroup(contentPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                .addComponent(documentLabel)
+                                .addComponent(documentTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                            .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addGroup(contentPanelLayout.createParallelGroup()
+                                .addGroup(contentPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                    .addComponent(firstNameTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(firstNameLabel))
+                                .addGroup(contentPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                    .addComponent(lastNameTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lastNameLabel)))
+                            .addGap(18, 18, 18)
+                            .addGroup(contentPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                .addComponent(phoneTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(phoneLabel)
+                                .addComponent(passwordField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(passwordLabel))
+                            .addGap(18, 18, 18)
+                            .addGroup(contentPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                .addComponent(emailTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(emailLabel)
+                                .addComponent(repeatPasswordField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(repeatPasswordLabel))
+                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                             .addGroup(contentPanelLayout.createParallelGroup()
                                 .addGroup(contentPanelLayout.createSequentialGroup()
-                                    .addGroup(contentPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                        .addComponent(documentLabel)
-                                        .addComponent(documentTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                                    .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addGroup(contentPanelLayout.createParallelGroup()
-                                        .addGroup(contentPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                            .addComponent(firstNameTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(firstNameLabel))
-                                        .addGroup(contentPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                            .addComponent(lastNameTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(lastNameLabel)))
-                                    .addGap(18, 18, 18)
-                                    .addGroup(contentPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                        .addComponent(phoneTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(phoneLabel)
-                                        .addComponent(passwordField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(passwordLabel))
-                                    .addGap(18, 18, 18)
-                                    .addGroup(contentPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                        .addComponent(emailTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(emailLabel)
-                                        .addComponent(repeatPasswordField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(repeatPasswordLabel))
-                                    .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(errorLabel, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
-                                    .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGroup(GroupLayout.Alignment.TRAILING, contentPanelLayout.createSequentialGroup()
-                                    .addGap(0, 209, Short.MAX_VALUE)
+                                    .addGap(0, 36, Short.MAX_VALUE)
                                     .addGroup(contentPanelLayout.createParallelGroup()
                                         .addComponent(createUserButton, GroupLayout.Alignment.TRAILING)
-                                        .addComponent(cancelButton, GroupLayout.Alignment.TRAILING)))))
+                                        .addComponent(cancelButton, GroupLayout.Alignment.TRAILING)))
+                                .addGroup(contentPanelLayout.createSequentialGroup()
+                                    .addComponent(errorLabel, GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
+                                    .addContainerGap())))
                 );
             }
             dialogPane.add(contentPanel, BorderLayout.CENTER);
@@ -196,10 +196,7 @@ public class CreateUserFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 errorLabel.setVisible(false);
-                if (documentTextField.getText() != null && firstNameTextField.getText() != null &&
-                        lastNameTextField.getText() != null && phoneTextField.getText() != null &&
-                        emailTextField.getText() != null && passwordField.getText() != null &&
-                        repeatPasswordField.getText() != null) {
+                if (!anyNull()) {
                         try {
                             if (passwordField.getText().compareTo(repeatPasswordField.getText()) == 0) {
                                 Integer.parseInt(documentTextField.getText());
@@ -209,8 +206,10 @@ public class CreateUserFrame extends JFrame {
                                         emailTextField.getText(), passwordField.getText());
                                 //Salto al frame de creación de usuario
                                 viewController.goToLogin(CreateUserFrame.this);
+
                             } else {
                                 errorLabel.setText(notTheSame);
+                                errorLabel.setVisible(true);
                             }
 
                         } catch (NumberFormatException h) {
@@ -227,10 +226,31 @@ public class CreateUserFrame extends JFrame {
         cancelButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
                 // Salto al frame de creación de usuario
                 viewController.goToLogin(CreateUserFrame.this);
             }
         });
+    }
+
+    public void vaciar() {
+        documentTextField.setText("");
+        firstNameTextField.setText("");
+        lastNameTextField.setText("");
+        phoneTextField.setText("");
+        passwordField.setText("");
+        repeatPasswordField.setText("");
+        emailTextField.setText("");
+    }
+
+    private boolean anyNull() {
+        return !(documentTextField.getText().compareTo("") != 0 &&
+                firstNameTextField.getText().compareTo("") != 0 &&
+                lastNameTextField.getText().compareTo("") != 0 &&
+                phoneTextField.getText().compareTo("") != 0 &&
+                emailTextField.getText().compareTo("") != 0 &&
+                passwordField.getText().compareTo("") != 0 &&
+                repeatPasswordField.getText().compareTo("") != 0);
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables  @formatter:off

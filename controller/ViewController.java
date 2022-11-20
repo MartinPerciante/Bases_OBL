@@ -134,6 +134,7 @@ public class ViewController {
     }
 
     public void goToRegistration(JFrame origin) {
+        getCreateUserFrame().vaciar();
         goToFrom(getCreateUserFrame(), origin);
     }
 
