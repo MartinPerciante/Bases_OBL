@@ -1,4 +1,4 @@
-JFDML JFormDesigner: "8.0.0.0.194" Java: "11.0.14.1" encoding: "UTF-8"
+JFDML JFormDesigner: "8.0.0.0.194" Java: "17.0.4.1" encoding: "UTF-8"
 
 new FormModel {
 	contentType: "form/swing"
@@ -10,8 +10,8 @@ new FormModel {
 				name: "dialogPane"
 				"border": new javax.swing.border.EmptyBorder( 12, 12, 12, 12 )
 				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-					"$horizontalGroup": "par l {seq {space :::p, par l {seq {par l {seq l {comp documentLabel:::p::p, space :12:12:p, comp documentTextField:::p:78:p, space s:::p, comp passwordLabel::::71:x}, seq l {comp firstNameLabel:::p:62:p, space :12:12:p, comp firstNameTextField:::p:78:p, space :18:18:p, comp lastNameLabel:::p:50:p}, seq l {comp phoneLabel:::p:62:p, space :12:12:p, comp phoneTextField:::p:78:p, space :18:18:p, comp emailLabel:::p:50:p}}, space :p:18:p}, seq l {comp cancelButton:::p:80:p, space ::180:x}}, par l {comp passwordTextField::l:p:78:p, comp lastNameTextField::l:p:78:p, comp emailTextField::l:p:78:p, comp createUserButton:::p:80:p}, space :p:28:p}, seq l {space :p:52:p, comp errorLabel:::p:247:p, space ::75:x}}"
-					"$verticalGroup": "par l {seq {space :::p, par l {seq l {par l {comp documentTextField:::p::p, seq {space :7:7:p, par l {comp documentLabel:::p::p, comp passwordLabel:::p::p}}}, space :p:18:p, par l {comp firstNameTextField:::p::p, seq l {space :7:7:p, par l {comp firstNameLabel:::p::p, comp lastNameLabel:::p::p}}}, space :18:18:p, par l {comp phoneTextField:::p::p, seq l {space :7:7:p, par l {comp phoneLabel:::p::p, comp emailLabel:::p::p}}}}, seq l {comp passwordTextField:::p::p, space :p:18:p, comp lastNameTextField:::p::p, space :18:18:p, comp emailTextField:::p::p}}, space ::38:x, comp errorLabel:::p:27:p, space u:::p, par b {comp cancelButton::b:p::p, comp createUserButton::b:p::p}, space :::p}}"
+					"$horizontalGroup": "par l {seq {par l {seq l {comp cancelButton:::p:92:p, space :::p, comp errorLabel:::p:299:p, space :::x, comp createUserButton:::p:80:p}, seq {par l {seq l {space :p:15:p, par t {seq t {comp emailLabel:::p:38:p, space :::p, comp emailTextField:::p:130:p}, seq t {comp phoneLabel:::p:52:p, space :::p, comp phoneTextField:::p:130:p}, seq t {comp firstNameLabel:::p:58:p, space :::p, comp firstNameTextField:::p:130:p}}, space :p:12:p, par t {comp lastNameLabel::t:p:50:p, comp passwordLabel::t:p:67:p, comp repeatPasswordLabel:::p:109:p}, space :::p, par l {comp lastNameTextField:::p:130:p, comp repeatPasswordField:::p:130:p, comp passwordField:::p:130:p}}, seq l {space :p:150:p, comp documentLabel:::p::p, space :::p, comp documentTextField:::p:130:p}}, space :0:0:x}}, space :::p}}"
+					"$verticalGroup": "par l {seq {space :::p, par l {seq {par b {comp documentLabel::b:p::p, comp documentTextField::b:p::p}, space u:::p, par l {par b {comp firstNameTextField::b:p::p, comp firstNameLabel::b:p::p}, par b:l {comp lastNameTextField::b:p::p, comp lastNameLabel::b:p::p}}, space s:::p, par b {comp phoneTextField::b:p::p, comp phoneLabel::b:p::p, comp passwordField::b:p::p, comp passwordLabel::b:p::p}, space s:::p, par b {comp emailTextField::b:p::p, comp emailLabel::b:p::p, comp repeatPasswordField::b:p::p, comp repeatPasswordLabel::b:p::p}, space u:::p, comp errorLabel:::p:49:p, space :::x}, seq t {space :0:209:x, par l {comp createUserButton::t:p::p, comp cancelButton::t:p::p}}}}}"
 				} ) {
 					name: "contentPanel"
 					add( new FormComponent( "javax.swing.JLabel" ) {
@@ -53,9 +53,6 @@ new FormModel {
 						name: "passwordLabel"
 						"text": "Contraseña"
 					} )
-					add( new FormComponent( "javax.swing.JTextField" ) {
-						name: "passwordTextField"
-					} )
 					add( new FormComponent( "javax.swing.JButton" ) {
 						name: "createUserButton"
 						"text": "CREAR"
@@ -67,6 +64,16 @@ new FormModel {
 					add( new FormComponent( "javax.swing.JLabel" ) {
 						name: "errorLabel"
 					} )
+					add( new FormComponent( "javax.swing.JPasswordField" ) {
+						name: "passwordField"
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "repeatPasswordLabel"
+						"text": "Repetir contraseña"
+					} )
+					add( new FormComponent( "javax.swing.JPasswordField" ) {
+						name: "repeatPasswordField"
+					} )
 				}, new FormLayoutConstraints( class java.lang.String ) {
 					"value": "Center"
 				} )
@@ -75,7 +82,7 @@ new FormModel {
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 0 )
-			"size": new java.awt.Dimension( 400, 300 )
+			"size": new java.awt.Dimension( 510, 300 )
 		} )
 	}
 }
