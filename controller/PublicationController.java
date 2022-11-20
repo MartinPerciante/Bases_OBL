@@ -44,7 +44,7 @@ public class PublicationController {
 
     public ResultSet getFiguritasPhotos(String country, String number) {
         StringBuilder stringBuilderQuery = new StringBuilder();
-        stringBuilderQuery.append("SELECT foto FROM figurita ");
+        stringBuilderQuery.append("SELECT * FROM figurita ");
         if (!country.equals(Utils.EMPTY_ITEM) && !number.equals(Utils.EMPTY_ITEM)) {
             stringBuilderQuery.append("WHERE pais = '" + country + "' AND numero = " + number);
         } else if (!country.equals(Utils.EMPTY_ITEM) && number.equals(Utils.EMPTY_ITEM)) {
