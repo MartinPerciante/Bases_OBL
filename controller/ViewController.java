@@ -70,6 +70,7 @@ public class ViewController {
     public PickFiguritaFrame getPickFiguritaFrame() throws SQLException {
         //if (pickFiguritaFrame == null) {
             pickFiguritaFrame = new PickFiguritaFrame();
+            pickFiguritaFrame.setSize(725, 520);
         //}
         return pickFiguritaFrame;
     }

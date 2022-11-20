@@ -134,7 +134,14 @@ public class CreateOfferFrame extends JFrame {
         cancelButton = new JButton();
         createButton = new JButton();
         scrollPane1 = new JScrollPane();
-        offeredFiguritasTable = new JTable();
+        offeredFiguritasTable = new JTable(0, 3) {
+            public Class getColumnClass(int column) {
+                return Icon.class;
+            }
+        };
+        offeredFiguritasTable.setTableHeader(null);
+        offeredFiguritasTable.setRowHeight(312);
+        offeredFiguritasTable.setBorder(Utils.blackBorder1);
         addFiguritaButton = new JButton();
         deleteFiguritaButton = new JButton();
 

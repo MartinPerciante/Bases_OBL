@@ -153,7 +153,14 @@ public class CreatePublicationFrame extends JFrame {
         interestedFiguritasLabel = new JLabel();
         figuritaImageLabel = new JLabel();
         scrollPane1 = new JScrollPane();
-        interestedFiguritasTable = new JTable();
+        interestedFiguritasTable = new JTable(0, 3) {
+            public Class getColumnClass(int column) {
+                return Icon.class;
+            }
+        };
+        interestedFiguritasTable.setTableHeader(null);
+        interestedFiguritasLabel.setBorder(Utils.blackBorder1);
+        interestedFiguritasTable.setBorder(Utils.blackBorder1);
         figuritasStateLabel = new JLabel();
         documentValueLabel = new JLabel();
         figuritaStateComboBox = new JComboBox();

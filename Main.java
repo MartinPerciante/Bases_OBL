@@ -103,23 +103,23 @@ public class Main {
 
         ViewController.getInstance().getLoginFrame();
 
-        JFrame jFrame = new JFrame();
-        jFrame.setLayout(new BorderLayout(1, 2));
-        //setting the bounds for the JFrame
-        jFrame.setBounds(0, 0, 1432, 730);
-//        Border br = BorderFactory.createLineBorder(Color.black);
-        Container c = jFrame.getContentPane();
+//        JFrame jFrame = new JFrame();
+//        jFrame.setLayout(new BorderLayout(1, 2));
+//        //setting the bounds for the JFrame
+//        jFrame.setBounds(0, 0, 1432, 730);
+////        Border br = BorderFactory.createLineBorder(Color.black);
+//        Container c = jFrame.getContentPane();
         //Creating a JPanel for the JFrame
-
-        PublicationPanel panel = new PublicationPanel(0, 0, 706, 422);
-        PublicationPanel panel1 = new PublicationPanel(716, 0, 706, 422);
-        JScrollPane jScrollPane = new JScrollPane(panel);
-        jScrollPane.setViewportView(panel);
-        jScrollPane.setVisible(true);
-        c.add(jScrollPane);
-//        c.add(panel1);
-
-        jFrame.setVisible(true);
+//
+//        PublicationPanel panel = new PublicationPanel(0, 0, 706, 422);
+//        PublicationPanel panel1 = new PublicationPanel(716, 0, 706, 422);
+//        JScrollPane jScrollPane = new JScrollPane(panel);
+//        jScrollPane.setViewportView(panel);
+//        jScrollPane.setVisible(true);
+//        c.add(jScrollPane);
+////        c.add(panel1);
+//
+//        jFrame.setVisible(true);
 //        panel.setLayout(null);
 //        panel.setBackground(Color.white);
 //        panel.setBounds(0, 0, 706, 422);

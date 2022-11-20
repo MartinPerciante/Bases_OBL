@@ -28,11 +28,6 @@ public class PickFiguritaFrame extends JFrame {
         initComponents();
         buttonActions();
         loadComboBoxData();
-
-
-        //esto va en el init
-        figuritasTable.setTableHeader(null);
-        figuritasTable.setRowHeight(312);
         setResizable(false);
     }
 
@@ -159,7 +154,14 @@ public class PickFiguritaFrame extends JFrame {
         countryLabel = new JLabel();
         countryComboBox = new JComboBox();
         scrollPane1 = new JScrollPane();
-        figuritasTable = new JTable();
+        figuritasTable = new JTable(0, 3) {
+            public Class getColumnClass(int column) {
+                return Icon.class;
+            }
+        };
+        figuritasTable.setTableHeader(null);
+        figuritasTable.setRowHeight(312);
+        figuritasTable.setRowMargin(5);
         filterButton = new JButton();
         figuritaStateLabel = new JLabel();
         figuritaStateComboBox = new JComboBox();
