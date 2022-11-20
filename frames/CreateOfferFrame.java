@@ -31,6 +31,7 @@ public class CreateOfferFrame extends JFrame {
         initComponents();
         offeredFiguritasList = new ArrayList<>();
         buttonActions();
+        setResizable(false);
     }
 
     ArrayList<Figurita> offeredFiguritasList;
@@ -133,18 +134,12 @@ public class CreateOfferFrame extends JFrame {
         cancelButton = new JButton();
         createButton = new JButton();
         scrollPane1 = new JScrollPane();
-        offeredFiguritasTable = new JTable(0, 3) {
-            public Class getColumnClass(int column) {
-                return Icon.class;
-            }
-        };
-        offeredFiguritasTable.setTableHeader(null);
-        offeredFiguritasTable.setRowHeight(312);
-        offeredFiguritasTable.setBorder(Utils.blackBorder1);
+        offeredFiguritasTable = new JTable();
         addFiguritaButton = new JButton();
         deleteFiguritaButton = new JButton();
 
         //======== this ========
+        setTitle("CREAR OFERTA");
         var contentPane = getContentPane();
         contentPane.setLayout(new BorderLayout());
 
@@ -176,34 +171,34 @@ public class CreateOfferFrame extends JFrame {
                 GroupLayout contentPanelLayout = new GroupLayout(contentPanel);
                 contentPanel.setLayout(contentPanelLayout);
                 contentPanelLayout.setHorizontalGroup(
-                        contentPanelLayout.createParallelGroup()
+                    contentPanelLayout.createParallelGroup()
+                        .addGroup(contentPanelLayout.createSequentialGroup()
+                            .addGroup(contentPanelLayout.createParallelGroup()
+                                .addComponent(scrollPane1, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 493, Short.MAX_VALUE)
                                 .addGroup(contentPanelLayout.createSequentialGroup()
-                                        .addGroup(contentPanelLayout.createParallelGroup()
-                                                .addComponent(scrollPane1, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 493, Short.MAX_VALUE)
-                                                .addGroup(contentPanelLayout.createSequentialGroup()
-                                                        .addComponent(addFiguritaButton)
-                                                        .addGap(18, 18, 18)
-                                                        .addComponent(deleteFiguritaButton)
-                                                        .addGap(0, 0, Short.MAX_VALUE))
-                                                .addGroup(contentPanelLayout.createSequentialGroup()
-                                                        .addComponent(cancelButton, GroupLayout.PREFERRED_SIZE, 108, GroupLayout.PREFERRED_SIZE)
-                                                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 277, Short.MAX_VALUE)
-                                                        .addComponent(createButton, GroupLayout.PREFERRED_SIZE, 108, GroupLayout.PREFERRED_SIZE)))
-                                        .addContainerGap())
+                                    .addComponent(addFiguritaButton)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(deleteFiguritaButton)
+                                    .addGap(0, 0, Short.MAX_VALUE))
+                                .addGroup(contentPanelLayout.createSequentialGroup()
+                                    .addComponent(cancelButton, GroupLayout.PREFERRED_SIZE, 108, GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 277, Short.MAX_VALUE)
+                                    .addComponent(createButton, GroupLayout.PREFERRED_SIZE, 108, GroupLayout.PREFERRED_SIZE)))
+                            .addContainerGap())
                 );
                 contentPanelLayout.setVerticalGroup(
-                        contentPanelLayout.createParallelGroup()
-                                .addGroup(contentPanelLayout.createSequentialGroup()
-                                        .addGroup(contentPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                                .addComponent(addFiguritaButton)
-                                                .addComponent(deleteFiguritaButton))
-                                        .addGap(16, 16, 16)
-                                        .addComponent(scrollPane1, GroupLayout.DEFAULT_SIZE, 257, Short.MAX_VALUE)
-                                        .addGap(12, 12, 12)
-                                        .addGroup(contentPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                                .addComponent(cancelButton, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(createButton, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
-                                        .addContainerGap())
+                    contentPanelLayout.createParallelGroup()
+                        .addGroup(contentPanelLayout.createSequentialGroup()
+                            .addGroup(contentPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                .addComponent(addFiguritaButton)
+                                .addComponent(deleteFiguritaButton))
+                            .addGap(16, 16, 16)
+                            .addComponent(scrollPane1, GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE)
+                            .addGap(12, 12, 12)
+                            .addGroup(contentPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                .addComponent(cancelButton, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(createButton, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
+                            .addContainerGap())
                 );
             }
             dialogPane.add(contentPanel, BorderLayout.CENTER);

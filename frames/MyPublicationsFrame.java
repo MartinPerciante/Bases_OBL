@@ -26,6 +26,7 @@ public class MyPublicationsFrame extends JFrame {
         publicationPanelArrayList = new ArrayList<>();
         buttonActions();
         populatePublications();
+        setResizable(false);
     }
 
     int xPosition = 0;
@@ -98,6 +99,7 @@ public class MyPublicationsFrame extends JFrame {
         publicationsPanel = new JPanel();
 
         //======== this ========
+        setTitle("MIS PUBLICACIONES");
         var contentPane = getContentPane();
         contentPane.setLayout(new BorderLayout());
 
@@ -110,18 +112,18 @@ public class MyPublicationsFrame extends JFrame {
             GroupLayout buttonsPanelLayout = new GroupLayout(buttonsPanel);
             buttonsPanel.setLayout(buttonsPanelLayout);
             buttonsPanelLayout.setHorizontalGroup(
-                    buttonsPanelLayout.createParallelGroup()
-                            .addGroup(buttonsPanelLayout.createSequentialGroup()
-                                    .addGap(372, 372, 372)
-                                    .addComponent(goBackButton, GroupLayout.PREFERRED_SIZE, 114, GroupLayout.PREFERRED_SIZE)
-                                    .addContainerGap(402, Short.MAX_VALUE))
+                buttonsPanelLayout.createParallelGroup()
+                    .addGroup(buttonsPanelLayout.createSequentialGroup()
+                        .addGap(372, 372, 372)
+                        .addComponent(goBackButton, GroupLayout.PREFERRED_SIZE, 114, GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(402, Short.MAX_VALUE))
             );
             buttonsPanelLayout.setVerticalGroup(
-                    buttonsPanelLayout.createParallelGroup()
-                            .addGroup(buttonsPanelLayout.createSequentialGroup()
-                                    .addGap(38, 38, 38)
-                                    .addComponent(goBackButton)
-                                    .addContainerGap(38, Short.MAX_VALUE))
+                buttonsPanelLayout.createParallelGroup()
+                    .addGroup(buttonsPanelLayout.createSequentialGroup()
+                        .addGap(38, 38, 38)
+                        .addComponent(goBackButton)
+                        .addContainerGap(38, Short.MAX_VALUE))
             );
         }
         contentPane.add(buttonsPanel, BorderLayout.NORTH);
@@ -132,12 +134,12 @@ public class MyPublicationsFrame extends JFrame {
             GroupLayout publicationsPanelLayout = new GroupLayout(publicationsPanel);
             publicationsPanel.setLayout(publicationsPanelLayout);
             publicationsPanelLayout.setHorizontalGroup(
-                    publicationsPanelLayout.createParallelGroup()
-                            .addGap(0, 888, Short.MAX_VALUE)
+                publicationsPanelLayout.createParallelGroup()
+                    .addGap(0, 888, Short.MAX_VALUE)
             );
             publicationsPanelLayout.setVerticalGroup(
-                    publicationsPanelLayout.createParallelGroup()
-                            .addGap(0, 504, Short.MAX_VALUE)
+                publicationsPanelLayout.createParallelGroup()
+                    .addGap(0, 498, Short.MAX_VALUE)
             );
         }
         contentPane.add(publicationsPanel, BorderLayout.CENTER);

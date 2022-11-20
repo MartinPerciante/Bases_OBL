@@ -27,6 +27,7 @@ public class ShowPublicationsFrame extends JFrame {
         buttonActions();
         loadComboBoxData();
         populatePublications(EMPTY_ITEM, EMPTY_ITEM);
+        setResizable(false);
     }
 
     int xPosition = 0;
@@ -129,6 +130,7 @@ public class ShowPublicationsFrame extends JFrame {
         publicationsPanel = new JPanel();
 
         //======== this ========
+        setTitle("PUBLICACIONES");
         var contentPane = getContentPane();
         contentPane.setLayout(new BorderLayout());
 
@@ -150,37 +152,37 @@ public class ShowPublicationsFrame extends JFrame {
             GroupLayout filterPanelLayout = new GroupLayout(filterPanel);
             filterPanel.setLayout(filterPanelLayout);
             filterPanelLayout.setHorizontalGroup(
-                    filterPanelLayout.createParallelGroup()
-                            .addGroup(GroupLayout.Alignment.TRAILING, filterPanelLayout.createSequentialGroup()
-                                    .addContainerGap()
-                                    .addComponent(cancelButton, GroupLayout.PREFERRED_SIZE, 114, GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 350, Short.MAX_VALUE)
-                                    .addComponent(numberLabel, GroupLayout.PREFERRED_SIZE, 67, GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(numberComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(countryLabel, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(countryComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                    .addGap(29, 29, 29)
-                                    .addComponent(filterButton, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE)
-                                    .addContainerGap())
+                filterPanelLayout.createParallelGroup()
+                    .addGroup(GroupLayout.Alignment.TRAILING, filterPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(cancelButton, GroupLayout.PREFERRED_SIZE, 114, GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 340, Short.MAX_VALUE)
+                        .addComponent(numberLabel, GroupLayout.PREFERRED_SIZE, 67, GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(numberComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(countryLabel, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(countryComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                        .addGap(29, 29, 29)
+                        .addComponent(filterButton, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
             );
             filterPanelLayout.setVerticalGroup(
-                    filterPanelLayout.createParallelGroup()
+                filterPanelLayout.createParallelGroup()
+                    .addGroup(filterPanelLayout.createSequentialGroup()
+                        .addGap(35, 35, 35)
+                        .addGroup(filterPanelLayout.createParallelGroup()
+                            .addGroup(filterPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                .addComponent(numberComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(numberLabel)
+                                .addComponent(cancelButton))
+                            .addComponent(countryComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                            .addComponent(filterButton)
                             .addGroup(filterPanelLayout.createSequentialGroup()
-                                    .addGap(35, 35, 35)
-                                    .addGroup(filterPanelLayout.createParallelGroup()
-                                            .addGroup(filterPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                                    .addComponent(numberComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(numberLabel)
-                                                    .addComponent(cancelButton))
-                                            .addComponent(countryComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(filterButton)
-                                            .addGroup(filterPanelLayout.createSequentialGroup()
-                                                    .addGap(4, 4, 4)
-                                                    .addComponent(countryLabel)))
-                                    .addContainerGap(41, Short.MAX_VALUE))
+                                .addGap(4, 4, 4)
+                                .addComponent(countryLabel)))
+                        .addContainerGap(41, Short.MAX_VALUE))
             );
         }
         contentPane.add(filterPanel, BorderLayout.NORTH);
@@ -191,12 +193,12 @@ public class ShowPublicationsFrame extends JFrame {
             GroupLayout publicationsPanelLayout = new GroupLayout(publicationsPanel);
             publicationsPanel.setLayout(publicationsPanelLayout);
             publicationsPanelLayout.setHorizontalGroup(
-                    publicationsPanelLayout.createParallelGroup()
-                            .addGap(0, 888, Short.MAX_VALUE)
+                publicationsPanelLayout.createParallelGroup()
+                    .addGap(0, 888, Short.MAX_VALUE)
             );
             publicationsPanelLayout.setVerticalGroup(
-                    publicationsPanelLayout.createParallelGroup()
-                            .addGap(0, 504, Short.MAX_VALUE)
+                publicationsPanelLayout.createParallelGroup()
+                    .addGap(0, 498, Short.MAX_VALUE)
             );
         }
         contentPane.add(publicationsPanel, BorderLayout.CENTER);

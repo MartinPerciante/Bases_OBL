@@ -5,12 +5,13 @@ new FormModel {
 	root: new FormRoot {
 		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class java.awt.BorderLayout ) ) {
 			name: "this"
+			"title": "DATOS PERSONALES"
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.BorderLayout ) ) {
 				name: "dialogPane"
 				"border": new javax.swing.border.EmptyBorder( 12, 12, 12, 12 )
 				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-					"$horizontalGroup": "par l {seq {par l {seq {space :p:23:p, par t:::p {seq t {comp phoneLabel:::::x, space :p:12:p, comp phoneTextField:::p:78:p}, seq t {comp firstNameLabel:::::x, space :p:12:p, comp firstNameTextField:::p:78:p}, seq t {comp documentLabel:::p::p, space u:::p, comp documentTextField:::p:78:p}}, space s:::p, par l {seq l {comp lastNameLabel:::p:50:p, space :12:12:p, comp lastNameField:::p:78:p}, seq l {comp emailLabel:::p:50:p, space :12:12:p, comp emailTextField:::p:78:p}}}, seq l {space :::p, comp changePasswordButton:::p:157:p, space u:::p, comp saveButton:::p:94:p, space u:::p, comp returnButton:::p:93:p}}, space :::x}}"
-					"$verticalGroup": "par l {seq l {space :::p, par b {comp documentTextField::b:p::p, comp documentLabel::b:p::p}, space s:::p, par l {seq {space :7:7:p, comp firstNameLabel:::p::p, space :::p}, par l {seq t {comp firstNameTextField:::p::p, space s:::p}, seq l {par l {seq l {space :7:7:p, comp lastNameLabel:::p::p}, comp lastNameField:::p::p}, space :p:18:p}}}, par l {comp emailTextField:::p::p, comp phoneTextField:::p::p, seq l {space :7:7:p, par l {comp emailLabel:::p::p, comp phoneLabel:::p::p}}}, space ::76:x, par b {comp changePasswordButton::b:p:31:p, comp saveButton::b:p:31:p, comp returnButton::b:p::p}, space :::p}}"
+					"$horizontalGroup": "par l {seq l {space :::p, comp changePasswordButton:::::x, space u:::p, comp saveButton:::p:94:p, space :p:12:p, comp returnButton:::p:93:p, space :::p}, seq l {space :p:22:p, par t {seq t {comp firstNameLabel:::p:55:p, space :::p, comp firstNameTextField:::p:100:p}, seq t {comp phoneLabel:::p:55:p, space :::p, comp phoneTextField:::p:100:p}, seq t {comp documentLabel:::p::p, space :::p, comp documentTextField:::p:100:p}}, par l {seq l {space :p:24:p, comp emailLabel:::p:50:p}, seq t {space :::p, comp lastNameLabel:::p:50:p}}, space :::p, par l {comp lastNameTextField:::p:100:p, comp emailTextField:::p:100:p}, space :::x}}"
+					"$verticalGroup": "par l {seq l {space :p:24:p, par l {seq t {par b {comp documentTextField::b:p::p, comp documentLabel::b:p::p}, space s:::p, par b {comp firstNameTextField::b:p::p, comp firstNameLabel::b:p::p}}, par b:t {comp emailTextField::b:p::p, comp lastNameLabel::b:p::p}}, par l {seq l {space :p:18:p, par b {comp lastNameTextField::b:p::p, comp emailLabel::b:p::p}}, seq l {space s:::p, par b {comp phoneTextField::b:p::p, comp phoneLabel::b:p::p}}}, space :p:28:p, par b {comp saveButton::b:p:31:p, comp changePasswordButton::b:p:31:p, comp returnButton::l:::x}, space s:::p}}"
 				} ) {
 					name: "contentPanel"
 					add( new FormComponent( "javax.swing.JLabel" ) {
@@ -25,7 +26,7 @@ new FormModel {
 						"text": "Apellido"
 					} )
 					add( new FormComponent( "javax.swing.JTextField" ) {
-						name: "lastNameField"
+						name: "lastNameTextField"
 					} )
 					add( new FormComponent( "javax.swing.JLabel" ) {
 						name: "firstNameLabel"
@@ -68,7 +69,7 @@ new FormModel {
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 0 )
-			"size": new java.awt.Dimension( 400, 300 )
+			"size": new java.awt.Dimension( 405, 270 )
 		} )
 	}
 }

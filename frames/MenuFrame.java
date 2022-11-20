@@ -20,6 +20,7 @@ public class MenuFrame extends JFrame {
     public MenuFrame() {
         initComponents();
         buttonActions();
+        setResizable(false);
     }
 
     private void initComponents() {

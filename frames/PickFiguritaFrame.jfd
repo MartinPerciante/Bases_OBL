@@ -1,15 +1,16 @@
-JFDML JFormDesigner: "8.0.0.0.194" Java: "11.0.14.1" encoding: "UTF-8"
+JFDML JFormDesigner: "8.0.0.0.194" Java: "17.0.4.1" encoding: "UTF-8"
 
 new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class java.awt.BorderLayout ) ) {
 			name: "this"
+			"title": "ELEGIR FIGURITA"
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.BorderLayout ) ) {
 				name: "dialogPane"
 				"border": new javax.swing.border.EmptyBorder( 12, 12, 12, 12 )
 				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-					"$horizontalGroup": "par l {comp scrollPane1::::699:x, seq {comp cancelButton:::p:115:p, space :::x, comp numberLabel:::p:67:p, space :::p, comp numberComboBox:::p::p, space s:::p, comp countryLabel:::p:31:p, space s:::p, comp countryComboBox:::p::p, space :p:29:p, comp filterButton:::p:95:p, space s:::p, comp figuritaStateLabel:::p:46:p, space s:::p, comp figuritaStateComboBox:::p::p, space :::p}}"
+					"$horizontalGroup": "par l {comp scrollPane1:::::x, seq {comp cancelButton:::p:115:p, space :::x, comp numberLabel:::p:67:p, space :::p, comp numberComboBox:::p::p, space s:::p, comp countryLabel:::p:31:p, space s:::p, comp countryComboBox:::p::p, space :p:29:p, comp filterButton:::p:95:p, space s:::p, comp figuritaStateLabel:::p:46:p, space s:::p, comp figuritaStateComboBox:::p::p, space :::p}}"
 					"$verticalGroup": "par l {seq l {space :::p, par l {par b {comp figuritaStateComboBox::b:p::p, comp figuritaStateLabel::b:p::p}, par b:l {comp numberComboBox::b:p::p, comp numberLabel::b:p::p, comp cancelButton::b:p::p}, par b:l {comp countryComboBox::b:p::p, comp filterButton::b:p::p, comp countryLabel::b:p::p}}, space :p:18:p, comp scrollPane1:::p:384:p, space :::x}}"
 				} ) {
 					name: "contentPanel"

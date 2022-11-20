@@ -22,26 +22,28 @@ public class ChangePasswordFrame extends JFrame {
 
     private final String notActualPassword = "La contraseña actual ingresada es incorrecta";
     private final String notTheSame = "La nueva contraseña y la confirmación no coinciden";
+    private final String notEmpty = "Los campos no pueden estar vacios";
 
     public ChangePasswordFrame() {
         initComponents();
         buttonActions();
         errorLabel.setVisible(false);
+        setResizable(false);
     }
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
         dialogPane = new JPanel();
         contentPanel = new JPanel();
-        actualPasswordTextField = new JTextField();
         actualPasswordLabel = new JLabel();
-        newPasswordTextField = new JTextField();
         newPasswordLabel = new JLabel();
-        repeatPasswordTextField = new JTextField();
         repeatPasswordLabel = new JLabel();
         saveButton = new JButton();
         cancelButton = new JButton();
         errorLabel = new JLabel();
+        actualPasswordField = new JPasswordField();
+        newPasswordField = new JPasswordField();
+        repeatNewPasswordField = new JPasswordField();
 
         //======== this ========
         setTitle("CAMBIAR CONTRASE\u00d1A");
@@ -71,9 +73,6 @@ public class ChangePasswordFrame extends JFrame {
                 //---- cancelButton ----
                 cancelButton.setText("CANCELAR");
 
-                //---- errorLabel ----
-                errorLabel.setText("text");
-
                 GroupLayout contentPanelLayout = new GroupLayout(contentPanel);
                 contentPanel.setLayout(contentPanelLayout);
                 contentPanelLayout.setHorizontalGroup(
@@ -83,49 +82,47 @@ public class ChangePasswordFrame extends JFrame {
                                 .addGroup(contentPanelLayout.createSequentialGroup()
                                     .addContainerGap()
                                     .addComponent(cancelButton)
-                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 180, Short.MAX_VALUE)
+                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(saveButton))
                                 .addGroup(contentPanelLayout.createSequentialGroup()
                                     .addGap(58, 58, 58)
-                                    .addGroup(contentPanelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                                        .addGroup(contentPanelLayout.createSequentialGroup()
-                                            .addComponent(newPasswordLabel, GroupLayout.PREFERRED_SIZE, 113, GroupLayout.PREFERRED_SIZE)
-                                            .addGap(18, 18, 18)
-                                            .addComponent(newPasswordTextField, GroupLayout.PREFERRED_SIZE, 115, GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(contentPanelLayout.createSequentialGroup()
-                                            .addComponent(actualPasswordLabel, GroupLayout.PREFERRED_SIZE, 113, GroupLayout.PREFERRED_SIZE)
-                                            .addGap(18, 18, 18)
-                                            .addComponent(actualPasswordTextField, GroupLayout.PREFERRED_SIZE, 115, GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(contentPanelLayout.createSequentialGroup()
-                                            .addComponent(repeatPasswordLabel, GroupLayout.PREFERRED_SIZE, 113, GroupLayout.PREFERRED_SIZE)
-                                            .addGap(18, 18, 18)
-                                            .addComponent(repeatPasswordTextField, GroupLayout.PREFERRED_SIZE, 115, GroupLayout.PREFERRED_SIZE))
-                                        .addComponent(errorLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addGap(0, 64, Short.MAX_VALUE)))
+                                    .addGroup(contentPanelLayout.createParallelGroup()
+                                        .addComponent(errorLabel, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGroup(GroupLayout.Alignment.TRAILING, contentPanelLayout.createSequentialGroup()
+                                            .addGroup(contentPanelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING, false)
+                                                .addGroup(contentPanelLayout.createSequentialGroup()
+                                                    .addComponent(actualPasswordLabel, GroupLayout.PREFERRED_SIZE, 113, GroupLayout.PREFERRED_SIZE)
+                                                    .addGap(18, 18, 18)
+                                                    .addComponent(actualPasswordField))
+                                                .addGroup(contentPanelLayout.createSequentialGroup()
+                                                    .addComponent(newPasswordLabel, GroupLayout.PREFERRED_SIZE, 113, GroupLayout.PREFERRED_SIZE)
+                                                    .addGap(18, 18, 18)
+                                                    .addComponent(newPasswordField, GroupLayout.PREFERRED_SIZE, 119, GroupLayout.PREFERRED_SIZE))
+                                                .addGroup(contentPanelLayout.createSequentialGroup()
+                                                    .addComponent(repeatPasswordLabel, GroupLayout.PREFERRED_SIZE, 113, GroupLayout.PREFERRED_SIZE)
+                                                    .addGap(18, 18, 18)
+                                                    .addComponent(repeatNewPasswordField, GroupLayout.PREFERRED_SIZE, 119, GroupLayout.PREFERRED_SIZE)))
+                                            .addGap(60, 60, 60)))))
                             .addContainerGap())
                 );
                 contentPanelLayout.setVerticalGroup(
                     contentPanelLayout.createParallelGroup()
                         .addGroup(contentPanelLayout.createSequentialGroup()
-                            .addGap(26, 26, 26)
+                            .addGap(28, 28, 28)
                             .addGroup(contentPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                                 .addComponent(actualPasswordLabel)
-                                .addComponent(actualPasswordTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(contentPanelLayout.createParallelGroup()
-                                .addGroup(contentPanelLayout.createSequentialGroup()
-                                    .addGap(7, 7, 7)
-                                    .addComponent(newPasswordLabel))
-                                .addComponent(newPasswordTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(contentPanelLayout.createParallelGroup()
-                                .addGroup(contentPanelLayout.createSequentialGroup()
-                                    .addGap(7, 7, 7)
-                                    .addComponent(repeatPasswordLabel))
-                                .addComponent(repeatPasswordTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                            .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(actualPasswordField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                            .addGap(8, 8, 8)
+                            .addGroup(contentPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                .addComponent(newPasswordLabel)
+                                .addComponent(newPasswordField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                            .addGap(6, 6, 6)
+                            .addGroup(contentPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                .addComponent(repeatPasswordLabel)
+                                .addComponent(repeatNewPasswordField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
                             .addComponent(errorLabel, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                            .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
                             .addGroup(contentPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                                 .addComponent(cancelButton, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
                                 .addComponent(saveButton, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)))
@@ -154,19 +151,24 @@ public class ChangePasswordFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                  //Los campos de password estan iguales
-                if (newPasswordTextField.getText().equals(repeatPasswordTextField.getText())) {
+                if (!newPasswordField.getText().isEmpty() && ! repeatNewPasswordField.getText().isEmpty()) {
+                    if (newPasswordField.getText().equals(repeatNewPasswordField.getText())) {
 
-                    if (userController.changePassword(Usuario.getInstance().getUsername(),
-                             actualPasswordTextField.getText(),
-                             newPasswordTextField.getText())) {
-                        errorLabel.setVisible(false);
-                         ViewController.getInstance().goToMenu(ChangePasswordFrame.this);
-                     } else {
-                        errorLabel.setText(notActualPassword);
+                        if (userController.changePassword(Usuario.getInstance().getUsername(),
+                                actualPasswordField.getText(),
+                                newPasswordField.getText())) {
+                            errorLabel.setVisible(false);
+                            ViewController.getInstance().goToMenu(ChangePasswordFrame.this);
+                        } else {
+                            errorLabel.setText(notActualPassword);
+                            errorLabel.setVisible(true);
+                        }
+                    } else {
+                        errorLabel.setText(notTheSame);
                         errorLabel.setVisible(true);
-                     }
+                    }
                 } else {
-                    errorLabel.setText(notTheSame);
+                    errorLabel.setText(notEmpty);
                     errorLabel.setVisible(true);
                 }
             }
@@ -177,14 +179,14 @@ public class ChangePasswordFrame extends JFrame {
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables  @formatter:off
     private JPanel dialogPane;
     private JPanel contentPanel;
-    private JTextField actualPasswordTextField;
     private JLabel actualPasswordLabel;
-    private JTextField newPasswordTextField;
     private JLabel newPasswordLabel;
-    private JTextField repeatPasswordTextField;
     private JLabel repeatPasswordLabel;
     private JButton saveButton;
     private JButton cancelButton;
     private JLabel errorLabel;
+    private JPasswordField actualPasswordField;
+    private JPasswordField newPasswordField;
+    private JPasswordField repeatNewPasswordField;
     // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
 }

@@ -37,6 +37,8 @@ public class LoginFrame extends JFrame {
         errorLabel = new JLabel();
 
         //======== this ========
+        setResizable(false);
+        setTitle("INICIAR SESI\u00d3N");
         var contentPane = getContentPane();
         contentPane.setLayout(new BorderLayout());
 
@@ -101,7 +103,7 @@ public class LoginFrame extends JFrame {
                             .addGroup(contentPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                                 .addComponent(passwordTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                                 .addComponent(passwordLabel))
-                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
+                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
                             .addComponent(loginButton)
                             .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
                             .addComponent(registerButton)

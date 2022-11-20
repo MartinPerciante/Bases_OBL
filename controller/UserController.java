@@ -20,7 +20,7 @@ public class UserController {
     }
 
     public boolean isInfoLogOk(String ci, String password) {
-        String condition = "ci = '" + ci + "' AND " + "password = '" + password + "'";
+        String condition = "ci = '" + ci + "' AND " + "password = '" + password.hashCode() + "'";
         String query = Queries.findByColumn("usuario", condition);
         ResultSet result = DBService.executeQuery(query);
 
@@ -37,7 +37,8 @@ public class UserController {
                         String usernameDb = result.getString("ci");
                         String passwordDb = result.getString("password");
                         //Se ingresaron datos para inyeccion SQL
-                        if (!(usernameDb.equals(ci) && passwordDb.equals(passwordDb))){
+                        String hashedPw = String.valueOf(password.hashCode());
+                        if (!(usernameDb.equals(ci) && passwordDb.equals(hashedPw))){
                             counter = -1;
                             break;
                         }
@@ -98,13 +99,13 @@ public class UserController {
     public void register(String ci, String username, String lastname, String telefono, String email, String password) {
         DBService.executeUpdate("INSERT INTO usuario (ci, nombre, apellido, telefono, email, password) " +
                 "VALUES ('" + ci + "','" + username + "','" + lastname + "','" +
-                telefono + "','" + email + "','" + password + "')");
+                telefono + "','" + email + "','" + password.hashCode() + "')");
     }
 
     public boolean changePassword(String ci, String oldPassword, String newPassword) {
         if (isInfoLogOk(ci, oldPassword)) {
-            String condition = "ci = '" + ci + "' AND " + "password = '" + oldPassword + "'";
-            String query = Queries.update("usuario", List.of("password = '" + newPassword + "'"), condition);
+            String condition = "ci = '" + ci + "' AND " + "password = '" + oldPassword.hashCode() + "'";
+            String query = Queries.update("usuario", List.of("password = '" + newPassword.hashCode() + "'"), condition);
             DBService.executeUpdate(query);
             return true;
         }

@@ -40,7 +40,7 @@ public class CreatePublicationFrame extends JFrame {
         interestedFiguritasTable.setRowHeight(312);
         interestedFiguritasTable.setTableHeader(null);
         //
-
+        setResizable(false);
         ResultSet resultSet = PublicationController.getInstance().getFiguritasState();
         while (resultSet.next()) {
             figuritaStateComboBox.addItem(resultSet.getString("estado"));
@@ -131,6 +131,16 @@ public class CreatePublicationFrame extends JFrame {
                 viewController.goToMenu(CreatePublicationFrame.this);
             }
         });
+
+        deleteFiguritaButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Icon iconSelected = (Icon) interestedFiguritasTable.getValueAt(interestedFiguritasTable.getSelectedRow(), interestedFiguritasTable.getSelectedColumn());
+                if (iconSelected != null) {
+                    interestedFiguritasTable.setValueAt(null, interestedFiguritasTable.getSelectedRow(), interestedFiguritasTable.getSelectedColumn());
+                }
+            }
+        });
     }
 
     //añadir a table metodo getColumnClass con return Icon.class
@@ -143,22 +153,17 @@ public class CreatePublicationFrame extends JFrame {
         interestedFiguritasLabel = new JLabel();
         figuritaImageLabel = new JLabel();
         scrollPane1 = new JScrollPane();
-        interestedFiguritasTable = new JTable(0, 3) {
-            public Class getColumnClass(int column) {
-                return Icon.class;
-            }
-        };
-        interestedFiguritasTable.setTableHeader(null);
-        interestedFiguritasLabel.setBorder(Utils.blackBorder1);
-        interestedFiguritasTable.setBorder(Utils.blackBorder1);
+        interestedFiguritasTable = new JTable();
         figuritasStateLabel = new JLabel();
         documentValueLabel = new JLabel();
         figuritaStateComboBox = new JComboBox();
         cancelButton = new JButton();
         createButton = new JButton();
         addFiguritaButton = new JButton();
+        deleteFiguritaButton = new JButton();
 
         //======== this ========
+        setTitle("CREAR PUBLICACI\u00d3N");
         var contentPane = getContentPane();
         contentPane.setLayout(new BorderLayout());
 
@@ -196,68 +201,77 @@ public class CreatePublicationFrame extends JFrame {
                 //---- addFiguritaButton ----
                 addFiguritaButton.setText("AGREGAR");
 
+                //---- deleteFiguritaButton ----
+                deleteFiguritaButton.setText("ELIMINAR");
+
                 GroupLayout contentPanelLayout = new GroupLayout(contentPanel);
                 contentPanel.setLayout(contentPanelLayout);
                 contentPanelLayout.setHorizontalGroup(
-                        contentPanelLayout.createParallelGroup()
+                    contentPanelLayout.createParallelGroup()
+                        .addGroup(contentPanelLayout.createSequentialGroup()
+                            .addContainerGap()
+                            .addGroup(contentPanelLayout.createParallelGroup()
                                 .addGroup(contentPanelLayout.createSequentialGroup()
-                                        .addContainerGap()
-                                        .addGroup(contentPanelLayout.createParallelGroup()
+                                    .addGroup(contentPanelLayout.createParallelGroup()
+                                        .addComponent(figuritaImageLabel, GroupLayout.DEFAULT_SIZE, 239, Short.MAX_VALUE)
+                                        .addGroup(contentPanelLayout.createSequentialGroup()
+                                            .addGroup(contentPanelLayout.createParallelGroup()
                                                 .addGroup(contentPanelLayout.createSequentialGroup()
-                                                        .addGroup(contentPanelLayout.createParallelGroup()
-                                                                .addComponent(figuritaImageLabel, GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE)
-                                                                .addGroup(contentPanelLayout.createSequentialGroup()
-                                                                        .addComponent(documentLabel, GroupLayout.PREFERRED_SIZE, 137, GroupLayout.PREFERRED_SIZE)
-                                                                        .addGap(18, 18, 18)
-                                                                        .addComponent(documentValueLabel, GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE))
-                                                                .addGroup(contentPanelLayout.createSequentialGroup()
-                                                                        .addGroup(contentPanelLayout.createParallelGroup()
-                                                                                .addGroup(contentPanelLayout.createSequentialGroup()
-                                                                                        .addComponent(figuritasStateLabel, GroupLayout.PREFERRED_SIZE, 53, GroupLayout.PREFERRED_SIZE)
-                                                                                        .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                                                                                        .addComponent(figuritaStateComboBox, GroupLayout.PREFERRED_SIZE, 114, GroupLayout.PREFERRED_SIZE))
-                                                                                .addComponent(offeredFiguritaLabel, GroupLayout.PREFERRED_SIZE, 122, GroupLayout.PREFERRED_SIZE))
-                                                                        .addGap(0, 25, Short.MAX_VALUE)))
-                                                        .addGap(18, 18, 18)
-                                                        .addGroup(contentPanelLayout.createParallelGroup()
-                                                                .addGroup(contentPanelLayout.createSequentialGroup()
-                                                                        .addComponent(addFiguritaButton)
-                                                                        .addGap(185, 185, 185)
-                                                                        .addComponent(interestedFiguritasLabel, GroupLayout.PREFERRED_SIZE, 122, GroupLayout.PREFERRED_SIZE))
-                                                                .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 650, GroupLayout.PREFERRED_SIZE)))
-                                                .addGroup(contentPanelLayout.createSequentialGroup()
-                                                        .addGap(6, 6, 6)
-                                                        .addComponent(cancelButton, GroupLayout.PREFERRED_SIZE, 106, GroupLayout.PREFERRED_SIZE)
-                                                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 646, Short.MAX_VALUE)
-                                                        .addComponent(createButton, GroupLayout.PREFERRED_SIZE, 114, GroupLayout.PREFERRED_SIZE)))
-                                        .addContainerGap())
+                                                    .addComponent(figuritasStateLabel, GroupLayout.PREFERRED_SIZE, 53, GroupLayout.PREFERRED_SIZE)
+                                                    .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                                                    .addComponent(figuritaStateComboBox, GroupLayout.PREFERRED_SIZE, 114, GroupLayout.PREFERRED_SIZE))
+                                                .addComponent(offeredFiguritaLabel, GroupLayout.PREFERRED_SIZE, 122, GroupLayout.PREFERRED_SIZE))
+                                            .addGap(0, 0, Short.MAX_VALUE))
+                                        .addGroup(contentPanelLayout.createSequentialGroup()
+                                            .addComponent(documentLabel, GroupLayout.PREFERRED_SIZE, 137, GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(documentValueLabel, GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE)))
+                                    .addGap(18, 18, 18)
+                                    .addGroup(contentPanelLayout.createParallelGroup()
+                                        .addGroup(contentPanelLayout.createSequentialGroup()
+                                            .addComponent(addFiguritaButton)
+                                            .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addComponent(deleteFiguritaButton)
+                                            .addGap(87, 87, 87)
+                                            .addComponent(interestedFiguritasLabel, GroupLayout.PREFERRED_SIZE, 122, GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 650, GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(contentPanelLayout.createSequentialGroup()
+                                    .addGap(6, 6, 6)
+                                    .addComponent(cancelButton, GroupLayout.PREFERRED_SIZE, 106, GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 681, Short.MAX_VALUE)
+                                    .addComponent(createButton, GroupLayout.PREFERRED_SIZE, 114, GroupLayout.PREFERRED_SIZE)))
+                            .addContainerGap())
                 );
                 contentPanelLayout.setVerticalGroup(
-                        contentPanelLayout.createParallelGroup()
+                    contentPanelLayout.createParallelGroup()
+                        .addGroup(contentPanelLayout.createSequentialGroup()
+                            .addGroup(contentPanelLayout.createParallelGroup()
                                 .addGroup(contentPanelLayout.createSequentialGroup()
-                                        .addContainerGap(13, Short.MAX_VALUE)
-                                        .addGroup(contentPanelLayout.createParallelGroup()
-                                                .addComponent(documentValueLabel, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(documentLabel, GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE))
-                                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(contentPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                                .addComponent(offeredFiguritaLabel)
-                                                .addComponent(addFiguritaButton)
-                                                .addComponent(interestedFiguritasLabel))
-                                        .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addGroup(contentPanelLayout.createParallelGroup()
-                                                .addGroup(contentPanelLayout.createSequentialGroup()
-                                                        .addGroup(contentPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                                                .addComponent(figuritasStateLabel)
-                                                                .addComponent(figuritaStateComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                                                        .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                                                        .addComponent(figuritaImageLabel, GroupLayout.PREFERRED_SIZE, 497, GroupLayout.PREFERRED_SIZE))
-                                                .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 547, GroupLayout.PREFERRED_SIZE))
-                                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
-                                        .addGroup(contentPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                                .addComponent(cancelButton)
-                                                .addComponent(createButton))
-                                        .addContainerGap())
+                                    .addContainerGap(9, Short.MAX_VALUE)
+                                    .addComponent(documentLabel, GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE))
+                                .addGroup(contentPanelLayout.createSequentialGroup()
+                                    .addContainerGap(9, Short.MAX_VALUE)
+                                    .addComponent(documentValueLabel, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)))
+                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(contentPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                .addComponent(offeredFiguritaLabel)
+                                .addComponent(addFiguritaButton)
+                                .addComponent(interestedFiguritasLabel)
+                                .addComponent(deleteFiguritaButton))
+                            .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addGroup(contentPanelLayout.createParallelGroup()
+                                .addGroup(contentPanelLayout.createSequentialGroup()
+                                    .addGroup(contentPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                        .addComponent(figuritasStateLabel)
+                                        .addComponent(figuritaStateComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                    .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(figuritaImageLabel, GroupLayout.PREFERRED_SIZE, 497, GroupLayout.PREFERRED_SIZE))
+                                .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 547, GroupLayout.PREFERRED_SIZE))
+                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                            .addGroup(contentPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                .addComponent(cancelButton)
+                                .addComponent(createButton))
+                            .addContainerGap())
                 );
             }
             dialogPane.add(contentPanel, BorderLayout.CENTER);
@@ -283,5 +297,6 @@ public class CreatePublicationFrame extends JFrame {
     private JButton cancelButton;
     private JButton createButton;
     private JButton addFiguritaButton;
+    private JButton deleteFiguritaButton;
     // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
 }

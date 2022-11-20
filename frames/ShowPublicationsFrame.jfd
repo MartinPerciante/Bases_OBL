@@ -1,12 +1,13 @@
-JFDML JFormDesigner: "8.0.0.0.194" Java: "11.0.14.1" encoding: "UTF-8"
+JFDML JFormDesigner: "8.0.0.0.194" Java: "17.0.4.1" encoding: "UTF-8"
 
 new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class java.awt.BorderLayout ) ) {
 			name: "this"
+			"title": "PUBLICACIONES"
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-				"$horizontalGroup": "par l {seq t {space :::p, comp cancelButton:::p:114:p, space ::350:x, comp numberLabel:::p:67:p, space :::p, comp numberComboBox:::p::p, space :18:18:p, comp countryLabel:::p:31:p, space :18:18:p, comp countryComboBox:::p::p, space :29:29:p, comp filterButton:::p:95:p, space :::p}}"
+				"$horizontalGroup": "par l {seq t {space :::p, comp cancelButton:::p:114:p, space ::340:x, comp numberLabel:::p:67:p, space :::p, comp numberComboBox:::p::p, space :18:18:p, comp countryLabel:::p:31:p, space :18:18:p, comp countryComboBox:::p::p, space :29:29:p, comp filterButton:::p:95:p, space :::p}}"
 				"$verticalGroup": "par l {seq l {space :p:35:p, par l {par b {comp numberComboBox::b:p::p, comp numberLabel::b:p::p, comp cancelButton::b:p::p}, comp countryComboBox:::p::p, comp filterButton:::p::p, seq l {space :p:4:p, comp countryLabel:::p::p}}, space ::41:x}}"
 			} ) {
 				name: "filterPanel"
@@ -37,7 +38,7 @@ new FormModel {
 			} )
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
 				"$horizontalGroup": "par l {space :0:888:x}"
-				"$verticalGroup": "par l {space :0:504:x}"
+				"$verticalGroup": "par l {space :0:498:x}"
 			} ) {
 				name: "publicationsPanel"
 			}, new FormLayoutConstraints( class java.lang.String ) {
