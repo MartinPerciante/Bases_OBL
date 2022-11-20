@@ -8,7 +8,7 @@ import controller.PublicationController;
 import controller.ViewController;
 import database.DBService;
 import entities.Figurita;
-import entities.User;
+import entities.Usuario;
 import enums.EPickFigurita;
 import utils.Utils;
 
@@ -35,7 +35,7 @@ public class CreatePublicationFrame extends JFrame {
         interestedFiguritasList = new ArrayList<>();
         //estas 4 lineas van en el init, lo pongo aca pa q no se borre por ahora y al final lo movemos
         figuritaImageLabel.setText("Haga click para seleccionar una figurita");
-        documentValueLabel.setText(User.getInstance().getUsername());
+        documentValueLabel.setText(Usuario.getInstance().getUsername());
         interestedFiguritasTable.setPreferredScrollableViewportSize(interestedFiguritasTable.getPreferredSize());
         interestedFiguritasTable.setRowHeight(312);
         interestedFiguritasTable.setTableHeader(null);
@@ -92,7 +92,7 @@ public class CreatePublicationFrame extends JFrame {
         figuritaImageLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                PublicationController.getInstance().gotToPickFigurita(CreatePublicationFrame.this, EPickFigurita.PUBLICATED);
+                PublicationController.getInstance().goToPickFigurita(CreatePublicationFrame.this, EPickFigurita.CREATE_PUBLICATION_OFFERED_FIGURITA);
 
             }
         });
@@ -100,14 +100,14 @@ public class CreatePublicationFrame extends JFrame {
         addFiguritaButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                PublicationController.getInstance().gotToPickFigurita(CreatePublicationFrame.this, EPickFigurita.INTERESTED);
+                PublicationController.getInstance().goToPickFigurita(CreatePublicationFrame.this, EPickFigurita.CREATE_PUBLICATION_INTERESTED_FIGURITAS);
             }
         });
 
         createButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String actualDate = Utils.formatLocalDateTime(LocalDateTime.now());
+                String actualDate = Utils.formatLocalDateTimeToString(LocalDateTime.now());
                 DBService.executeUpdate("INSERT INTO publicacion VALUES ('" + documentValueLabel.getText() + "', '" + actualDate + "', 'ACTIVA', " + figuritaPublicated.getNumero() + ", '" + figuritaPublicated.getPais() + "', '" + figuritaStateComboBox.getSelectedItem().toString() + "')");
                 if (interestedFiguritasTable.getRowCount() > 0) {
                     StringBuilder stringBuilderQuery = new StringBuilder();

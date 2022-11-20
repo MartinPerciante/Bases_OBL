@@ -18,8 +18,12 @@ public class Utils {
     private static Integer MAX_COLUMNS = 5;
     private static Integer MAX_ROWS = 6;
 
-    public static String formatLocalDateTime(LocalDateTime localDateTime) {
+    public static String formatLocalDateTimeToString(LocalDateTime localDateTime) {
         return YYYYMMDDHHMMSS.format(localDateTime);
+    }
+
+    public static LocalDateTime formatStringToLocalDateTime(String date) {
+        return LocalDateTime.parse(date);
     }
 
     public static void populateTableWithIcon(JTable table, Icon icon) {

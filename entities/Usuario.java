@@ -3,15 +3,15 @@ package entities;
 import lombok.Data;
 
 @Data
-public class User {
+public class Usuario {
 
     private String username;
 
-    private static User instance;
+    private static Usuario instance;
 
-    public static User getInstance(){
+    public static Usuario getInstance(){
         if (instance == null){
-            instance = new User();
+            instance = new Usuario();
         }
         return instance;
     }

@@ -2,6 +2,7 @@ package controller;
 
 import database.DBService;
 import entities.Figurita;
+import entities.Publicacion;
 import enums.EPickFigurita;
 import utils.Utils;
 
@@ -14,6 +15,16 @@ public class PublicationController {
     private static PublicationController instance;
 
     private EPickFigurita statusEnum;
+
+    public Publicacion getPublicacionSelected() {
+        return publicacionSelected;
+    }
+
+    public void setPublicacionSelected(Publicacion publicacionSelected) {
+        this.publicacionSelected = publicacionSelected;
+    }
+
+    private Publicacion publicacionSelected;
 
     public EPickFigurita getStatusEnum() {
         return this.statusEnum;
@@ -38,6 +49,10 @@ public class PublicationController {
         ViewController.getInstance().getCreatePublicationFrame().setFiguritaInterestedImageSelected(figurita);
     }
 
+    public void setOfferOfferedFiguritaImageSelected(Figurita figurita) throws SQLException {
+        ViewController.getInstance().getCreateOfferFrame().setFiguritaOfferedImageSelected(figurita);
+    }
+
     public ResultSet getPublications(String figuritaNumber, String figuritaCountry) {
         StringBuilder query = new StringBuilder();
         query.append("SELECT ci, nombre, apellido, fecha, estado, estado_figurita, foto FROM publicacion p " +
@@ -45,11 +60,20 @@ public class PublicationController {
                 "INNER JOIN figurita f on p.numero_figurita = f.numero and p.pais_figurita = f.pais ");
         if (!figuritaNumber.equals(Utils.EMPTY_ITEM) && !figuritaCountry.equals(Utils.EMPTY_ITEM)) {
             query.append("WHERE p.numero_figurita = ").append(figuritaNumber).append(" AND p.pais_figurita = '").append(figuritaCountry).append("'");
-        } else if(!figuritaNumber.equals(Utils.EMPTY_ITEM)) {
+        } else if (!figuritaNumber.equals(Utils.EMPTY_ITEM)) {
             query.append("WHERE p.numero_figurita = ").append(figuritaNumber);
-        } else if(!figuritaCountry.equals(Utils.EMPTY_ITEM)) {
+        } else if (!figuritaCountry.equals(Utils.EMPTY_ITEM)) {
             query.append("WHERE p.pais_figurita = '").append(figuritaCountry).append("'");
         }
+        return DBService.executeQuery(query.toString());
+    }
+
+    public ResultSet getPublicationsFromUser(String userDocument) {
+        StringBuilder query = new StringBuilder();
+        query.append("SELECT ci, nombre, apellido, fecha, estado, estado_figurita, foto FROM publicacion p " +
+                "INNER JOIN usuario u on p.ci_usuario = u.ci " +
+                "INNER JOIN figurita f on p.numero_figurita = f.numero and p.pais_figurita = f.pais " +
+                "WHERE p.ci_usuario = '" + userDocument + "'");
         return DBService.executeQuery(query.toString());
     }
 
@@ -77,7 +101,7 @@ public class PublicationController {
         return DBService.executeQuery(stringBuilderQuery.toString());
     }
 
-    public void gotToPickFigurita(JFrame origin, EPickFigurita enumValue) {
+    public void goToPickFigurita(JFrame origin, EPickFigurita enumValue) {
         statusEnum = enumValue;
         try {
             ViewController.getInstance().goToPickFigurita(origin);

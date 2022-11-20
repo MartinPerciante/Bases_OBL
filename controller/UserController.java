@@ -2,11 +2,8 @@ package controller;
 
 import database.DBService;
 import database.Queries;
-import entities.User;
-import lombok.Data;
-import frames.*;
+import entities.Usuario;
 
-import javax.swing.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -57,7 +54,7 @@ public class UserController {
 
     public boolean login(String ci, String password) {
         boolean result = isInfoLogOk(ci, password);
-        if (result) User.getInstance().setUsername(ci);
+        if (result) Usuario.getInstance().setUsername(ci);
         return result;
     }
 

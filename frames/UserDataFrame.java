@@ -6,13 +6,12 @@ package frames;
 
 import controller.UserController;
 import controller.ViewController;
-import entities.User;
+import entities.Usuario;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.List;
 import javax.swing.*;
 import javax.swing.GroupLayout;
 import javax.swing.LayoutStyle;
@@ -30,7 +29,7 @@ public class UserDataFrame extends JFrame {
     }
 
     private void loadInfo(){
-        ArrayList<String> fieldList = UserController.getInstance().loadInfoUser(User.getInstance().getUsername());
+        ArrayList<String> fieldList = UserController.getInstance().loadInfoUser(Usuario.getInstance().getUsername());
 
         documentTextField.setText(fieldList.get(0));
         firstNameTextField.setText(fieldList.get(1));

@@ -1,6 +1,5 @@
 package controller;
 
-import enums.EPickFigurita;
 import frames.*;
 
 import javax.swing.*;
@@ -84,6 +83,24 @@ public class ViewController {
         return showPublicationsFrame;
     }
 
+    private CreateOfferFrame createOfferFrame;
+
+    public CreateOfferFrame getCreateOfferFrame() {
+        if (createOfferFrame == null) {
+            createOfferFrame = new CreateOfferFrame();
+        }
+        return createOfferFrame;
+    }
+
+    private MyPublicationsFrame myPublicationsFrame;
+
+    public MyPublicationsFrame getMyPublicationsFrame() throws SQLException {
+        if (myPublicationsFrame == null) {
+            myPublicationsFrame = new MyPublicationsFrame();
+        }
+        return myPublicationsFrame;
+    }
+
     public static ViewController getInstance() {
         if (instance == null) {
             instance = new ViewController();
@@ -126,5 +143,13 @@ public class ViewController {
 
     public void goToShowPublications(JFrame origin) throws SQLException {
         goToFrom(getShowPublicationsFrame(), origin);
+    }
+
+    public void goToCreateOffer(JFrame origin) throws SQLException {
+        goToFrom(getCreateOfferFrame(), origin);
+    }
+
+    public void goToMyPublications(JFrame origin) throws SQLException {
+        goToFrom(getMyPublicationsFrame(), origin);
     }
 }

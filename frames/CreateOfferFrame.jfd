@@ -5,34 +5,35 @@ new FormModel {
 	root: new FormRoot {
 		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class java.awt.BorderLayout ) ) {
 			name: "this"
-			"title": "MENU PRINCIPAL"
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.BorderLayout ) ) {
 				name: "dialogPane"
 				"border": new javax.swing.border.EmptyBorder( 12, 12, 12, 12 )
 				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-					"$horizontalGroup": "par l {seq t {space ::122:x, par t:::p {comp createPublicationButton::t::131:x, comp listPublicationsButton::l::131:x, comp myPublicationsButton::l::131:x, comp myProfileButton::t::131:x, comp logOutButton::l::131:x}, space :p:121:p}}"
-					"$verticalGroup": "par l {seq t {space :p:18:p, comp createPublicationButton:::p::p, space s:::p, comp listPublicationsButton:::p::p, space s:::p, comp myPublicationsButton:::p::p, space s:::p, comp myProfileButton:::p::p, space s:::p, comp logOutButton:::p::p, space ::35:x}}"
+					"$horizontalGroup": "par l {seq {par l {comp scrollPane1::t::493:x, seq {comp addFiguritaButton:::p::p, space s:::p, comp deleteFiguritaButton:::p::p, space :0:0:x}, seq l {comp cancelButton:::p:108:p, space ::277:x, comp createButton:::p:108:p}}, space :::p}}"
+					"$verticalGroup": "par l {seq l {par b {comp addFiguritaButton::b:p::p, comp deleteFiguritaButton::b:p::p}, space :p:16:p, comp scrollPane1::::257:x, space :p:12:p, par b {comp cancelButton::b:p:25:p, comp createButton::b:p:25:p}, space :::p}}"
 				} ) {
 					name: "contentPanel"
 					add( new FormComponent( "javax.swing.JButton" ) {
-						name: "createPublicationButton"
-						"text": "Crear publicación"
+						name: "cancelButton"
+						"text": "CANCELAR"
 					} )
 					add( new FormComponent( "javax.swing.JButton" ) {
-						name: "listPublicationsButton"
-						"text": "Ver publicaciones"
+						name: "createButton"
+						"text": "CREAR"
+					} )
+					add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+						name: "scrollPane1"
+						add( new FormComponent( "javax.swing.JTable" ) {
+							name: "offeredFiguritasTable"
+						} )
 					} )
 					add( new FormComponent( "javax.swing.JButton" ) {
-						name: "myProfileButton"
-						"text": "Mi perfil"
+						name: "addFiguritaButton"
+						"text": "AGREGAR"
 					} )
 					add( new FormComponent( "javax.swing.JButton" ) {
-						name: "logOutButton"
-						"text": "Cerrar sesión"
-					} )
-					add( new FormComponent( "javax.swing.JButton" ) {
-						name: "myPublicationsButton"
-						"text": "Mis publicaciones"
+						name: "deleteFiguritaButton"
+						"text": "ELIMINAR"
 					} )
 				}, new FormLayoutConstraints( class java.lang.String ) {
 					"value": "Center"
@@ -42,7 +43,7 @@ new FormModel {
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 0 )
-			"size": new java.awt.Dimension( 400, 300 )
+			"size": new java.awt.Dimension( 525, 395 )
 		} )
 	}
 }

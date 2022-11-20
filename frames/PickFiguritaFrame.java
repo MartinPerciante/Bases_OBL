@@ -38,16 +38,29 @@ public class PickFiguritaFrame extends JFrame {
     HashMap<Icon, String> hashMap = new HashMap<>();
 
     private void loadComboBoxData() throws SQLException {
-        ResultSet resultSet = PublicationController.getInstance().getFiguritasCountry();
+        ResultSet resultSetCountries = PublicationController.getInstance().getFiguritasCountry();
         countryComboBox.addItem(Utils.EMPTY_ITEM);
-        while (resultSet.next()) {
-            countryComboBox.addItem(resultSet.getString("pais"));
+        while (resultSetCountries.next()) {
+            countryComboBox.addItem(resultSetCountries.getString("pais"));
         }
+
         //agregar num de figurita oficiales, no se si son 30, tambien podria ser una query a la tabla de figurita
         //que agarra los num sin repetir
         numberComboBox.addItem(Utils.EMPTY_ITEM);
         for (int i = 1; i <= 30; i++) {
             numberComboBox.addItem(i);
+        }
+
+        if (PublicationController.getInstance().getStatusEnum().equals(EPickFigurita.CREATE_OFFER_OFFERED_FIGURITAS)) {
+            figuritaStateLabel.setVisible(true);
+            figuritaStateComboBox.setVisible(true);
+            ResultSet resultSetStates = PublicationController.getInstance().getFiguritasState();
+            while (resultSetStates.next()) {
+                figuritaStateComboBox.addItem(resultSetStates.getString("estado"));
+            }
+        } else {
+            figuritaStateLabel.setVisible(false);
+            figuritaStateComboBox.setVisible(false);
         }
     }
 
@@ -57,7 +70,7 @@ public class PickFiguritaFrame extends JFrame {
             public void mouseClicked(MouseEvent e) {
                 EPickFigurita eAddFiguritaOptions = PublicationController.getInstance().getStatusEnum();
                 switch (eAddFiguritaOptions) {
-                    case PUBLICATED: {
+                    case CREATE_PUBLICATION_OFFERED_FIGURITA: {
                         try {
                             ImageIcon icon = (ImageIcon) figuritasTable.getValueAt(figuritasTable.getSelectedRow(), figuritasTable.getSelectedColumn());
                             if (icon != null) {
@@ -65,12 +78,13 @@ public class PickFiguritaFrame extends JFrame {
                                 PublicationController.getInstance().setPublicationOfferedFiguritaImageSelected(new Figurita(Integer.parseInt(numAndCountry[0]), numAndCountry[1], icon));
                                 PickFiguritaFrame.this.setVisible(false);
                             }
+                            ViewController.getInstance().goToCreatePublication(PickFiguritaFrame.this);
                         } catch (SQLException ex) {
                             throw new RuntimeException(ex);
                         }
                         break;
                     }
-                    case INTERESTED: {
+                    case CREATE_PUBLICATION_INTERESTED_FIGURITAS: {
                         try {
                             ImageIcon icon = (ImageIcon) figuritasTable.getValueAt(figuritasTable.getSelectedRow(), figuritasTable.getSelectedColumn());
                             if (icon != null) {
@@ -78,16 +92,26 @@ public class PickFiguritaFrame extends JFrame {
                                 PublicationController.getInstance().setPublicationInterestedFiguritaImageSelected(new Figurita(Integer.parseInt(numAndCountry[0]), numAndCountry[1], icon));
                                 PickFiguritaFrame.this.setVisible(false);
                             }
+                            ViewController.getInstance().goToCreatePublication(PickFiguritaFrame.this);
                         } catch (SQLException ex) {
                             throw new RuntimeException(ex);
                         }
                         break;
                     }
-                }
-                try {
-                    ViewController.getInstance().goToCreatePublication(PickFiguritaFrame.this);
-                } catch (SQLException ex) {
-                    throw new RuntimeException(ex);
+                    case CREATE_OFFER_OFFERED_FIGURITAS: {
+                        try {
+                            ImageIcon icon = (ImageIcon) figuritasTable.getValueAt(figuritasTable.getSelectedRow(), figuritasTable.getSelectedColumn());
+                            if (icon != null) {
+                                String[] numAndCountry = hashMap.get(icon).split(" ");
+                                PublicationController.getInstance().setOfferOfferedFiguritaImageSelected(new Figurita(Integer.parseInt(numAndCountry[0]), numAndCountry[1], icon, figuritaStateComboBox.getSelectedItem().toString()));
+                                PickFiguritaFrame.this.setVisible(false);
+                            }
+                            ViewController.getInstance().goToCreateOffer(PickFiguritaFrame.this);
+                        } catch (SQLException ex) {
+                            throw new RuntimeException(ex);
+                        }
+                        break;
+                    }
                 }
             }
         });
@@ -143,6 +167,8 @@ public class PickFiguritaFrame extends JFrame {
         figuritasTable.setRowHeight(312);
         figuritasTable.setRowMargin(5);
         filterButton = new JButton();
+        figuritaStateLabel = new JLabel();
+        figuritaStateComboBox = new JComboBox();
         cancelButton = new JButton();
 
         //======== this ========
@@ -171,6 +197,9 @@ public class PickFiguritaFrame extends JFrame {
                 //---- filterButton ----
                 filterButton.setText("FILTRAR");
 
+                //---- figuritaStateLabel ----
+                figuritaStateLabel.setText("Estado");
+
                 //---- cancelButton ----
                 cancelButton.setText("CANCELAR");
 
@@ -180,6 +209,8 @@ public class PickFiguritaFrame extends JFrame {
                         contentPanelLayout.createParallelGroup()
                                 .addComponent(scrollPane1, GroupLayout.DEFAULT_SIZE, 699, Short.MAX_VALUE)
                                 .addGroup(contentPanelLayout.createSequentialGroup()
+                                        .addComponent(cancelButton, GroupLayout.PREFERRED_SIZE, 115, GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(numberLabel, GroupLayout.PREFERRED_SIZE, 67, GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(numberComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
@@ -189,8 +220,10 @@ public class PickFiguritaFrame extends JFrame {
                                         .addComponent(countryComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                                         .addGap(29, 29, 29)
                                         .addComponent(filterButton, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 177, Short.MAX_VALUE)
-                                        .addComponent(cancelButton)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(figuritaStateLabel, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(figuritaStateComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                                         .addContainerGap())
                 );
                 contentPanelLayout.setVerticalGroup(
@@ -199,13 +232,16 @@ public class PickFiguritaFrame extends JFrame {
                                         .addContainerGap()
                                         .addGroup(contentPanelLayout.createParallelGroup()
                                                 .addGroup(contentPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                                        .addComponent(figuritaStateComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(figuritaStateLabel))
+                                                .addGroup(contentPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                                                         .addComponent(numberComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(numberLabel))
+                                                        .addComponent(numberLabel)
+                                                        .addComponent(cancelButton))
                                                 .addGroup(contentPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                                                         .addComponent(countryComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                                                         .addComponent(filterButton)
-                                                        .addComponent(countryLabel)
-                                                        .addComponent(cancelButton)))
+                                                        .addComponent(countryLabel)))
                                         .addGap(18, 18, 18)
                                         .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 384, GroupLayout.PREFERRED_SIZE)
                                         .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -229,6 +265,8 @@ public class PickFiguritaFrame extends JFrame {
     private JScrollPane scrollPane1;
     private JTable figuritasTable;
     private JButton filterButton;
+    private JLabel figuritaStateLabel;
+    private JComboBox figuritaStateComboBox;
     private JButton cancelButton;
     // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
 }

@@ -6,7 +6,7 @@ package frames;
 
 import controller.UserController;
 import controller.ViewController;
-import entities.User;
+import entities.Usuario;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -156,7 +156,7 @@ public class ChangePasswordFrame extends JFrame {
                  //Los campos de password estan iguales
                 if (newPasswordTextField.getText().equals(repeatPasswordTextField.getText())) {
 
-                    if (userController.changePassword(User.getInstance().getUsername(),
+                    if (userController.changePassword(Usuario.getInstance().getUsername(),
                              actualPasswordTextField.getText(),
                              newPasswordTextField.getText())) {
                         errorLabel.setVisible(false);

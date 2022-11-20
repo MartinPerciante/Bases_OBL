@@ -30,6 +30,7 @@ public class MenuFrame extends JFrame {
         listPublicationsButton = new JButton();
         myProfileButton = new JButton();
         logOutButton = new JButton();
+        myPublicationsButton = new JButton();
 
         //======== this ========
         setTitle("MENU PRINCIPAL");
@@ -56,31 +57,37 @@ public class MenuFrame extends JFrame {
                 //---- logOutButton ----
                 logOutButton.setText("Cerrar sesi\u00f3n");
 
+                //---- myPublicationsButton ----
+                myPublicationsButton.setText("Mis publicaciones");
+
                 GroupLayout contentPanelLayout = new GroupLayout(contentPanel);
                 contentPanel.setLayout(contentPanelLayout);
                 contentPanelLayout.setHorizontalGroup(
-                        contentPanelLayout.createParallelGroup()
-                                .addGroup(GroupLayout.Alignment.TRAILING, contentPanelLayout.createSequentialGroup()
-                                        .addContainerGap(125, Short.MAX_VALUE)
-                                        .addGroup(contentPanelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                                                .addComponent(createPublicationButton)
-                                                .addComponent(listPublicationsButton)
-                                                .addComponent(myProfileButton, GroupLayout.PREFERRED_SIZE, 128, GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(logOutButton, GroupLayout.PREFERRED_SIZE, 128, GroupLayout.PREFERRED_SIZE))
-                                        .addGap(121, 121, 121))
+                    contentPanelLayout.createParallelGroup()
+                        .addGroup(GroupLayout.Alignment.TRAILING, contentPanelLayout.createSequentialGroup()
+                            .addContainerGap(122, Short.MAX_VALUE)
+                            .addGroup(contentPanelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(createPublicationButton, GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
+                                .addComponent(listPublicationsButton, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
+                                .addComponent(myPublicationsButton, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
+                                .addComponent(myProfileButton, GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
+                                .addComponent(logOutButton, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE))
+                            .addGap(121, 121, 121))
                 );
                 contentPanelLayout.setVerticalGroup(
-                        contentPanelLayout.createParallelGroup()
-                                .addGroup(GroupLayout.Alignment.TRAILING, contentPanelLayout.createSequentialGroup()
-                                        .addContainerGap(33, Short.MAX_VALUE)
-                                        .addComponent(createPublicationButton)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(listPublicationsButton)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(myProfileButton)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(logOutButton)
-                                        .addGap(38, 38, 38))
+                    contentPanelLayout.createParallelGroup()
+                        .addGroup(GroupLayout.Alignment.TRAILING, contentPanelLayout.createSequentialGroup()
+                            .addGap(18, 18, 18)
+                            .addComponent(createPublicationButton)
+                            .addGap(18, 18, 18)
+                            .addComponent(listPublicationsButton)
+                            .addGap(18, 18, 18)
+                            .addComponent(myPublicationsButton)
+                            .addGap(18, 18, 18)
+                            .addComponent(myProfileButton)
+                            .addGap(18, 18, 18)
+                            .addComponent(logOutButton)
+                            .addContainerGap(35, Short.MAX_VALUE))
                 );
             }
             dialogPane.add(contentPanel, BorderLayout.CENTER);
@@ -116,6 +123,17 @@ public class MenuFrame extends JFrame {
             }
         });
 
+        myPublicationsButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    viewController.goToMyPublications(MenuFrame.this);
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+        });
+
         myProfileButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -138,5 +156,6 @@ public class MenuFrame extends JFrame {
     private JButton listPublicationsButton;
     private JButton myProfileButton;
     private JButton logOutButton;
+    private JButton myPublicationsButton;
     // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
 }
