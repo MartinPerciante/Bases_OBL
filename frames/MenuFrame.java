@@ -4,16 +4,14 @@
 
 package frames;
 
-import controller.UserController;
 import controller.ViewController;
 
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
-import javax.swing.*;
-import javax.swing.GroupLayout;
-import javax.swing.border.*;
 
 /**
  * @author unknown
@@ -61,28 +59,28 @@ public class MenuFrame extends JFrame {
                 GroupLayout contentPanelLayout = new GroupLayout(contentPanel);
                 contentPanel.setLayout(contentPanelLayout);
                 contentPanelLayout.setHorizontalGroup(
-                    contentPanelLayout.createParallelGroup()
-                        .addGroup(GroupLayout.Alignment.TRAILING, contentPanelLayout.createSequentialGroup()
-                            .addContainerGap(125, Short.MAX_VALUE)
-                            .addGroup(contentPanelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                                .addComponent(createPublicationButton)
-                                .addComponent(listPublicationsButton)
-                                .addComponent(myProfileButton, GroupLayout.PREFERRED_SIZE, 128, GroupLayout.PREFERRED_SIZE)
-                                .addComponent(logOutButton, GroupLayout.PREFERRED_SIZE, 128, GroupLayout.PREFERRED_SIZE))
-                            .addGap(121, 121, 121))
+                        contentPanelLayout.createParallelGroup()
+                                .addGroup(GroupLayout.Alignment.TRAILING, contentPanelLayout.createSequentialGroup()
+                                        .addContainerGap(125, Short.MAX_VALUE)
+                                        .addGroup(contentPanelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                                                .addComponent(createPublicationButton)
+                                                .addComponent(listPublicationsButton)
+                                                .addComponent(myProfileButton, GroupLayout.PREFERRED_SIZE, 128, GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(logOutButton, GroupLayout.PREFERRED_SIZE, 128, GroupLayout.PREFERRED_SIZE))
+                                        .addGap(121, 121, 121))
                 );
                 contentPanelLayout.setVerticalGroup(
-                    contentPanelLayout.createParallelGroup()
-                        .addGroup(GroupLayout.Alignment.TRAILING, contentPanelLayout.createSequentialGroup()
-                            .addContainerGap(33, Short.MAX_VALUE)
-                            .addComponent(createPublicationButton)
-                            .addGap(18, 18, 18)
-                            .addComponent(listPublicationsButton)
-                            .addGap(18, 18, 18)
-                            .addComponent(myProfileButton)
-                            .addGap(18, 18, 18)
-                            .addComponent(logOutButton)
-                            .addGap(38, 38, 38))
+                        contentPanelLayout.createParallelGroup()
+                                .addGroup(GroupLayout.Alignment.TRAILING, contentPanelLayout.createSequentialGroup()
+                                        .addContainerGap(33, Short.MAX_VALUE)
+                                        .addComponent(createPublicationButton)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(listPublicationsButton)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(myProfileButton)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(logOutButton)
+                                        .addGap(38, 38, 38))
                 );
             }
             dialogPane.add(contentPanel, BorderLayout.CENTER);
@@ -106,12 +104,25 @@ public class MenuFrame extends JFrame {
                 }
             }
         });
+
+        listPublicationsButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    viewController.goToShowPublications(MenuFrame.this);
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+        });
+
         myProfileButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 viewController.goToUserData(MenuFrame.this);
             }
         });
+
         logOutButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -119,6 +130,7 @@ public class MenuFrame extends JFrame {
             }
         });
     }
+
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables  @formatter:off
     private JPanel dialogPane;
     private JPanel contentPanel;

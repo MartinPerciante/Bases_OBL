@@ -6,8 +6,8 @@ package frames;
 
 import controller.PublicationController;
 import controller.ViewController;
+import entities.Figurita;
 import enums.EPickFigurita;
-import lombok.SneakyThrows;
 import utils.Utils;
 
 import javax.swing.*;
@@ -18,6 +18,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 
 /**
  * @author unknown
@@ -33,6 +34,8 @@ public class PickFiguritaFrame extends JFrame {
         figuritasTable.setTableHeader(null);
         figuritasTable.setRowHeight(312);
     }
+
+    HashMap<Icon, String> hashMap = new HashMap<>();
 
     private void loadComboBoxData() throws SQLException {
         ResultSet resultSet = PublicationController.getInstance().getFiguritasCountry();
@@ -56,8 +59,10 @@ public class PickFiguritaFrame extends JFrame {
                 switch (eAddFiguritaOptions) {
                     case PUBLICATED: {
                         try {
-                            if (figuritasTable.getValueAt(figuritasTable.getSelectedRow(), figuritasTable.getSelectedColumn()) != null) {
-                                PublicationController.getInstance().setPublicationOfferedFiguritaImageSelected((ImageIcon) figuritasTable.getValueAt(figuritasTable.getSelectedRow(), figuritasTable.getSelectedColumn()));
+                            ImageIcon icon = (ImageIcon) figuritasTable.getValueAt(figuritasTable.getSelectedRow(), figuritasTable.getSelectedColumn());
+                            if (icon != null) {
+                                String[] numAndCountry = hashMap.get(icon).split(" ");
+                                PublicationController.getInstance().setPublicationOfferedFiguritaImageSelected(new Figurita(Integer.parseInt(numAndCountry[0]), numAndCountry[1], icon));
                                 PickFiguritaFrame.this.setVisible(false);
                             }
                         } catch (SQLException ex) {
@@ -67,7 +72,12 @@ public class PickFiguritaFrame extends JFrame {
                     }
                     case INTERESTED: {
                         try {
-                            PublicationController.getInstance().setPublicationInterestedFiguritaImageSelected((ImageIcon) figuritasTable.getValueAt(figuritasTable.getSelectedRow(), figuritasTable.getSelectedColumn()));
+                            ImageIcon icon = (ImageIcon) figuritasTable.getValueAt(figuritasTable.getSelectedRow(), figuritasTable.getSelectedColumn());
+                            if (icon != null) {
+                                String[] numAndCountry = hashMap.get(icon).split(" ");
+                                PublicationController.getInstance().setPublicationInterestedFiguritaImageSelected(new Figurita(Integer.parseInt(numAndCountry[0]), numAndCountry[1], icon));
+                                PickFiguritaFrame.this.setVisible(false);
+                            }
                         } catch (SQLException ex) {
                             throw new RuntimeException(ex);
                         }
@@ -88,15 +98,18 @@ public class PickFiguritaFrame extends JFrame {
                 try {
                     ResultSet resultSet = PublicationController.getInstance().getFiguritasPhotos(countryComboBox.getSelectedItem().toString(), numberComboBox.getSelectedItem().toString());
                     if (resultSet != null) {
-                        Icon[] iconsRows = new Icon[5];
+                        hashMap = new HashMap<>();
+                        Icon[] iconsRows = new Icon[3];
                         int index = 0;
-                        DefaultTableModel defaultTableModel = new DefaultTableModel(0, 5);
+                        DefaultTableModel defaultTableModel = new DefaultTableModel(0, 3);
                         while (resultSet.next()) {
-                            iconsRows[index] = new ImageIcon(new ImageIcon(resultSet.getBytes("foto")).getImage().getScaledInstance(232, 312, Image.SCALE_DEFAULT));
+                            Icon icon = new ImageIcon(new ImageIcon(resultSet.getBytes("foto")).getImage().getScaledInstance(232, 312, Image.SCALE_DEFAULT));
+                            iconsRows[index] = icon;
+                            hashMap.put(icon, resultSet.getInt("numero") + " " + resultSet.getString("pais"));
                             index++;
-                            if (index == 5) {
+                            if (index == 3) {
                                 defaultTableModel.addRow(iconsRows);
-                                iconsRows = new Icon[5];
+                                iconsRows = new Icon[3];
                                 index = 0;
                             }
                         }
@@ -121,7 +134,7 @@ public class PickFiguritaFrame extends JFrame {
         countryLabel = new JLabel();
         countryComboBox = new JComboBox();
         scrollPane1 = new JScrollPane();
-        figuritasTable = new JTable(0, 5) {
+        figuritasTable = new JTable(0, 3) {
             public Class getColumnClass(int column) {
                 return Icon.class;
             }
@@ -129,10 +142,6 @@ public class PickFiguritaFrame extends JFrame {
         figuritasTable.setTableHeader(null);
         figuritasTable.setRowHeight(312);
         figuritasTable.setRowMargin(5);
-//        figuritasTable.setColumnModel(new DefaultTableColumnModel(){
-//            @Override
-//
-//        });
         filterButton = new JButton();
         cancelButton = new JButton();
 
@@ -214,7 +223,6 @@ public class PickFiguritaFrame extends JFrame {
     private JPanel dialogPane;
     private JPanel contentPanel;
     private JLabel numberLabel;
-
     private JComboBox numberComboBox;
     private JLabel countryLabel;
     private JComboBox countryComboBox;

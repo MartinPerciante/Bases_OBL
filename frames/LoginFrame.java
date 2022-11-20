@@ -21,6 +21,7 @@ public class LoginFrame extends JFrame {
         initComponents();
         buttonActions();
         errorLabel.setVisible(false);
+        setResizable(false);
     }
 
     private void initComponents() {
@@ -36,7 +37,6 @@ public class LoginFrame extends JFrame {
         errorLabel = new JLabel();
 
         //======== this ========
-        setResizable(false);
         var contentPane = getContentPane();
         contentPane.setLayout(new BorderLayout());
 

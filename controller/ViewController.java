@@ -61,6 +61,7 @@ public class ViewController {
     public CreatePublicationFrame getCreatePublicationFrame() throws SQLException {
         if (createPublicationFrame == null) {
             createPublicationFrame = new CreatePublicationFrame();
+            createPublicationFrame.setSize(955, 750);
         }
         return createPublicationFrame;
     }
@@ -72,6 +73,15 @@ public class ViewController {
             pickFiguritaFrame = new PickFiguritaFrame();
         }
         return pickFiguritaFrame;
+    }
+
+    private ShowPublicationsFrame showPublicationsFrame;
+
+    public ShowPublicationsFrame getShowPublicationsFrame() throws SQLException {
+        if (showPublicationsFrame == null) {
+            showPublicationsFrame = new ShowPublicationsFrame();
+        }
+        return showPublicationsFrame;
     }
 
     public static ViewController getInstance() {
@@ -114,4 +124,7 @@ public class ViewController {
         goToFrom(getPickFiguritaFrame(), origin);
     }
 
+    public void goToShowPublications(JFrame origin) throws SQLException {
+        goToFrom(getShowPublicationsFrame(), origin);
+    }
 }

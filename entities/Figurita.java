@@ -13,6 +13,6 @@ public class Figurita {
 
     private String pais;
 
-    private ImageIcon icon;
+    private ImageIcon foto;
 
 }
