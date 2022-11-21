@@ -1,11 +1,25 @@
 package utils;
 
+import database.DBService;
+import database.Queries;
+
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Utils {
 
@@ -26,40 +40,72 @@ public class Utils {
         return LocalDateTime.parse(date);
     }
 
-    public static void populateTableWithIcon(JTable table, Icon icon) {
-        DefaultTableModel defaultTableModel = (DefaultTableModel) table.getModel();
-        defaultTableModel.addRow(new String[]{"1"});
-//        if(defaultTableModel.getDataVector().eleme)
 
+    public static void cargarFigus() throws SQLException {
+        String[] paises = {"QAT",
+                "ECU",
+                "SEN",
+                "NED",
+                "ENG",
+                "IRN",
+                "USA",
+                "WAL",
+                "ARG",
+                "KSA",
+                "MEX",
+                "POL",
+                "FRA",
+                "AUS",
+                "DEN",
+                "TUN",
+                "ESP",
+                "CRC",
+                "GER",
+                "JPN",
+                "BEL",
+                "CAN",
+                "MAR",
+                "CRO",
+                "BRA",
+                "SRB",
+                "SUI",
+                "CMR",
+                "POR",
+                "GHA",
+                "URU",
+                "KOR",
+                "FWC"};
+        ArrayList<Integer> numeros = new ArrayList<>();
+        ArrayList<String> paisesArray = new ArrayList<>();
+        ArrayList<String> paths = new ArrayList<>();
 
-        //int rowCount = defaultTableModel.getRowCount();
+        for (String pais : paises) {
+            int limite = pais.equals("FWC") ? 28 : 20;
 
-        // Si es la primera fila que s etiene que insertar
-        //if (rowCount == 0) {
-        //    defaultTableModel.addRow(new Icon[]{icon});
-        //    table.setModel(defaultTableModel);
-        //} else { // Si ya se ingreso al menos un dato
-
-            /*boolean added = false;
-            for (int i = 0; i < MAX_COLUMNS; i++){
-                int j = rowCount - 1;
-                var a = defaultTableModel.getValueAt(j, i);
-                if (a == null){
-                    defaultTableModel.setValueAt(new Icon[]{icon}, rowCount - 1, i);
-                    added = true;
-                }
-             */
-        //defaultTableModel = (DefaultTableModel) table.getModel();
-        //var a = defaultTableModel.getValueAt(0, 0);
-        //  System.out.println("LLegue aca");
-        //}
-        //Si no se agrego entonces es que estaba llena la fila
-            /*if (!added){
-                defaultTableModel.addRow(new Icon[]{icon});
-                added = true;
+            File dir = new File("Figuritas/" + pais);
+            String[] figuritasList = dir.list();
+            Map<Integer, String> map = new HashMap<Integer, String>();
+            for (String figuritaNom : figuritasList) {
+                ArrayList<String> array = new ArrayList<>(Arrays.stream(figuritaNom.split("-")).toList());
+                //System.out.println("Estoy en " + figuritaNom);
+                int numFigurita = Integer.parseInt(array.get(0));
+                map.put(numFigurita, figuritaNom);
             }
-            String temp = added ? "Se agrego" : "No se agrego";
-            System.out.println(temp);*/
+
+            Connection connection = DBService.connect();
+            for (int i = 1; i < limite; i++){
+                numeros.add(i);
+                paisesArray.add(pais);
+                String imagePath = dir + "/" + map.get(i);
+                paths.add(imagePath);
+            }
+
+        }
+        try {
+            DBService.setImagen(numeros, paisesArray, paths);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
 
