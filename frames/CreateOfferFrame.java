@@ -96,13 +96,13 @@ public class CreateOfferFrame extends JFrame {
                     StringBuilder stringBuilderQuery = new StringBuilder();
                     stringBuilderQuery.append("INSERT INTO oferta_tiene_figurita VALUES ");
                     for (Figurita figurita : offeredFiguritasList) {
-                        stringBuilderQuery.append("('" + publicacion.getUserDocument() + "', '");
-                        stringBuilderQuery.append(publicacion.getDate() + "', '");
-                        stringBuilderQuery.append(Usuario.getInstance().getUsername() + "', '");
-                        stringBuilderQuery.append(actualDate + "', ");
-                        stringBuilderQuery.append(figurita.getNumero() + ", '");
-                        stringBuilderQuery.append(figurita.getPais() + "', '");
-                        stringBuilderQuery.append(figurita.getEstado() + "'),");
+                        stringBuilderQuery.append("('").append(publicacion.getUserDocument()).append("', '");
+                        stringBuilderQuery.append(publicacion.getDate()).append("', '");
+                        stringBuilderQuery.append(Usuario.getInstance().getUsername()).append("', '");
+                        stringBuilderQuery.append(actualDate).append("', ");
+                        stringBuilderQuery.append(figurita.getNumero()).append(", '");
+                        stringBuilderQuery.append(figurita.getPais()).append("', '");
+                        stringBuilderQuery.append(figurita.getEstado()).append("'),");
                     }
                     String query = stringBuilderQuery.toString();
                     DBService.executeUpdate(query.substring(0, query.length() - 1));
@@ -181,7 +181,7 @@ public class CreateOfferFrame extends JFrame {
                     contentPanelLayout.createParallelGroup()
                         .addGroup(contentPanelLayout.createSequentialGroup()
                             .addGroup(contentPanelLayout.createParallelGroup()
-                                .addComponent(scrollPane1, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 493, Short.MAX_VALUE)
+                                .addComponent(scrollPane1, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 633, Short.MAX_VALUE)
                                 .addGroup(contentPanelLayout.createSequentialGroup()
                                     .addComponent(addFiguritaButton)
                                     .addGap(18, 18, 18)
@@ -189,7 +189,7 @@ public class CreateOfferFrame extends JFrame {
                                     .addGap(0, 0, Short.MAX_VALUE))
                                 .addGroup(contentPanelLayout.createSequentialGroup()
                                     .addComponent(cancelButton, GroupLayout.PREFERRED_SIZE, 108, GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 277, Short.MAX_VALUE)
+                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 417, Short.MAX_VALUE)
                                     .addComponent(createButton, GroupLayout.PREFERRED_SIZE, 108, GroupLayout.PREFERRED_SIZE)))
                             .addContainerGap())
                 );
@@ -200,7 +200,7 @@ public class CreateOfferFrame extends JFrame {
                                 .addComponent(addFiguritaButton)
                                 .addComponent(deleteFiguritaButton))
                             .addGap(16, 16, 16)
-                            .addComponent(scrollPane1, GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE)
+                            .addComponent(scrollPane1, GroupLayout.DEFAULT_SIZE, 307, Short.MAX_VALUE)
                             .addGap(12, 12, 12)
                             .addGroup(contentPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                                 .addComponent(cancelButton, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)

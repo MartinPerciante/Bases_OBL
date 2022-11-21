@@ -33,7 +33,7 @@ public class MyPublicationsFrame extends JFrame {
 
     int yPosition = 0;
 
-    int width = 770;
+    int width = 800;
 
     int height = 480;
 
@@ -50,7 +50,7 @@ public class MyPublicationsFrame extends JFrame {
         if (resultSetPublications != null) {
             Boolean isPositionedLeft = true;
             while (resultSetPublications.next()) {
-                PublicationPanel publicationPanel = new PublicationPanel(xPosition, yPosition, width, height);
+                PublicationPanel publicationPanel = new PublicationPanel(true, xPosition, yPosition, width, height);
                 String document = resultSetPublications.getString("ci");
                 String firstName = resultSetPublications.getString("nombre");
                 String lastName = resultSetPublications.getString("apellido");

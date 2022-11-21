@@ -1,0 +1,56 @@
+JFDML JFormDesigner: "8.0.0.0.194" Java: "11.0.14.1" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+			"$horizontalGroup": "par l {seq {par l {seq t {space :::p, par l:::p {seq {par l {comp documentLabel::l:p:64:p, comp figuritaStateLabel::l:p::p}, space :::p, par l:::p {comp firstNameLabel::::94:x, comp figuritaStateValueLabel::::94:x}}, comp dateLabel::::182:x}, space :::x}, seq {par l {seq {space :::p, comp figuritaImageLabel:::p:232:p}, seq l {space :::p, comp offerStateLabel:::p:82:p}, seq l {space :p:79:p, comp publishedFiguritaLabel:::p::p}, seq l {space :p:194:p, comp offerButton::::116:x}}, space :::p}}, par l {seq t {comp scrollPane1:::p:428:p, space :::p}, seq t {comp offeredFiguritasLabel:::p::p, space :p:171:p}}}}"
+			"$verticalGroup": "par l {seq l {space :::p, par b {comp publishedFiguritaLabel::b:p::p, comp offeredFiguritasLabel::b:p::p}, space :::p, par t {seq {comp figuritaImageLabel:::p:312:p, par l {seq {space :p:36:p, comp offerStateLabel:::p::p, space s:::p, par b {comp figuritaStateLabel::b:p::p, comp figuritaStateValueLabel::b:p::p}, space u:::p, par b {comp documentLabel::b:p::p, comp firstNameLabel::b:p::p}}, seq {space :p:70:p, comp offerButton:::p::p}}, space :::p, comp dateLabel:::p::p}, comp scrollPane1:::p:406:p}, space :::p}}"
+		} ) {
+			name: "this"
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "publishedFiguritaLabel"
+				"text": "Figurita publicada"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "figuritaImageLabel"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "documentLabel"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "firstNameLabel"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "dateLabel"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "figuritaStateLabel"
+				"text": "Estado:"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "figuritaStateValueLabel"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "offeredFiguritasLabel"
+				"text": "Figuritas ofrecidas"
+			} )
+			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+				name: "scrollPane1"
+				add( new FormComponent( "javax.swing.JTable" ) {
+					name: "offeredFiguritasTable"
+				} )
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "offerButton"
+				"text": "CONTRAOFERTAR"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "offerStateLabel"
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 0 )
+			"size": new java.awt.Dimension( 750, 440 )
+		} )
+	}
+}

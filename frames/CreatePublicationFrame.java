@@ -159,7 +159,6 @@ public class CreatePublicationFrame extends JFrame {
             }
         };
         interestedFiguritasTable.setTableHeader(null);
-        interestedFiguritasLabel.setBorder(Utils.blackBorder1);
         interestedFiguritasTable.setBorder(Utils.blackBorder1);
         figuritasStateLabel = new JLabel();
         documentValueLabel = new JLabel();

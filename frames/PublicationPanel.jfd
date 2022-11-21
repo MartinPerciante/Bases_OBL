@@ -4,7 +4,7 @@ new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-			"$horizontalGroup": "par l {seq {par l {seq t {space :::p, par l:::p {seq {par l {comp documentLabel::l:p:64:p, comp figuritaStateLabel::l:p::p}, space :::p, par l:::p {comp firstNameLabel::::94:x, comp figuritaStateValueLabel::::94:x}}, comp dateLabel::::182:x}, space :::p, comp offerButton:::p:96:p}, seq {space :::p, comp figuritaImageLabel:::p:232:p}, seq l {space :p:79:p, comp offeredFiguritaLabel:::p:95:p}, seq l {space :::p, comp publicationStateLabel:::p:82:p}}, par l {seq {space :p:162:p, comp interestedFiguritasLabel:::p::p, space :p:181:p}, seq t {comp scrollPane1:::p:428:p, space :::p}}}}"
+			"$horizontalGroup": "par l {seq {par l {seq t {space :::p, par l:::p {seq {par l {comp documentLabel::l:p:64:p, comp figuritaStateLabel::l:p::p}, space :::p, par l:::p {comp firstNameLabel::::94:x, comp figuritaStateValueLabel::::94:x}}, comp dateLabel::::182:x}, space :::p, comp offerButton:::p:130:p}, seq {space :::p, comp figuritaImageLabel:::p:232:p}, seq l {space :p:79:p, comp offeredFiguritaLabel:::p:95:p}, seq l {space :::p, comp publicationStateLabel:::p:82:p}}, par l {seq {space :p:162:p, comp interestedFiguritasLabel:::p::p, space :p:181:p}, seq t {comp scrollPane1:::p:428:p, space :::p}}}}"
 			"$verticalGroup": "par l {seq l {space :::p, par b {comp offeredFiguritaLabel::b:p::p, comp interestedFiguritasLabel::b:p::p}, space :::p, par l:::p {seq {comp figuritaImageLabel:::p:312:p, space :::x, comp publicationStateLabel:::p::p, space s:::p, par l {seq t {par b {comp figuritaStateLabel::b:p::p, comp figuritaStateValueLabel::b:p::p}, space u:::p, par b {comp documentLabel::b:p::p, comp firstNameLabel::b:p::p}, space u:::p, comp dateLabel:::p::p}, comp offerButton::t:p::p}}, comp scrollPane1:::p:406:p}, space :::p}}"
 		} ) {
 			name: "this"
@@ -50,7 +50,7 @@ new FormModel {
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 0 )
-			"size": new java.awt.Dimension( 720, 440 )
+			"size": new java.awt.Dimension( 775, 440 )
 		} )
 	}
 }

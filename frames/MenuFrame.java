@@ -32,6 +32,7 @@ public class MenuFrame extends JFrame {
         myProfileButton = new JButton();
         logOutButton = new JButton();
         myPublicationsButton = new JButton();
+        myOffersButton = new JButton();
 
         //======== this ========
         setTitle("MENU PRINCIPAL");
@@ -61,18 +62,23 @@ public class MenuFrame extends JFrame {
                 //---- myPublicationsButton ----
                 myPublicationsButton.setText("Mis publicaciones");
 
+                //---- myOffersButton ----
+                myOffersButton.setText("Mis ofertas");
+
                 GroupLayout contentPanelLayout = new GroupLayout(contentPanel);
                 contentPanel.setLayout(contentPanelLayout);
                 contentPanelLayout.setHorizontalGroup(
                     contentPanelLayout.createParallelGroup()
                         .addGroup(GroupLayout.Alignment.TRAILING, contentPanelLayout.createSequentialGroup()
                             .addContainerGap(122, Short.MAX_VALUE)
-                            .addGroup(contentPanelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(createPublicationButton, GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
-                                .addComponent(listPublicationsButton, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
-                                .addComponent(myPublicationsButton, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
-                                .addComponent(myProfileButton, GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
-                                .addComponent(logOutButton, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE))
+                            .addGroup(contentPanelLayout.createParallelGroup()
+                                .addComponent(logOutButton, GroupLayout.PREFERRED_SIZE, 131, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(myProfileButton, GroupLayout.PREFERRED_SIZE, 131, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(myOffersButton, GroupLayout.PREFERRED_SIZE, 131, GroupLayout.PREFERRED_SIZE)
+                                .addGroup(contentPanelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(createPublicationButton, GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
+                                    .addComponent(listPublicationsButton, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
+                                    .addComponent(myPublicationsButton, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)))
                             .addGap(121, 121, 121))
                 );
                 contentPanelLayout.setVerticalGroup(
@@ -85,10 +91,12 @@ public class MenuFrame extends JFrame {
                             .addGap(18, 18, 18)
                             .addComponent(myPublicationsButton)
                             .addGap(18, 18, 18)
+                            .addComponent(myOffersButton)
+                            .addGap(18, 18, 18)
                             .addComponent(myProfileButton)
                             .addGap(18, 18, 18)
                             .addComponent(logOutButton)
-                            .addContainerGap(35, Short.MAX_VALUE))
+                            .addContainerGap(18, Short.MAX_VALUE))
                 );
             }
             dialogPane.add(contentPanel, BorderLayout.CENTER);
@@ -106,7 +114,7 @@ public class MenuFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    viewController.goToCreatePublication(MenuFrame.this);
+                    viewController.goToCreatePublication(MenuFrame.this, true);
                 } catch (SQLException ex) {
                     throw new RuntimeException(ex);
                 }
@@ -129,6 +137,17 @@ public class MenuFrame extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 try {
                     viewController.goToMyPublications(MenuFrame.this);
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+        });
+
+        myOffersButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    viewController.goToMyOffers(MenuFrame.this, null, null);
                 } catch (SQLException ex) {
                     throw new RuntimeException(ex);
                 }
@@ -158,5 +177,6 @@ public class MenuFrame extends JFrame {
     private JButton myProfileButton;
     private JButton logOutButton;
     private JButton myPublicationsButton;
+    private JButton myOffersButton;
     // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
 }

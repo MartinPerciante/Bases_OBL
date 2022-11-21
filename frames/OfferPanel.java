@@ -20,49 +20,38 @@ import java.util.ArrayList;
 /**
  * @author unknown
  */
-public class PublicationPanel extends JPanel {
-    public PublicationPanel(Boolean isOwner, int x, int y, int width, int height) {
+public class OfferPanel extends JPanel {
+    public OfferPanel(int x, int y, int width, int height) {
         setBounds(x, y, width, height);
         initComponents();
-        if (isOwner) {
-            offerButton.setText("VER OFERTAS");
-        }
-        buttonActions(isOwner);
+        buttonActions();
     }
 
-    private void buttonActions(Boolean isOwner) {
+    private void buttonActions() {
         offerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (isOwner) {
-                    try {
-                        ViewController.getInstance().goToMyOffers((JFrame) getParent().getParent().getParent().getParent().getParent(), documentLabel.getText(), dateLabel.getText());
-                    } catch (SQLException ex) {
-                        throw new RuntimeException(ex);
-                    }
-                } else {
-                    try {
-                        PublicationController.getInstance().setPublicacionSelected(new Publicacion(documentLabel.getText(), dateLabel.getText()));
-                        ViewController.getInstance().goToCreateOffer((JFrame) getParent().getParent().getParent().getParent().getParent(), true);
-                    } catch (SQLException ex) {
-                        throw new RuntimeException(ex);
-                    }
+                try {
+                    PublicationController.getInstance().setPublicacionSelected(new Publicacion(documentLabel.getText(), dateLabel.getText()));
+                    ViewController.getInstance().goToCreateOffer((ShowPublicationsFrame) getParent().getParent().getParent().getParent().getParent(), true);
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
                 }
             }
         });
     }
 
-    public void setPublicationData(String document, String name, String date, String publicationState, String figuritaState, Icon offeredFiguritaImage, ArrayList<Icon> interestedFiguritasList) {
+    public void setOfferData(String document, String name, String date, String offerState, String figuritaState, Icon offeredFiguritaImage, ArrayList<Icon> offeredFiguritasArrayList) {
         documentLabel.setText(document);
         firstNameLabel.setText(name);
         dateLabel.setText(date);
-        publicationStateLabel.setText(publicationState);
+        offerStateLabel.setText(offerState);
         figuritaStateValueLabel.setText(figuritaState);
         figuritaImageLabel.setIcon(new ImageIcon(((ImageIcon) offeredFiguritaImage).getImage().getScaledInstance(232, 312, Image.SCALE_DEFAULT)));
         Icon[] iconsRows = new Icon[3];
         int index = 0;
         DefaultTableModel defaultTableModel = new DefaultTableModel(0, 3);
-        for (Icon icon : interestedFiguritasList) {
+        for (Icon icon : offeredFiguritasArrayList) {
             iconsRows[index] = new ImageIcon(((ImageIcon) icon).getImage().getScaledInstance(140, 189, Image.SCALE_DEFAULT));
             index++;
             if (index == 3) {
@@ -74,53 +63,53 @@ public class PublicationPanel extends JPanel {
         if (index != 0) {
             defaultTableModel.addRow(iconsRows);
         }
-        interestedFiguritasTable.setModel(defaultTableModel);
+        offeredFiguritasTable.setModel(defaultTableModel);
     }
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
-        offeredFiguritaLabel = new JLabel();
+        publishedFiguritaLabel = new JLabel();
         figuritaImageLabel = new JLabel();
         documentLabel = new JLabel();
         firstNameLabel = new JLabel();
         dateLabel = new JLabel();
         figuritaStateLabel = new JLabel();
         figuritaStateValueLabel = new JLabel();
-        interestedFiguritasLabel = new JLabel();
+        offeredFiguritasLabel = new JLabel();
         scrollPane1 = new JScrollPane();
-        interestedFiguritasTable = new JTable(3, 3) {
+        offeredFiguritasTable = new JTable();
+        offeredFiguritasTable = new JTable(3, 3) {
             public Class getColumnClass(int column) {
                 return Icon.class;
             }
         };
         setBorder(Utils.blackBorder1);
         figuritaImageLabel.setBorder(Utils.blackBorder1);
-        interestedFiguritasTable.setBorder(Utils.blackBorder1);
-        interestedFiguritasTable.setTableHeader(null);
-        interestedFiguritasTable.setRowHeight(189);
-        interestedFiguritasTable.setBounds(300, 40, 420, 378);
-
+        offeredFiguritasTable.setBorder(Utils.blackBorder1);
+        offeredFiguritasTable.setTableHeader(null);
+        offeredFiguritasTable.setRowHeight(189);
+        offeredFiguritasTable.setBounds(300, 40, 420, 378);
         offerButton = new JButton();
-        publicationStateLabel = new JLabel();
+        offerStateLabel = new JLabel();
 
         //======== this ========
 
-        //---- offeredFiguritaLabel ----
-        offeredFiguritaLabel.setText("Figurita ofrecida");
+        //---- publishedFiguritaLabel ----
+        publishedFiguritaLabel.setText("Figurita publicada");
 
         //---- figuritaStateLabel ----
         figuritaStateLabel.setText("Estado:");
 
-        //---- interestedFiguritasLabel ----
-        interestedFiguritasLabel.setText("Figuritas interesadas");
+        //---- offeredFiguritasLabel ----
+        offeredFiguritasLabel.setText("Figuritas ofrecidas");
 
         //======== scrollPane1 ========
         {
-            scrollPane1.setViewportView(interestedFiguritasTable);
+            scrollPane1.setViewportView(offeredFiguritasTable);
         }
 
         //---- offerButton ----
-        offerButton.setText("OFERTAR");
+        offerButton.setText("CONTRAOFERTAR");
 
         GroupLayout layout = new GroupLayout(this);
         setLayout(layout);
@@ -140,52 +129,58 @@ public class PublicationPanel extends JPanel {
                                         .addComponent(firstNameLabel, GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE)
                                         .addComponent(figuritaStateValueLabel, GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE)))
                                 .addComponent(dateLabel, GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE))
-                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(offerButton, GroupLayout.PREFERRED_SIZE, 130, GroupLayout.PREFERRED_SIZE))
+                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGroup(layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(figuritaImageLabel, GroupLayout.PREFERRED_SIZE, 232, GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(79, 79, 79)
-                            .addComponent(offeredFiguritaLabel, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(publicationStateLabel, GroupLayout.PREFERRED_SIZE, 82, GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createParallelGroup()
+                                .addGroup(layout.createSequentialGroup()
+                                    .addContainerGap()
+                                    .addComponent(figuritaImageLabel, GroupLayout.PREFERRED_SIZE, 232, GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addContainerGap()
+                                    .addComponent(offerStateLabel, GroupLayout.PREFERRED_SIZE, 82, GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(79, 79, 79)
+                                    .addComponent(publishedFiguritaLabel))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(194, 194, 194)
+                                    .addComponent(offerButton, GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE)))
+                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)))
                     .addGroup(layout.createParallelGroup()
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(162, 162, 162)
-                            .addComponent(interestedFiguritasLabel)
-                            .addGap(181, 181, 181))
                         .addGroup(GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                             .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 428, GroupLayout.PREFERRED_SIZE)
-                            .addContainerGap())))
+                            .addContainerGap())
+                        .addGroup(GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addComponent(offeredFiguritasLabel)
+                            .addGap(171, 171, 171))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup()
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
                     .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                        .addComponent(offeredFiguritaLabel)
-                        .addComponent(interestedFiguritasLabel))
+                        .addComponent(publishedFiguritaLabel)
+                        .addComponent(offeredFiguritasLabel))
                     .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(figuritaImageLabel, GroupLayout.PREFERRED_SIZE, 312, GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(publicationStateLabel)
-                            .addGap(18, 18, 18)
                             .addGroup(layout.createParallelGroup()
-                                .addGroup(GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(36, 36, 36)
+                                    .addComponent(offerStateLabel)
+                                    .addGap(18, 18, 18)
                                     .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                                         .addComponent(figuritaStateLabel)
                                         .addComponent(figuritaStateValueLabel))
                                     .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
                                     .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                                         .addComponent(documentLabel)
-                                        .addComponent(firstNameLabel))
-                                    .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(dateLabel))
-                                .addComponent(offerButton, GroupLayout.Alignment.TRAILING)))
+                                        .addComponent(firstNameLabel)))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(70, 70, 70)
+                                    .addComponent(offerButton)))
+                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(dateLabel))
                         .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 406, GroupLayout.PREFERRED_SIZE))
                     .addContainerGap())
         );
@@ -193,17 +188,17 @@ public class PublicationPanel extends JPanel {
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables  @formatter:off
-    private JLabel offeredFiguritaLabel;
+    private JLabel publishedFiguritaLabel;
     private JLabel figuritaImageLabel;
     private JLabel documentLabel;
     private JLabel firstNameLabel;
     private JLabel dateLabel;
     private JLabel figuritaStateLabel;
     private JLabel figuritaStateValueLabel;
-    private JLabel interestedFiguritasLabel;
+    private JLabel offeredFiguritasLabel;
     private JScrollPane scrollPane1;
-    private JTable interestedFiguritasTable;
+    private JTable offeredFiguritasTable;
     private JButton offerButton;
-    private JLabel publicationStateLabel;
+    private JLabel offerStateLabel;
     // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
 }

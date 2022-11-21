@@ -10,8 +10,8 @@ new FormModel {
 				name: "dialogPane"
 				"border": new javax.swing.border.EmptyBorder( 12, 12, 12, 12 )
 				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-					"$horizontalGroup": "par l {seq t {space ::122:x, par t:::p {comp createPublicationButton::t::131:x, comp listPublicationsButton::l::131:x, comp myPublicationsButton::l::131:x, comp myProfileButton::t::131:x, comp logOutButton::l::131:x}, space :p:121:p}}"
-					"$verticalGroup": "par l {seq t {space :p:18:p, comp createPublicationButton:::p::p, space s:::p, comp listPublicationsButton:::p::p, space s:::p, comp myPublicationsButton:::p::p, space s:::p, comp myProfileButton:::p::p, space s:::p, comp logOutButton:::p::p, space ::35:x}}"
+					"$horizontalGroup": "par l {seq t {space ::122:x, par l {comp logOutButton:::p:131:p, comp myProfileButton:::p:131:p, comp myOffersButton:::p:131:p, par t:::p {comp createPublicationButton::t::131:x, comp listPublicationsButton::l::131:x, comp myPublicationsButton::l::131:x}}, space :p:121:p}}"
+					"$verticalGroup": "par l {seq t {space :p:18:p, comp createPublicationButton:::p::p, space s:::p, comp listPublicationsButton:::p::p, space s:::p, comp myPublicationsButton:::p::p, space s:::p, comp myOffersButton:::p::p, space s:::p, comp myProfileButton:::p::p, space s:::p, comp logOutButton:::p::p, space ::18:x}}"
 				} ) {
 					name: "contentPanel"
 					add( new FormComponent( "javax.swing.JButton" ) {
@@ -34,6 +34,10 @@ new FormModel {
 						name: "myPublicationsButton"
 						"text": "Mis publicaciones"
 					} )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "myOffersButton"
+						"text": "Mis ofertas"
+					} )
 				}, new FormLayoutConstraints( class java.lang.String ) {
 					"value": "Center"
 				} )
@@ -42,7 +46,7 @@ new FormModel {
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 0 )
-			"size": new java.awt.Dimension( 400, 300 )
+			"size": new java.awt.Dimension( 400, 325 )
 		} )
 	}
 }

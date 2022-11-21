@@ -42,15 +42,15 @@ public class PublicationController {
     }
 
     public void setPublicationOfferedFiguritaImageSelected(Figurita figurita) throws SQLException {
-        ViewController.getInstance().getCreatePublicationFrame().setFiguritaImageSelected(figurita);
+        ViewController.getInstance().getCreatePublicationFrame(false).setFiguritaImageSelected(figurita);
     }
 
     public void setPublicationInterestedFiguritaImageSelected(Figurita figurita) throws SQLException {
-        ViewController.getInstance().getCreatePublicationFrame().setFiguritaInterestedImageSelected(figurita);
+        ViewController.getInstance().getCreatePublicationFrame(false).setFiguritaInterestedImageSelected(figurita);
     }
 
     public void setOfferOfferedFiguritaImageSelected(Figurita figurita) throws SQLException {
-        ViewController.getInstance().getCreateOfferFrame().setFiguritaOfferedImageSelected(figurita);
+        ViewController.getInstance().getCreateOfferFrame(false).setFiguritaOfferedImageSelected(figurita);
     }
 
     public ResultSet getPublications(String figuritaNumber, String figuritaCountry) {
@@ -82,6 +82,31 @@ public class PublicationController {
                 "INNER JOIN figurita ON publicacion_tiene_interesada_figurita.numero_figurita = figurita.numero AND " +
                 "publicacion_tiene_interesada_figurita.pais_figurita = figurita.pais " +
                 "WHERE ci_usuario_publicacion = '" + userDocument + "' AND fecha_publicacion = '" + date + "'");
+    }
+
+    public ResultSet getOffersFromUser(String userDocument, String documentOwner, String dateOwner) {
+        StringBuilder query = new StringBuilder();
+        if (documentOwner != null && dateOwner != null) {
+            query.append("SELECT ci_usuario_oferta, fecha_oferta, ci, nombre, apellido, fecha_publicacion, estado_figurita, o.estado, foto FROM oferta o " +
+                    "INNER JOIN usuario u ON o.ci_usuario_publicacion = u.ci " +
+                    "INNER JOIN publicacion p ON o.ci_usuario_publicacion = p.ci_usuario AND o.fecha_publicacion = p.fecha " +
+                    "INNER JOIN figurita f on p.numero_figurita = f.numero and p.pais_figurita = f.pais " +
+                    "WHERE o.ci_usuario_oferta = '" + userDocument + "'");
+        } else {
+            query.append("SELECT ci_usuario_oferta, fecha_oferta, ci, nombre, apellido, fecha_publicacion, estado_figurita, o.estado, foto FROM oferta o " +
+                    "INNER JOIN usuario u ON o.ci_usuario_publicacion = u.ci " +
+                    "INNER JOIN publicacion p ON o.ci_usuario_publicacion = p.ci_usuario AND o.fecha_publicacion = p.fecha " +
+                    "INNER JOIN figurita f on p.numero_figurita = f.numero and p.pais_figurita = f.pais " +
+                    "WHERE p.ci_usuario = '" + documentOwner + "' AND p.fecha = '" + dateOwner + "'");
+        }
+        return DBService.executeQuery(query.toString());
+    }
+
+    public ResultSet getOffersFiguritas(String publicationUserDocument, String publicationDate, String offerUserDocument, String offerDate) {
+        return DBService.executeQuery("SELECT foto FROM oferta_tiene_figurita o " +
+                "INNER JOIN figurita f on o.numero_figurita = f.numero and o.pais_figurita = f.pais " +
+                "WHERE ci_usuario_publicacion = '" + publicationUserDocument + "' AND fecha_publicacion = '" + publicationDate +
+                "' AND ci_usuario_oferta = '" + offerUserDocument + "' AND fecha_oferta = '" + offerDate + "'");
     }
 
     public ResultSet getFiguritasCountry() {

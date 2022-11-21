@@ -74,7 +74,7 @@ public class PickFiguritaFrame extends JFrame {
                                 PublicationController.getInstance().setPublicationOfferedFiguritaImageSelected(new Figurita(Integer.parseInt(numAndCountry[0]), numAndCountry[1], icon));
                                 PickFiguritaFrame.this.setVisible(false);
                             }
-                            ViewController.getInstance().goToCreatePublication(PickFiguritaFrame.this);
+                            ViewController.getInstance().goToCreatePublication(PickFiguritaFrame.this, false);
                         } catch (SQLException ex) {
                             throw new RuntimeException(ex);
                         }
@@ -88,7 +88,7 @@ public class PickFiguritaFrame extends JFrame {
                                 PublicationController.getInstance().setPublicationInterestedFiguritaImageSelected(new Figurita(Integer.parseInt(numAndCountry[0]), numAndCountry[1], icon));
                                 PickFiguritaFrame.this.setVisible(false);
                             }
-                            ViewController.getInstance().goToCreatePublication(PickFiguritaFrame.this);
+                            ViewController.getInstance().goToCreatePublication(PickFiguritaFrame.this, false);
                         } catch (SQLException ex) {
                             throw new RuntimeException(ex);
                         }
@@ -102,7 +102,7 @@ public class PickFiguritaFrame extends JFrame {
                                 PublicationController.getInstance().setOfferOfferedFiguritaImageSelected(new Figurita(Integer.parseInt(numAndCountry[0]), numAndCountry[1], icon, figuritaStateComboBox.getSelectedItem().toString()));
                                 PickFiguritaFrame.this.setVisible(false);
                             }
-                            ViewController.getInstance().goToCreateOffer(PickFiguritaFrame.this);
+                            ViewController.getInstance().goToCreateOffer(PickFiguritaFrame.this, false);
                         } catch (SQLException ex) {
                             throw new RuntimeException(ex);
                         }
