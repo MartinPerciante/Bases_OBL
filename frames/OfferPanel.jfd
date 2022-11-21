@@ -4,8 +4,8 @@ new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-			"$horizontalGroup": "par l {seq {par l {seq t {space :::p, par l:::p {seq {par l {comp documentLabel::l:p:64:p, comp figuritaStateLabel::l:p::p}, space :::p, par l:::p {comp firstNameLabel::::94:x, comp figuritaStateValueLabel::::94:x}}, comp dateLabel::::182:x}, space :::x}, seq {par l {seq {space :::p, comp figuritaImageLabel:::p:232:p}, seq l {space :::p, comp offerStateLabel:::p:82:p}, seq l {space :p:79:p, comp publishedFiguritaLabel:::p::p}, seq l {space :p:194:p, comp offerButton::::116:x}}, space :::p}}, par l {seq t {comp scrollPane1:::p:428:p, space :::p}, seq t {comp offeredFiguritasLabel:::p::p, space :p:171:p}}}}"
-			"$verticalGroup": "par l {seq l {space :::p, par b {comp publishedFiguritaLabel::b:p::p, comp offeredFiguritasLabel::b:p::p}, space :::p, par t {seq {comp figuritaImageLabel:::p:312:p, par l {seq {space :p:36:p, comp offerStateLabel:::p::p, space s:::p, par b {comp figuritaStateLabel::b:p::p, comp figuritaStateValueLabel::b:p::p}, space u:::p, par b {comp documentLabel::b:p::p, comp firstNameLabel::b:p::p}}, seq {space :p:70:p, comp offerButton:::p::p}}, space :::p, comp dateLabel:::p::p}, comp scrollPane1:::p:406:p}, space :::p}}"
+			"$horizontalGroup": "par l {seq {par l {seq l {space :::p, par l {seq l {comp figuritaStateLabel:::p::p, space :::p, comp figuritaStateValueLabel::::107:x, space :p:24:p, comp offerButton::::135:x}, seq l {par l:::p {seq l {comp documentLabel:::p:64:p, space :::p, comp firstNameLabel:::p:94:p}, comp dateLabel:::p:182:p}, space ::128:x}}}, seq {par l {seq {space :::p, comp figuritaImageLabel:::p:232:p}, seq l {space :p:79:p, comp publishedFiguritaLabel:::p::p}, seq l {space :::p, comp offerStateLabel:::p:82:p}, seq l {space :::p, comp ofertanteLabel:::p::p}, seq l {space :::p, comp ofertanteDocumentLabel:::p:70:p, space :::p, comp ofertanteOfferDateLabel:::p:193:p}}, space ::41:x}}, par l {seq {space :p:167:p, comp offeredFiguritasLabel:::p::p, space :p:171:p}, seq t {space :::p, comp scrollPane1:::p:428:p, space :::p}}}}"
+			"$verticalGroup": "par l {seq l {space :::p, par b {comp publishedFiguritaLabel::b:p::p, comp offeredFiguritasLabel::b:p::p}, space :::p, par l {seq {comp figuritaImageLabel:::p:312:p, space u:::p, comp offerStateLabel:::p::p, space :::p, par b {comp offerButton::b:p::p, comp figuritaStateLabel::b:p::p, comp figuritaStateValueLabel::b:p::p}, space :::x, par b {comp documentLabel::b:p::p, comp firstNameLabel::b:p::p}, space :::p, comp dateLabel:::p::p, space :::p, comp ofertanteLabel:::p::p, space :::p, par b {comp ofertanteDocumentLabel::b:p::p, comp ofertanteOfferDateLabel::b:p::p}}, seq {space :0:0:x, comp scrollPane1:::p:419:p}}, space :p:48:p}}"
 		} ) {
 			name: "this"
 			add( new FormComponent( "javax.swing.JLabel" ) {
@@ -48,9 +48,19 @@ new FormModel {
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "offerStateLabel"
 			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "ofertanteLabel"
+				"text": "OFERTANTE"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "ofertanteDocumentLabel"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "ofertanteOfferDateLabel"
+			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 0 )
-			"size": new java.awt.Dimension( 750, 440 )
+			"size": new java.awt.Dimension( 750, 495 )
 		} )
 	}
 }

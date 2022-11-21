@@ -2,6 +2,7 @@ package controller;
 
 import database.DBService;
 import entities.Figurita;
+import entities.Oferta;
 import entities.Publicacion;
 import enums.EPickFigurita;
 import utils.Utils;
@@ -26,6 +27,16 @@ public class PublicationController {
 
     private Publicacion publicacionSelected;
 
+    public Oferta getOfertaSelected() {
+        return ofertaSelected;
+    }
+
+    public void setOfertaSelected(Oferta ofertaSelected) {
+        this.ofertaSelected = ofertaSelected;
+    }
+
+    private Oferta ofertaSelected;
+
     public EPickFigurita getStatusEnum() {
         return this.statusEnum;
     }
@@ -35,6 +46,25 @@ public class PublicationController {
             instance = new PublicationController();
         }
         return instance;
+    }
+
+    public void updateOffer(String documentUserCounterOffer, String documentUserOffer, String dateCounterOffer, String dateOffer, String datePublication) {
+        DBService.executeUpdate("UPDATE oferta SET ci_usuario_contraoferta = '" + documentUserCounterOffer + "', " +
+                "fecha_contraoferta = '" + dateCounterOffer + "', " +
+                "estado = 'CONTRAOFERTADA' WHERE ci_usuario_oferta = '" + documentUserOffer + "' " +
+                "AND ci_usuario_publicacion = '" + documentUserCounterOffer + "' " +
+                "AND fecha_oferta = '" + dateOffer + "' " +
+                "AND fecha_publicacion = '" + datePublication + "'");
+    }
+
+    public void insertOffer(String userDocument, String publicationUserDocument, String offerDate, String publicationDate, Boolean isOffer) {
+        DBService.executeUpdate("INSERT INTO oferta VALUES ('" + userDocument + "', '"
+                + publicationUserDocument + "', '" + offerDate + "', '" + publicationDate + "', '"
+                + (isOffer ? "OFERTA'" : "CONTRAOFERTA'") + ", 'PENDIENTE', null, null)");
+    }
+
+    public void insertOfferHasFigurita(String query) {
+        DBService.executeUpdate(query);
     }
 
     public ResultSet getFiguritasState() {
@@ -51,6 +81,10 @@ public class PublicationController {
 
     public void setOfferOfferedFiguritaImageSelected(Figurita figurita) throws SQLException {
         ViewController.getInstance().getCreateOfferFrame(false).setFiguritaOfferedImageSelected(figurita);
+    }
+
+    public void setCounterOfferFiguritaImageSelected(Figurita figurita) throws SQLException {
+        ViewController.getInstance().getCreateCounterOfferFrame(false).setFiguritaOfferedImageSelected(figurita);
     }
 
     public ResultSet getPublications(String figuritaNumber, String figuritaCountry) {
@@ -91,7 +125,7 @@ public class PublicationController {
                     "INNER JOIN usuario u ON o.ci_usuario_publicacion = u.ci " +
                     "INNER JOIN publicacion p ON o.ci_usuario_publicacion = p.ci_usuario AND o.fecha_publicacion = p.fecha " +
                     "INNER JOIN figurita f on p.numero_figurita = f.numero and p.pais_figurita = f.pais " +
-                    "WHERE p.ci_usuario = '" + documentOwner + "' AND p.fecha = '" + dateOwner + "'");
+                    "WHERE p.ci_usuario = '" + documentOwner + "' AND p.fecha = '" + dateOwner + "' AND o.tipo = 'OFERTA'");
         } else {
             query.append("SELECT ci_usuario_oferta, fecha_oferta, ci, nombre, apellido, fecha_publicacion, estado_figurita, o.estado, foto FROM oferta o " +
                     "INNER JOIN usuario u ON o.ci_usuario_publicacion = u.ci " +
@@ -111,6 +145,10 @@ public class PublicationController {
 
     public ResultSet getFiguritasCountry() {
         return DBService.executeQuery("SELECT pais FROM pais_figurita");
+    }
+
+    public ResultSet getFiguritasNumber() {
+        return DBService.executeQuery("SELECT DISTINCT numero FROM figurita ORDER BY numero");
     }
 
     public ResultSet getFiguritasPhotos(String country, String number) {

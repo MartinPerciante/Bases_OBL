@@ -7,6 +7,7 @@ package frames;
 import controller.PublicationController;
 import controller.ViewController;
 import entities.Usuario;
+import utils.Utils;
 
 import javax.swing.*;
 import java.awt.*;
@@ -91,11 +92,10 @@ public class ShowPublicationsFrame extends JFrame {
         while (resultSet.next()) {
             countryComboBox.addItem(resultSet.getString("pais"));
         }
-        //agregar num de figurita oficiales, no se si son 30, tambien podria ser una query a la tabla de figurita
-        //que agarra los num sin repetir
-        numberComboBox.addItem(EMPTY_ITEM);
-        for (int i = 1; i <= 30; i++) {
-            numberComboBox.addItem(i);
+        ResultSet resultSetNumbers = PublicationController.getInstance().getFiguritasNumber();
+        numberComboBox.addItem(Utils.EMPTY_ITEM);
+        while (resultSetNumbers.next()) {
+            numberComboBox.addItem(resultSetNumbers.getString("numero"));
         }
     }
 

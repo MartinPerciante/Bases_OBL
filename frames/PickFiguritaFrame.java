@@ -14,6 +14,8 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.ResultSet;
@@ -39,15 +41,13 @@ public class PickFiguritaFrame extends JFrame {
         while (resultSetCountries.next()) {
             countryComboBox.addItem(resultSetCountries.getString("pais"));
         }
-
-        //agregar num de figurita oficiales, no se si son 30, tambien podria ser una query a la tabla de figurita
-        //que agarra los num sin repetir
+        ResultSet resultSetNumbers = PublicationController.getInstance().getFiguritasNumber();
         numberComboBox.addItem(Utils.EMPTY_ITEM);
-        for (int i = 1; i <= 30; i++) {
-            numberComboBox.addItem(i);
+        while (resultSetNumbers.next()) {
+            numberComboBox.addItem(resultSetNumbers.getString("numero"));
         }
-
-        if (PublicationController.getInstance().getStatusEnum().equals(EPickFigurita.CREATE_OFFER_OFFERED_FIGURITAS)) {
+        EPickFigurita ePickFigurita = PublicationController.getInstance().getStatusEnum();
+        if (ePickFigurita.equals(EPickFigurita.CREATE_OFFER_OFFERED_FIGURITAS) || ePickFigurita.equals(EPickFigurita.CREATE_COUNTEROFFER_OFFERED_FIGURITAS)) {
             figuritaStateLabel.setVisible(true);
             figuritaStateComboBox.setVisible(true);
             ResultSet resultSetStates = PublicationController.getInstance().getFiguritasState();
@@ -108,6 +108,20 @@ public class PickFiguritaFrame extends JFrame {
                         }
                         break;
                     }
+                    case CREATE_COUNTEROFFER_OFFERED_FIGURITAS: {
+                        try {
+                            ImageIcon icon = (ImageIcon) figuritasTable.getValueAt(figuritasTable.getSelectedRow(), figuritasTable.getSelectedColumn());
+                            if (icon != null) {
+                                String[] numAndCountry = hashMap.get(icon).split(" ");
+                                PublicationController.getInstance().setCounterOfferFiguritaImageSelected(new Figurita(Integer.parseInt(numAndCountry[0]), numAndCountry[1], icon, figuritaStateComboBox.getSelectedItem().toString()));
+                                PickFiguritaFrame.this.setVisible(false);
+                            }
+                            ViewController.getInstance().goToCreateCounterOfferFrame(PickFiguritaFrame.this, false);
+                        } catch (SQLException ex) {
+                            throw new RuntimeException(ex);
+                        }
+                        break;
+                    }
                 }
             }
         });
@@ -140,6 +154,41 @@ public class PickFiguritaFrame extends JFrame {
                     }
                 } catch (Exception exception) {
                     exception.printStackTrace();
+                }
+            }
+        });
+
+        cancelButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                EPickFigurita eAddFiguritaOptions = PublicationController.getInstance().getStatusEnum();
+                ViewController viewController = ViewController.getInstance();
+                switch (eAddFiguritaOptions) {
+                    case CREATE_PUBLICATION_OFFERED_FIGURITA:
+                    case CREATE_PUBLICATION_INTERESTED_FIGURITAS: {
+                        try {
+                            viewController.goToCreatePublication(PickFiguritaFrame.this, false);
+                        } catch (SQLException ex) {
+                            throw new RuntimeException(ex);
+                        }
+                        break;
+                    }
+                    case CREATE_OFFER_OFFERED_FIGURITAS: {
+                        try {
+                            viewController.goToCreateOffer(PickFiguritaFrame.this, false);
+                        } catch (SQLException ex) {
+                            throw new RuntimeException(ex);
+                        }
+                        break;
+                    }
+                    case CREATE_COUNTEROFFER_OFFERED_FIGURITAS: {
+                        try {
+                            viewController.goToCreatePublication(PickFiguritaFrame.this, false);
+                        } catch (SQLException ex) {
+                            throw new RuntimeException(ex);
+                        }
+                        break;
+                    }
                 }
             }
         });
@@ -203,45 +252,45 @@ public class PickFiguritaFrame extends JFrame {
                 GroupLayout contentPanelLayout = new GroupLayout(contentPanel);
                 contentPanel.setLayout(contentPanelLayout);
                 contentPanelLayout.setHorizontalGroup(
-                    contentPanelLayout.createParallelGroup()
-                        .addComponent(scrollPane1)
-                        .addGroup(contentPanelLayout.createSequentialGroup()
-                            .addComponent(cancelButton, GroupLayout.PREFERRED_SIZE, 115, GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(numberLabel, GroupLayout.PREFERRED_SIZE, 67, GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(numberComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(countryLabel, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(countryComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                            .addGap(29, 29, 29)
-                            .addComponent(filterButton, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(figuritaStateLabel, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(figuritaStateComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                            .addContainerGap())
+                        contentPanelLayout.createParallelGroup()
+                                .addComponent(scrollPane1)
+                                .addGroup(contentPanelLayout.createSequentialGroup()
+                                        .addComponent(cancelButton, GroupLayout.PREFERRED_SIZE, 115, GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(numberLabel, GroupLayout.PREFERRED_SIZE, 67, GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(numberComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(countryLabel, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(countryComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                        .addGap(29, 29, 29)
+                                        .addComponent(filterButton, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(figuritaStateLabel, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(figuritaStateComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                        .addContainerGap())
                 );
                 contentPanelLayout.setVerticalGroup(
-                    contentPanelLayout.createParallelGroup()
-                        .addGroup(contentPanelLayout.createSequentialGroup()
-                            .addContainerGap()
-                            .addGroup(contentPanelLayout.createParallelGroup()
-                                .addGroup(contentPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                    .addComponent(figuritaStateComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(figuritaStateLabel))
-                                .addGroup(contentPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                    .addComponent(numberComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(numberLabel)
-                                    .addComponent(cancelButton))
-                                .addGroup(contentPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                    .addComponent(countryComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(filterButton)
-                                    .addComponent(countryLabel)))
-                            .addGap(18, 18, 18)
-                            .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 384, GroupLayout.PREFERRED_SIZE)
-                            .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        contentPanelLayout.createParallelGroup()
+                                .addGroup(contentPanelLayout.createSequentialGroup()
+                                        .addContainerGap()
+                                        .addGroup(contentPanelLayout.createParallelGroup()
+                                                .addGroup(contentPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                                        .addComponent(figuritaStateComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(figuritaStateLabel))
+                                                .addGroup(contentPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                                        .addComponent(numberComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(numberLabel)
+                                                        .addComponent(cancelButton))
+                                                .addGroup(contentPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                                        .addComponent(countryComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(filterButton)
+                                                        .addComponent(countryLabel)))
+                                        .addGap(18, 18, 18)
+                                        .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 384, GroupLayout.PREFERRED_SIZE)
+                                        .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 );
             }
             dialogPane.add(contentPanel, BorderLayout.CENTER);

@@ -110,6 +110,15 @@ public class ViewController {
         return myOffersFrame;
     }
 
+    private CreateCounterOfferFrame createCounterOfferFrame;
+
+    public CreateCounterOfferFrame getCreateCounterOfferFrame(Boolean newFrame) {
+        if (newFrame) {
+            createCounterOfferFrame = new CreateCounterOfferFrame();
+        }
+        return createCounterOfferFrame;
+    }
+
     public static ViewController getInstance() {
         if (instance == null) {
             instance = new ViewController();
@@ -164,5 +173,9 @@ public class ViewController {
 
     public void goToMyOffers(JFrame origin, String document, String date) throws SQLException {
         goToFrom(getMyOffersFrame(document, date), origin);
+    }
+
+    public void goToCreateCounterOfferFrame(JFrame origin, Boolean newFrame) throws SQLException {
+        goToFrom(getCreateCounterOfferFrame(newFrame), origin);
     }
 }

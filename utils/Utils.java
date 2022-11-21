@@ -1,18 +1,12 @@
 package utils;
 
 import database.DBService;
-import database.Queries;
 
 import javax.swing.*;
 import javax.swing.border.Border;
-import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -40,6 +34,22 @@ public class Utils {
         return LocalDateTime.parse(date);
     }
 
+    public static boolean isTableEmpty(JTable table) {
+        int columnCount = table.getColumnCount();
+        int rowCount = table.getRowCount();
+        for (int i = 0; i < rowCount; i++) {
+            for (int j = 0; j < columnCount; j++) {
+                try {
+                    if (table.getValueAt(i, j) != null) {
+                        return false;
+                    }
+                } catch (Exception e) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
 
     public static void cargarFigus() throws SQLException {
         String[] paises = {"QAT",
@@ -93,7 +103,7 @@ public class Utils {
             }
 
             Connection connection = DBService.connect();
-            for (int i = 1; i < limite; i++){
+            for (int i = 1; i < limite; i++) {
                 numeros.add(i);
                 paisesArray.add(pais);
                 String imagePath = dir + "/" + map.get(i);
