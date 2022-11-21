@@ -86,7 +86,17 @@ public class OfferPanel extends JPanel {
         figuritaStateValueLabel = new JLabel();
         offeredFiguritasLabel = new JLabel();
         scrollPane1 = new JScrollPane();
-        offeredFiguritasTable = new JTable();
+        offeredFiguritasTable = new JTable(3, 3) {
+            public Class getColumnClass(int column) {
+                return Icon.class;
+            }
+        };
+        setBorder(Utils.blackBorder1);
+        figuritaImageLabel.setBorder(Utils.blackBorder1);
+        offeredFiguritasTable.setBorder(Utils.blackBorder1);
+        offeredFiguritasTable.setTableHeader(null);
+        offeredFiguritasTable.setRowHeight(189);
+        offeredFiguritasTable.setBounds(300, 40, 420, 378);
         counterOfferButton = new JButton();
         offerStateLabel = new JLabel();
         ofertanteLabel = new JLabel();
