@@ -137,7 +137,7 @@ public class PickFiguritaFrame extends JFrame {
                         int index = 0;
                         DefaultTableModel defaultTableModel = new DefaultTableModel(0, 3);
                         while (resultSet.next()) {
-                            Icon icon = new ImageIcon(new ImageIcon(resultSet.getBytes("foto")).getImage().getScaledInstance(232, 312, Image.SCALE_DEFAULT));
+                            Icon icon = new ImageIcon(new ImageIcon(resultSet.getBytes("foto")).getImage().getScaledInstance(232, 312, Image.SCALE_SMOOTH));
                             iconsRows[index] = icon;
                             hashMap.put(icon, resultSet.getInt("numero") + " " + resultSet.getString("pais"));
                             index++;

@@ -29,6 +29,9 @@ public class MyOffersFrame extends JFrame {
         if (document != null && date != null) {
             setTitle("OFERTAS");
         }
+        if (isCounterOffer) {
+            setTitle("CONTRAOFERTA");
+        }
         populateOffers(isCounterOffer, document, date);
 //        setResizable(false);
     }
@@ -51,10 +54,9 @@ public class MyOffersFrame extends JFrame {
         yPosition = 0;
         offerPanelArrayList = new ArrayList<>();
         ResultSet resultSetOffers = null;
-        if(isCounterOffer) {
+        if (isCounterOffer) {
             Publicacion publicacion = PublicationController.getInstance().getPublicacionSelected();
-            Oferta oferta = PublicationController.getInstance().getOfertaSelected();
-            resultSetOffers = PublicationController.getInstance().getCounterOffers(oferta.getUserDocument(), publicacion.getUserDocument(), oferta.getDate(), publicacion.getDate());
+            resultSetOffers = PublicationController.getInstance().getCounterOffers(publicacion.getUserDocument(), publicacion.getDate());
         } else {
             resultSetOffers = PublicationController.getInstance().getOffersFromUser(Usuario.getInstance().getUsername(), document, date);
         }
@@ -69,13 +71,13 @@ public class MyOffersFrame extends JFrame {
                 String offerDate = resultSetOffers.getString("fecha_oferta");
                 String publicationFiguritaState = resultSetOffers.getString("estado_figurita");
                 String offerState = resultSetOffers.getString("estado");
-                Icon figuritaPublicatedImage = new ImageIcon(new ImageIcon(resultSetOffers.getBytes("foto")).getImage().getScaledInstance(232, 312, Image.SCALE_DEFAULT));
+                Icon figuritaPublicatedImage = new ImageIcon(new ImageIcon(resultSetOffers.getBytes("foto")).getImage().getScaledInstance(232, 312, Image.SCALE_SMOOTH));
 
                 ResultSet resultSetOfferedFiguritas = PublicationController.getInstance().getOffersFiguritas(publicationUserDocument, publicationDate, offerUserDocument, offerDate);
                 ArrayList<Icon> iconArrayList = new ArrayList<>();
                 if (resultSetOfferedFiguritas != null) {
                     while (resultSetOfferedFiguritas.next()) {
-                        Icon icon = new ImageIcon(new ImageIcon(resultSetOfferedFiguritas.getBytes("foto")).getImage().getScaledInstance(232, 312, Image.SCALE_DEFAULT));
+                        Icon icon = new ImageIcon(new ImageIcon(resultSetOfferedFiguritas.getBytes("foto")).getImage().getScaledInstance(232, 312, Image.SCALE_SMOOTH));
                         iconArrayList.add(icon);
                     }
                 }

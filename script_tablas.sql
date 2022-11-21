@@ -119,7 +119,8 @@ VALUES ('RECHAZADA'),
        ('ACEPTADA');
 INSERT INTO estado_publicacion
 VALUES ('ACTIVA'),
-       ('INACTIVA');
+       ('INACTIVA'),
+       ('CONCRETADA');
 INSERT INTO tipo_oferta
 VALUES ('OFERTA'),
        ('CONTRAOFERTA');

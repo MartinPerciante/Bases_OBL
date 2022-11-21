@@ -53,7 +53,7 @@ public class CreatePublicationFrame extends JFrame {
 
     public void setFiguritaImageSelected(Figurita figurita) {
         figuritaPublicated = figurita;
-        figuritaImageLabel.setIcon(new ImageIcon(figurita.getFoto().getImage().getScaledInstance(232, 312, Image.SCALE_DEFAULT)));
+        figuritaImageLabel.setIcon(new ImageIcon(figurita.getFoto().getImage().getScaledInstance(232, 312, Image.SCALE_SMOOTH)));
         figuritaImageLabel.setText("");
         setVisible(true);
     }

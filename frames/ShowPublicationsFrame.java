@@ -58,12 +58,12 @@ public class ShowPublicationsFrame extends JFrame {
                 String date = resultSetPublications.getString("fecha");
                 String publicationState = resultSetPublications.getString("estado");
                 String figuritaState = resultSetPublications.getString("estado_figurita");
-                Icon figuritaPublicatedImage = new ImageIcon(new ImageIcon(resultSetPublications.getBytes("foto")).getImage().getScaledInstance(232, 312, Image.SCALE_DEFAULT));
+                Icon figuritaPublicatedImage = new ImageIcon(new ImageIcon(resultSetPublications.getBytes("foto")).getImage().getScaledInstance(232, 312, Image.SCALE_SMOOTH));
                 ResultSet resultSetInterestedFiguritas = PublicationController.getInstance().getPublicationsInterestedFiguritas(document, date);
                 ArrayList<Icon> iconArrayList = new ArrayList<>();
                 if (resultSetInterestedFiguritas != null) {
                     while (resultSetInterestedFiguritas.next()) {
-                        Icon icon = new ImageIcon(new ImageIcon(resultSetInterestedFiguritas.getBytes("foto")).getImage().getScaledInstance(232, 312, Image.SCALE_DEFAULT));
+                        Icon icon = new ImageIcon(new ImageIcon(resultSetInterestedFiguritas.getBytes("foto")).getImage().getScaledInstance(232, 312, Image.SCALE_SMOOTH));
                         iconArrayList.add(icon);
                     }
                 }

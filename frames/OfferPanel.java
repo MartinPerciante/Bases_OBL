@@ -93,12 +93,12 @@ public class OfferPanel extends JPanel {
         dateLabel.setText(datePublication);
         offerStateLabel.setText(offerState);
         figuritaStateValueLabel.setText(figuritaState);
-        figuritaImageLabel.setIcon(new ImageIcon(((ImageIcon) offeredFiguritaImage).getImage().getScaledInstance(232, 312, Image.SCALE_DEFAULT)));
+        figuritaImageLabel.setIcon(new ImageIcon(((ImageIcon) offeredFiguritaImage).getImage().getScaledInstance(232, 312, Image.SCALE_SMOOTH)));
         Icon[] iconsRows = new Icon[3];
         int index = 0;
         DefaultTableModel defaultTableModel = new DefaultTableModel(0, 3);
         for (Icon icon : offeredFiguritasArrayList) {
-            iconsRows[index] = new ImageIcon(((ImageIcon) icon).getImage().getScaledInstance(140, 189, Image.SCALE_DEFAULT));
+            iconsRows[index] = new ImageIcon(((ImageIcon) icon).getImage().getScaledInstance(140, 189, Image.SCALE_SMOOTH));
             index++;
             if (index == 3) {
                 defaultTableModel.addRow(iconsRows);
@@ -118,8 +118,11 @@ public class OfferPanel extends JPanel {
         } else if (offerState.equals("CONTRAOFERTADA")) {
             rejectButton.setVisible(false);
             acceptButton.setVisible(false);
-            counterOfferButton.setText("VER CONTRAOFERTAS");
+            counterOfferButton.setText("VER CONTRAOFERTA");
             counterOfferButton.setVisible(true);
+        }
+        if (documentLabel.getText().equals(ofertanteDocumentLabel.getText())) {
+            counterOfferButton.setVisible(false);
         }
     }
 
