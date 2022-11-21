@@ -52,7 +52,6 @@ public class MyOffersFrame extends JFrame {
         if (resultSetOffers != null) {
             Boolean isPositionedLeft = true;
             while (resultSetOffers.next()) {
-                OfferPanel offerPanel = new OfferPanel(xPosition, yPosition, width, height);
                 String publicationUserDocument = resultSetOffers.getString("ci");
                 String offerUserDocument = resultSetOffers.getString("ci_usuario_oferta");
                 String publicationUserFirstName = resultSetOffers.getString("nombre");
@@ -71,6 +70,7 @@ public class MyOffersFrame extends JFrame {
                         iconArrayList.add(icon);
                     }
                 }
+                OfferPanel offerPanel = new OfferPanel((offerUserDocument.equals(Usuario.getInstance().getUsername())), xPosition, yPosition, width, height);
                 offerPanel.setOfferData(publicationUserDocument, publicationUserFirstName.concat(" ").concat(publicationUserLastName), publicationDate, offerState, publicationFiguritaState, figuritaPublicatedImage, iconArrayList);
                 offerPanelArrayList.add(offerPanel);
                 offersPanel.add(offerPanel);

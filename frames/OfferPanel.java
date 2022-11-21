@@ -21,10 +21,13 @@ import java.util.ArrayList;
  * @author unknown
  */
 public class OfferPanel extends JPanel {
-    public OfferPanel(int x, int y, int width, int height) {
+    public OfferPanel(Boolean isOwner, int x, int y, int width, int height) {
         setBounds(x, y, width, height);
         initComponents();
         buttonActions();
+        if(isOwner) {
+            offerButton.setVisible(false);
+        }
     }
 
     private void buttonActions() {
@@ -33,7 +36,7 @@ public class OfferPanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 try {
                     PublicationController.getInstance().setPublicacionSelected(new Publicacion(documentLabel.getText(), dateLabel.getText()));
-                    ViewController.getInstance().goToCreateOffer((ShowPublicationsFrame) getParent().getParent().getParent().getParent().getParent(), true);
+                    ViewController.getInstance().goToCreateOffer((JFrame) getParent().getParent().getParent().getParent().getParent(), true);
                 } catch (SQLException ex) {
                     throw new RuntimeException(ex);
                 }

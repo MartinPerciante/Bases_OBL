@@ -91,13 +91,13 @@ public class PublicationController {
                     "INNER JOIN usuario u ON o.ci_usuario_publicacion = u.ci " +
                     "INNER JOIN publicacion p ON o.ci_usuario_publicacion = p.ci_usuario AND o.fecha_publicacion = p.fecha " +
                     "INNER JOIN figurita f on p.numero_figurita = f.numero and p.pais_figurita = f.pais " +
-                    "WHERE o.ci_usuario_oferta = '" + userDocument + "'");
+                    "WHERE p.ci_usuario = '" + documentOwner + "' AND p.fecha = '" + dateOwner + "'");
         } else {
             query.append("SELECT ci_usuario_oferta, fecha_oferta, ci, nombre, apellido, fecha_publicacion, estado_figurita, o.estado, foto FROM oferta o " +
                     "INNER JOIN usuario u ON o.ci_usuario_publicacion = u.ci " +
                     "INNER JOIN publicacion p ON o.ci_usuario_publicacion = p.ci_usuario AND o.fecha_publicacion = p.fecha " +
                     "INNER JOIN figurita f on p.numero_figurita = f.numero and p.pais_figurita = f.pais " +
-                    "WHERE p.ci_usuario = '" + documentOwner + "' AND p.fecha = '" + dateOwner + "'");
+                    "WHERE o.ci_usuario_oferta = '" + userDocument + "'");
         }
         return DBService.executeQuery(query.toString());
     }
