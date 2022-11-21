@@ -27,7 +27,7 @@ public class ShowPublicationsFrame extends JFrame {
         publicationPanelArrayList = new ArrayList<>();
         buttonActions();
         loadComboBoxData();
-        populatePublications(EMPTY_ITEM, EMPTY_ITEM);
+        //populatePublications(EMPTY_ITEM, EMPTY_ITEM);
         setResizable(false);
     }
 

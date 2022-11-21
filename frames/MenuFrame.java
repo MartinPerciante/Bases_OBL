@@ -5,6 +5,8 @@
 package frames;
 
 import controller.ViewController;
+import database.DBService;
+import entities.Usuario;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -12,6 +14,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
+import java.sql.ResultSet;
 
 /**
  * @author unknown
@@ -114,7 +117,14 @@ public class MenuFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    viewController.goToCreatePublication(MenuFrame.this, true);
+                    ResultSet result = DBService.executeQuery("SELECT * FROM publicacion WHERE ci_usuario = '" + Usuario.getInstance().getUsername() + "'");
+                    int cont = 0;
+                    while (result.next()) {
+                        cont++;
+                    }
+                    if (cont < 3) {
+                        viewController.goToCreatePublication(MenuFrame.this, true);
+                    }
                 } catch (SQLException ex) {
                     throw new RuntimeException(ex);
                 }

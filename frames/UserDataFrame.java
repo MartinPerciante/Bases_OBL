@@ -195,12 +195,24 @@ public class UserDataFrame extends JFrame {
 
         saveButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) { userController.updateInfo(documentTextField.getText(),
-                                                                                    firstNameTextField.getText(),
-                                                                                    lastNameTextField.getText(),
-                                                                                    phoneTextField.getText(),
-                                                                                    emailTextField.getText());}
+            public void actionPerformed(ActionEvent e) {
+                if (anyEmpty()) {
+                    userController.updateInfo(documentTextField.getText(),
+                            firstNameTextField.getText(),
+                            lastNameTextField.getText(),
+                            phoneTextField.getText(),
+                            emailTextField.getText());
+                }
+            }
         });
+    }
+
+    private boolean anyEmpty() {
+        return firstNameTextField.getText().isEmpty() ||
+                documentTextField.getText().isEmpty() ||
+                lastNameLabel.getText().isEmpty() ||
+                phoneLabel.getText().isEmpty() ||
+                emailTextField.getText().isEmpty();
     }
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables  @formatter:off
     private JPanel dialogPane;
