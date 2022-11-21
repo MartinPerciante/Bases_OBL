@@ -214,4 +214,13 @@ public class PublicationController {
                 "WHERE ci_usuario = '" + userDocumentPublication + "' " +
                 "AND fecha = '" + datePublication + "' ");
     }
+
+    public void rejectOffer(String userDocumentPublication, String userDocumentOffer, String datePublication, String dateOffer) {
+        DBService.executeUpdate("UPDATE oferta SET " +
+                "estado = 'RECHAZADA' " +
+                "WHERE ci_usuario_publicacion = '" + userDocumentPublication + "' " +
+                "AND fecha_publicacion = '" + datePublication + "' " +
+                "AND ci_usuario_oferta = '" + userDocumentOffer + "' " +
+                "AND fecha_oferta = '" + dateOffer + "'");
+    }
 }

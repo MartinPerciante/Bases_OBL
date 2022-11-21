@@ -126,6 +126,13 @@ public class ViewController {
         return instance;
     }
 
+    private InfoUserFrame infoUserFrame;
+    public InfoUserFrame getInfoUserFrame(String username) throws SQLException {
+        infoUserFrame = new InfoUserFrame(username);
+        return infoUserFrame;
+    }
+
+
     public static void goToFrom(JFrame to, JFrame from) {
         from.setVisible(false);
         to.setVisible(true);
@@ -177,5 +184,9 @@ public class ViewController {
 
     public void goToCreateCounterOfferFrame(JFrame origin, Boolean newFrame) throws SQLException {
         goToFrom(getCreateCounterOfferFrame(newFrame), origin);
+    }
+
+    public void goToInfoUserFrame(JFrame origin, String username) throws SQLException {
+        goToFrom(getInfoUserFrame(username), origin);
     }
 }
