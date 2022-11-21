@@ -105,8 +105,8 @@ public class ViewController {
 
     private MyOffersFrame myOffersFrame;
 
-    public MyOffersFrame getMyOffersFrame(String document, String date) throws SQLException {
-        myOffersFrame = new MyOffersFrame(document, date);
+    public MyOffersFrame getMyOffersFrame(Boolean isCounterOffer, String document, String date) throws SQLException {
+        myOffersFrame = new MyOffersFrame(isCounterOffer, document, date);
         return myOffersFrame;
     }
 
@@ -178,8 +178,8 @@ public class ViewController {
         goToFrom(getMyPublicationsFrame(), origin);
     }
 
-    public void goToMyOffers(JFrame origin, String document, String date) throws SQLException {
-        goToFrom(getMyOffersFrame(document, date), origin);
+    public void goToMyOffers(JFrame origin, Boolean isCounterOffer, String document, String date) throws SQLException {
+        goToFrom(getMyOffersFrame(isCounterOffer, document, date), origin);
     }
 
     public void goToCreateCounterOfferFrame(JFrame origin, Boolean newFrame) throws SQLException {

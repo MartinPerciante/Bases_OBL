@@ -23,15 +23,8 @@ public class Utils {
 
     public final static Border blackBorder1 = BorderFactory.createLineBorder(Color.black, 1);
 
-    private static Integer MAX_COLUMNS = 5;
-    private static Integer MAX_ROWS = 6;
-
     public static String formatLocalDateTimeToString(LocalDateTime localDateTime) {
         return YYYYMMDDHHMMSS.format(localDateTime);
-    }
-
-    public static LocalDateTime formatStringToLocalDateTime(String date) {
-        return LocalDateTime.parse(date);
     }
 
     public static boolean isTableEmpty(JTable table) {
@@ -51,7 +44,7 @@ public class Utils {
         return true;
     }
 
-    /*public static void cargarFigus() throws SQLException {
+    public static void cargarFigus() throws SQLException {
         String[] paises = {"QAT",
                 "ECU",
                 "SEN",
@@ -116,6 +109,6 @@ public class Utils {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-    }*/
+    }
 }
 

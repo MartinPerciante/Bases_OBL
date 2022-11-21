@@ -26,6 +26,8 @@ public class MenuFrame extends JFrame {
         setResizable(false);
     }
 
+    String error = "Sólo se pueden tener 3 publicaciones en simultáneo";
+
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
         dialogPane = new JPanel();
@@ -36,6 +38,7 @@ public class MenuFrame extends JFrame {
         logOutButton = new JButton();
         myPublicationsButton = new JButton();
         myOffersButton = new JButton();
+        errorLabel = new JLabel();
 
         //======== this ========
         setTitle("MENU PRINCIPAL");
@@ -72,17 +75,22 @@ public class MenuFrame extends JFrame {
                 contentPanel.setLayout(contentPanelLayout);
                 contentPanelLayout.setHorizontalGroup(
                     contentPanelLayout.createParallelGroup()
-                        .addGroup(GroupLayout.Alignment.TRAILING, contentPanelLayout.createSequentialGroup()
-                            .addContainerGap(122, Short.MAX_VALUE)
+                        .addGroup(contentPanelLayout.createSequentialGroup()
+                            .addContainerGap(33, Short.MAX_VALUE)
                             .addGroup(contentPanelLayout.createParallelGroup()
-                                .addComponent(logOutButton, GroupLayout.PREFERRED_SIZE, 131, GroupLayout.PREFERRED_SIZE)
-                                .addComponent(myProfileButton, GroupLayout.PREFERRED_SIZE, 131, GroupLayout.PREFERRED_SIZE)
-                                .addComponent(myOffersButton, GroupLayout.PREFERRED_SIZE, 131, GroupLayout.PREFERRED_SIZE)
-                                .addGroup(contentPanelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(createPublicationButton, GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
-                                    .addComponent(listPublicationsButton, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
-                                    .addComponent(myPublicationsButton, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)))
-                            .addGap(121, 121, 121))
+                                .addGroup(GroupLayout.Alignment.TRAILING, contentPanelLayout.createSequentialGroup()
+                                    .addGroup(contentPanelLayout.createParallelGroup()
+                                        .addComponent(logOutButton, GroupLayout.PREFERRED_SIZE, 131, GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(myProfileButton, GroupLayout.PREFERRED_SIZE, 131, GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(myOffersButton, GroupLayout.PREFERRED_SIZE, 131, GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(contentPanelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING, false)
+                                            .addComponent(createPublicationButton, GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
+                                            .addComponent(listPublicationsButton, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
+                                            .addComponent(myPublicationsButton, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)))
+                                    .addGap(121, 121, 121))
+                                .addGroup(GroupLayout.Alignment.TRAILING, contentPanelLayout.createSequentialGroup()
+                                    .addComponent(errorLabel, GroupLayout.PREFERRED_SIZE, 324, GroupLayout.PREFERRED_SIZE)
+                                    .addGap(17, 17, 17))))
                 );
                 contentPanelLayout.setVerticalGroup(
                     contentPanelLayout.createParallelGroup()
@@ -99,7 +107,9 @@ public class MenuFrame extends JFrame {
                             .addComponent(myProfileButton)
                             .addGap(18, 18, 18)
                             .addComponent(logOutButton)
-                            .addContainerGap(18, Short.MAX_VALUE))
+                            .addGap(18, 18, 18)
+                            .addComponent(errorLabel)
+                            .addContainerGap(19, Short.MAX_VALUE))
                 );
             }
             dialogPane.add(contentPanel, BorderLayout.CENTER);
@@ -124,6 +134,8 @@ public class MenuFrame extends JFrame {
                     }
                     if (cont < 3) {
                         viewController.goToCreatePublication(MenuFrame.this, true);
+                    } else {
+                        errorLabel.setText(error);
                     }
                 } catch (SQLException ex) {
                     throw new RuntimeException(ex);
@@ -157,7 +169,7 @@ public class MenuFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    viewController.goToMyOffers(MenuFrame.this, null, null);
+                    viewController.goToMyOffers(MenuFrame.this, false,null, null);
                 } catch (SQLException ex) {
                     throw new RuntimeException(ex);
                 }
@@ -188,5 +200,6 @@ public class MenuFrame extends JFrame {
     private JButton logOutButton;
     private JButton myPublicationsButton;
     private JButton myOffersButton;
+    private JLabel errorLabel;
     // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
 }

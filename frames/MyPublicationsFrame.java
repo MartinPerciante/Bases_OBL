@@ -26,7 +26,7 @@ public class MyPublicationsFrame extends JFrame {
         publicationPanelArrayList = new ArrayList<>();
         buttonActions();
         populatePublications();
-        setResizable(false);
+//        setResizable(false);
     }
 
     int xPosition = 0;

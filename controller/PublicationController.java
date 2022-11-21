@@ -10,9 +10,6 @@ import utils.Utils;
 import javax.swing.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDateTime;
-import java.time.chrono.ChronoLocalDateTime;
-import java.time.temporal.ChronoUnit;
 
 public class PublicationController {
 
@@ -139,6 +136,18 @@ public class PublicationController {
         return DBService.executeQuery(query.toString());
     }
 
+    public ResultSet getCounterOffers(String offerUserDocument, String publicationUserDocument, String offerDate, String publicationDate) {
+        StringBuilder query = new StringBuilder();
+        query.append("SELECT ci_usuario_oferta, fecha_oferta, ci, nombre, apellido, fecha_publicacion, estado_figurita, o.estado, foto FROM oferta o " +
+                "INNER JOIN usuario u ON o.ci_usuario_publicacion = u.ci " +
+                "INNER JOIN publicacion p ON o.ci_usuario_publicacion = p.ci_usuario AND o.fecha_publicacion = p.fecha " +
+                "INNER JOIN figurita f on p.numero_figurita = f.numero and p.pais_figurita = f.pais " +
+                "WHERE o.ci_usuario_oferta = '" + offerUserDocument + "' AND o.ci_usuario_publicacion = '"
+                + publicationUserDocument + "' AND o.fecha_oferta = '" + offerDate + "' AND o.fecha_publicacion = '" + publicationDate + "' " +
+                "AND o.tipo = 'CONTRAOFERTA'");
+        return DBService.executeQuery(query.toString());
+    }
+
     public ResultSet getOffersFiguritas(String publicationUserDocument, String publicationDate, String offerUserDocument, String offerDate) {
         return DBService.executeQuery("SELECT foto FROM oferta_tiene_figurita o " +
                 "INNER JOIN figurita f on o.numero_figurita = f.numero and o.pais_figurita = f.pais " +
@@ -201,7 +210,7 @@ public class PublicationController {
     }
 
     //Acepta tanto ofertas como contraofertas
-    public void acceptOffer(String userDocumentPublication, String userDocumentOffer, String datePublication, String dateOffer){
+    public void acceptOffer(String userDocumentPublication, String userDocumentOffer, String datePublication, String dateOffer) {
         DBService.executeUpdate("UPDATE oferta SET " +
                 "estado = 'ACEPTADA' " +
                 "WHERE ci_usuario_publicacion = '" + userDocumentPublication + "' " +

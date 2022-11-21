@@ -183,7 +183,7 @@ public class PickFiguritaFrame extends JFrame {
                     }
                     case CREATE_COUNTEROFFER_OFFERED_FIGURITAS: {
                         try {
-                            viewController.goToCreatePublication(PickFiguritaFrame.this, false);
+                            viewController.goToCreateCounterOfferFrame(PickFiguritaFrame.this, false);
                         } catch (SQLException ex) {
                             throw new RuntimeException(ex);
                         }

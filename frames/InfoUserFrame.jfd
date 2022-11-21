@@ -1,0 +1,67 @@
+JFDML JFormDesigner: "8.0.0.0.194" Java: "11.0.14.1" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class java.awt.BorderLayout ) ) {
+			name: "this"
+			"title": "INFORMACIÓN CONTACTO"
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.BorderLayout ) ) {
+				name: "dialogPane"
+				"border": new javax.swing.border.EmptyBorder( 12, 12, 12, 12 )
+				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+					"$horizontalGroup": "par l {seq l {space :p:22:p, par t {comp phoneLabel::t:p:55:p, comp firstNameLabel::t:p:55:p, comp documentLabel::t:p::p}, space u:::p, par l {seq {par l:::p {seq {comp phoneValueLabel:::p:81:p, space :p:43:p, comp emailLabel:::p:50:p}, seq {comp firstNameValueLabel:::p:81:p, space :::x, comp lastNameLabel:::p:50:p}}, space :::p, par l {comp returnButton:::p:93:p, comp lastNameValueLabel:::p:81:p, comp emailValueLabel:::p:81:p}}, comp documentValueLabel::l:p:81:p}, space ::9:x}}"
+					"$verticalGroup": "par l {seq l {space :p:28:p, par l {seq t {par b {comp documentLabel::b:p::p, comp documentValueLabel::b:p::p}, space s:::p, par b {comp firstNameLabel::b:p::p, comp firstNameValueLabel::b:p::p}}, par b:t {comp lastNameLabel::b:p::p, comp lastNameValueLabel::b:p::p}}, par l {seq l {space :p:22:p, par b {comp emailLabel::b:p::p, comp emailValueLabel::b:p::p}}, seq l {space s:::p, par b {comp phoneLabel::b:p::p, comp phoneValueLabel::b:p::p}}}, space ::58:x, comp returnButton:::p::p, space :p:17:p}}"
+				} ) {
+					name: "contentPanel"
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "documentLabel"
+						"text": "Documento"
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "lastNameLabel"
+						"text": "Apellido"
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "firstNameLabel"
+						"text": "Nombre"
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "emailLabel"
+						"text": "Email"
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "phoneLabel"
+						"text": "Teléfono"
+					} )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "returnButton"
+						"text": "VOLVER"
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "documentValueLabel"
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "firstNameValueLabel"
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "phoneValueLabel"
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "lastNameValueLabel"
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "emailValueLabel"
+					} )
+				}, new FormLayoutConstraints( class java.lang.String ) {
+					"value": "Center"
+				} )
+			}, new FormLayoutConstraints( class java.lang.String ) {
+				"value": "Center"
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 0 )
+			"size": new java.awt.Dimension( 405, 270 )
+		} )
+	}
+}

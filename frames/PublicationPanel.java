@@ -36,7 +36,7 @@ public class PublicationPanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 if (isOwner) {
                     try {
-                        ViewController.getInstance().goToMyOffers((JFrame) getParent().getParent().getParent().getParent().getParent(), documentLabel.getText(), dateLabel.getText());
+                        ViewController.getInstance().goToMyOffers((JFrame) getParent().getParent().getParent().getParent().getParent(), false, documentLabel.getText(), dateLabel.getText());
                     } catch (SQLException ex) {
                         throw new RuntimeException(ex);
                     }

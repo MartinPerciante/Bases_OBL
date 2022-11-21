@@ -6,6 +6,8 @@ package frames;
 
 import controller.PublicationController;
 import controller.ViewController;
+import entities.Oferta;
+import entities.Publicacion;
 import entities.Usuario;
 
 import javax.swing.*;
@@ -20,15 +22,15 @@ import java.util.ArrayList;
  * @author unknown
  */
 public class MyOffersFrame extends JFrame {
-    public MyOffersFrame(String document, String date) throws SQLException {
+    public MyOffersFrame(Boolean isCounterOffer, String document, String date) throws SQLException {
         initComponents();
         offerPanelArrayList = new ArrayList<>();
         buttonActions();
         if (document != null && date != null) {
             setTitle("OFERTAS");
         }
-        populateOffers(document, date);
-        setResizable(false);
+        populateOffers(isCounterOffer, document, date);
+//        setResizable(false);
     }
 
     int xPosition = 0;
@@ -41,14 +43,21 @@ public class MyOffersFrame extends JFrame {
 
     ArrayList<OfferPanel> offerPanelArrayList;
 
-    private void populateOffers(String document, String date) throws SQLException {
+    private void populateOffers(Boolean isCounterOffer, String document, String date) throws SQLException {
         for (OfferPanel offerPanel : offerPanelArrayList) {
             offersPanel.remove(offerPanel);
         }
         xPosition = 0;
         yPosition = 0;
         offerPanelArrayList = new ArrayList<>();
-        ResultSet resultSetOffers = PublicationController.getInstance().getOffersFromUser(Usuario.getInstance().getUsername(), document, date);
+        ResultSet resultSetOffers = null;
+        if(isCounterOffer) {
+            Publicacion publicacion = PublicationController.getInstance().getPublicacionSelected();
+            Oferta oferta = PublicationController.getInstance().getOfertaSelected();
+            resultSetOffers = PublicationController.getInstance().getCounterOffers(oferta.getUserDocument(), publicacion.getUserDocument(), oferta.getDate(), publicacion.getDate());
+        } else {
+            resultSetOffers = PublicationController.getInstance().getOffersFromUser(Usuario.getInstance().getUsername(), document, date);
+        }
         if (resultSetOffers != null) {
             Boolean isPositionedLeft = true;
             while (resultSetOffers.next()) {
