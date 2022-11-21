@@ -51,7 +51,7 @@ public class Utils {
         return true;
     }
 
-    public static void cargarFigus() throws SQLException {
+    /*public static void cargarFigus() throws SQLException {
         String[] paises = {"QAT",
                 "ECU",
                 "SEN",
@@ -116,6 +116,6 @@ public class Utils {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-    }
+    }*/
 }
 

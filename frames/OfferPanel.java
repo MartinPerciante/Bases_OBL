@@ -27,12 +27,14 @@ public class OfferPanel extends JPanel {
         initComponents();
         buttonActions();
         if(isOwner) {
-            offerButton.setVisible(false);
+            counterOfferButton.setVisible(false);
+            acceptButton.setVisible(false);
+            rejectButton.setVisible(false);
         }
     }
 
     private void buttonActions() {
-        offerButton.addActionListener(new ActionListener() {
+        counterOfferButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
@@ -85,22 +87,13 @@ public class OfferPanel extends JPanel {
         offeredFiguritasLabel = new JLabel();
         scrollPane1 = new JScrollPane();
         offeredFiguritasTable = new JTable();
-        offeredFiguritasTable = new JTable(3, 3) {
-            public Class getColumnClass(int column) {
-                return Icon.class;
-            }
-        };
-        setBorder(Utils.blackBorder1);
-        figuritaImageLabel.setBorder(Utils.blackBorder1);
-        offeredFiguritasTable.setBorder(Utils.blackBorder1);
-        offeredFiguritasTable.setTableHeader(null);
-        offeredFiguritasTable.setRowHeight(189);
-        offeredFiguritasTable.setBounds(300, 40, 420, 378);
-        offerButton = new JButton();
+        counterOfferButton = new JButton();
         offerStateLabel = new JLabel();
         ofertanteLabel = new JLabel();
         ofertanteDocumentLabel = new JLabel();
         ofertanteOfferDateLabel = new JLabel();
+        rejectButton = new JButton();
+        acceptButton = new JButton();
 
         //======== this ========
 
@@ -118,17 +111,23 @@ public class OfferPanel extends JPanel {
             scrollPane1.setViewportView(offeredFiguritasTable);
         }
 
-        //---- offerButton ----
-        offerButton.setText("CONTRAOFERTAR");
+        //---- counterOfferButton ----
+        counterOfferButton.setText("CONTRAOFERTAR");
 
         //---- ofertanteLabel ----
         ofertanteLabel.setText("OFERTANTE");
+
+        //---- rejectButton ----
+        rejectButton.setText("RECHAZAR");
+
+        //---- acceptButton ----
+        acceptButton.setText("ACEPTAR");
 
         GroupLayout layout = new GroupLayout(this);
         setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup()
-                .addGroup(layout.createSequentialGroup()
+                .addGroup(GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                     .addGroup(layout.createParallelGroup()
                         .addGroup(layout.createSequentialGroup()
                             .addContainerGap()
@@ -137,44 +136,43 @@ public class OfferPanel extends JPanel {
                                     .addComponent(figuritaStateLabel)
                                     .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                     .addComponent(figuritaStateValueLabel, GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
-                                    .addGap(24, 24, 24)
-                                    .addComponent(offerButton, GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE))
+                                    .addGap(159, 159, 159))
                                 .addGroup(layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(documentLabel, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(firstNameLabel, GroupLayout.PREFERRED_SIZE, 94, GroupLayout.PREFERRED_SIZE))
-                                        .addComponent(dateLabel, GroupLayout.PREFERRED_SIZE, 182, GroupLayout.PREFERRED_SIZE))
-                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 128, Short.MAX_VALUE))))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup()
-                                .addGroup(layout.createSequentialGroup()
-                                    .addContainerGap()
-                                    .addComponent(figuritaImageLabel, GroupLayout.PREFERRED_SIZE, 232, GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(79, 79, 79)
-                                    .addComponent(publishedFiguritaLabel))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addContainerGap()
-                                    .addComponent(offerStateLabel, GroupLayout.PREFERRED_SIZE, 82, GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addContainerGap()
-                                    .addComponent(ofertanteLabel))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addContainerGap()
-                                    .addComponent(ofertanteDocumentLabel, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(documentLabel, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(ofertanteOfferDateLabel, GroupLayout.PREFERRED_SIZE, 193, GroupLayout.PREFERRED_SIZE)))
-                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)))
-                    .addGroup(layout.createParallelGroup()
+                                    .addComponent(firstNameLabel, GroupLayout.PREFERRED_SIZE, 94, GroupLayout.PREFERRED_SIZE))
+                                .addComponent(dateLabel, GroupLayout.PREFERRED_SIZE, 182, GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(figuritaImageLabel, GroupLayout.PREFERRED_SIZE, 232, GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(79, 79, 79)
+                            .addComponent(publishedFiguritaLabel))
+                        .addGroup(layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(offerStateLabel, GroupLayout.PREFERRED_SIZE, 82, GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(ofertanteLabel))
+                        .addGroup(layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(ofertanteDocumentLabel, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(ofertanteOfferDateLabel, GroupLayout.PREFERRED_SIZE, 193, GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
                         .addGroup(layout.createSequentialGroup()
                             .addGap(167, 167, 167)
                             .addComponent(offeredFiguritasLabel)
                             .addGap(171, 171, 171))
-                        .addGroup(GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 428, GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup()
+                                .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 428, GroupLayout.PREFERRED_SIZE)
+                                .addGroup(GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                    .addComponent(acceptButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(rejectButton, GroupLayout.PREFERRED_SIZE, 139, GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(counterOfferButton)))
                             .addContainerGap())))
         );
         layout.setVerticalGroup(
@@ -192,25 +190,30 @@ public class OfferPanel extends JPanel {
                             .addComponent(offerStateLabel)
                             .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                             .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                .addComponent(offerButton)
                                 .addComponent(figuritaStateLabel)
                                 .addComponent(figuritaStateValueLabel))
                             .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                                 .addComponent(documentLabel)
-                                .addComponent(firstNameLabel))
-                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(dateLabel)
-                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(firstNameLabel)))
+                        .addGroup(GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addGap(0, 0, Short.MAX_VALUE)
+                            .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 385, GroupLayout.PREFERRED_SIZE)))
+                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(dateLabel)
+                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                    .addGroup(layout.createParallelGroup()
+                        .addGroup(layout.createSequentialGroup()
                             .addComponent(ofertanteLabel)
-                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                            .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
                             .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                                 .addComponent(ofertanteDocumentLabel)
                                 .addComponent(ofertanteOfferDateLabel)))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(0, 0, Short.MAX_VALUE)
-                            .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 419, GroupLayout.PREFERRED_SIZE)))
-                    .addGap(48, 48, 48))
+                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                            .addComponent(counterOfferButton)
+                            .addComponent(rejectButton)
+                            .addComponent(acceptButton)))
+                    .addGap(40, 40, 40))
         );
         // JFormDesigner - End of component initialization  //GEN-END:initComponents  @formatter:on
     }
@@ -226,10 +229,12 @@ public class OfferPanel extends JPanel {
     private JLabel offeredFiguritasLabel;
     private JScrollPane scrollPane1;
     private JTable offeredFiguritasTable;
-    private JButton offerButton;
+    private JButton counterOfferButton;
     private JLabel offerStateLabel;
     private JLabel ofertanteLabel;
     private JLabel ofertanteDocumentLabel;
     private JLabel ofertanteOfferDateLabel;
+    private JButton rejectButton;
+    private JButton acceptButton;
     // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
 }

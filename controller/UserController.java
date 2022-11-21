@@ -121,4 +121,12 @@ public class UserController {
                                                           "email = '" + email + "'"), condition);
         DBService.executeUpdate(query);
     }
+
+    public ResultSet getInfoBytId(String document) {
+        String condition = "ci = '" + document + "'";
+
+        String query = Queries.findByColumn("usuario", condition);
+        ResultSet result = DBService.executeQuery(query);
+        return result;
+    }
 }
