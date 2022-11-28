@@ -37,7 +37,7 @@ public class OfferPanel extends JPanel {
                 try {
                     PublicationController.getInstance().setOfertaSelected(new Oferta(ofertanteDocumentLabel.getText(), ofertanteOfferDateLabel.getText()));
                     PublicationController.getInstance().setPublicacionSelected(new Publicacion(documentLabel.getText(), dateLabel.getText()));
-                    if (offerStateLabel.getText().equals(CONTRAOFERTADA)) {
+                    if (offerStateLabel.getText().equals(CONTRAOFERTADA.toString())) {
                         ViewController.getInstance().goToMyOffers((JFrame) getParent().getParent().getParent().getParent().getParent().getParent().getParent(), true, null, null);
                     } else {
                         ViewController.getInstance().goToCreateCounterOfferFrame((JFrame) getParent().getParent().getParent().getParent().getParent().getParent().getParent(), true);
@@ -51,7 +51,7 @@ public class OfferPanel extends JPanel {
         acceptButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (!offerStateLabel.getText().equals(ACEPTADA)) {
+                if (!offerStateLabel.getText().equals(ACEPTADA.toString())) {
                     PublicationController.getInstance().acceptOffer(documentLabel.getText(), ofertanteDocumentLabel.getText(), dateLabel.getText(), ofertanteOfferDateLabel.getText());
                 }
                 String usernameToShow = "";
@@ -106,12 +106,12 @@ public class OfferPanel extends JPanel {
             defaultTableModel.addRow(iconsRows);
         }
         offeredFiguritasTable.setModel(defaultTableModel);
-        if (offerState.equals(ACEPTADA)) {
+        if (offerState.equals(ACEPTADA.toString())) {
             counterOfferButton.setVisible(false);
             rejectButton.setVisible(false);
             acceptButton.setText("CONTACTO");
             acceptButton.setVisible(true);
-        } else if (offerState.equals(CONTRAOFERTADA)) {
+        } else if (offerState.equals(CONTRAOFERTADA.toString())) {
             rejectButton.setVisible(false);
             acceptButton.setVisible(false);
             counterOfferButton.setText("VER CONTRAOFERTA");

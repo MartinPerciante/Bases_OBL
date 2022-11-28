@@ -77,7 +77,7 @@ public class PublicationController {
     public void insertOffer(String userDocument, String publicationUserDocument, String offerDate, String publicationDate, Boolean isOffer) {
         DBService.executeUpdate("INSERT INTO oferta VALUES ('" + userDocument + "', '"
                 + publicationUserDocument + "', '" + offerDate + "', '" + publicationDate + "', '"
-                + (isOffer ? OFERTA : CONTRAOFERTA) + "' , '" + PENDIENTE + "', null, null)");
+                + (isOffer ? OFERTA.toString() : CONTRAOFERTA.toString()) + "' , '" + PENDIENTE + "', null, null)");
     }
 
     public void insertOfferHasFigurita(String query) {
@@ -240,10 +240,10 @@ public class PublicationController {
                 "AND fecha = '" + datePublication + "' ");
 
         DBService.executeUpdate("UPDATE oferta SET " +
-                "estado = '" + RECHAZADA + "' " +
+                "estado = '" + "RECHAZADA" + "' " +
                 "WHERE ci_usuario_publicacion = '" + userDocumentPublication + "' " +
                 "AND fecha_publicacion = '" + datePublication + "' " +
-                "AND ci_usuario_contraoferta != '" + userDocumentOffer + "' AND fecha_contraoferta != '" + dateOffer + "' AND estado != '" + ACEPTADA + "'");
+                "AND (ci_usuario_contraoferta != '" + userDocumentOffer + "' OR ci_usuario_contraoferta IS NULL) AND (fecha_contraoferta != '" + dateOffer + "'  OR fecha_contraoferta IS NULL) AND estado != '" + "ACEPTADA" + "'");
     }
 
     public void rejectOffer(String userDocumentPublication, String userDocumentOffer, String datePublication, String dateOffer) {

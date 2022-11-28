@@ -12,14 +12,9 @@ import java.awt.event.ActionListener;
 
 public class ChangePasswordFrame extends JFrame {
 
-    private final String notActualPasswordError = "La contraseña actual ingresada es incorrecta";
-    private final String notTheSamePasswordError = "La nueva contraseña y la confirmación no coinciden";
-    private final String notEmptyError = "Los campos no pueden estar vacios";
-
     public ChangePasswordFrame() {
         initComponents();
         buttonActions();
-        errorLabel.setVisible(false);
         setResizable(false);
     }
 
@@ -143,17 +138,8 @@ public class ChangePasswordFrame extends JFrame {
                                 newPasswordField.getText())) {
                             errorLabel.setVisible(false);
                             ViewController.getInstance().goToMenu(ChangePasswordFrame.this);
-                        } else {
-                            errorLabel.setText(notActualPasswordError);
-                            errorLabel.setVisible(true);
                         }
-                    } else {
-                        errorLabel.setText(notTheSamePasswordError);
-                        errorLabel.setVisible(true);
                     }
-                } else {
-                    errorLabel.setText(notEmptyError);
-                    errorLabel.setVisible(true);
                 }
             }
         });
