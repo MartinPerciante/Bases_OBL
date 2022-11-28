@@ -1,7 +1,3 @@
-/*
- * Created by JFormDesigner on Sat Nov 12 15:53:20 UYT 2022
- */
-
 package frames;
 
 import controller.PublicationController;
@@ -22,9 +18,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 
-/**
- * @author unknown
- */
 public class PickFiguritaFrame extends JFrame {
     public PickFiguritaFrame() throws SQLException {
         initComponents();
@@ -195,7 +188,6 @@ public class PickFiguritaFrame extends JFrame {
     }
 
     private void initComponents() {
-        // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
         dialogPane = new JPanel();
         contentPanel = new JPanel();
         numberLabel = new JLabel();
@@ -216,37 +208,28 @@ public class PickFiguritaFrame extends JFrame {
         figuritaStateComboBox = new JComboBox();
         cancelButton = new JButton();
 
-        //======== this ========
         setTitle("ELEGIR FIGURITA");
         var contentPane = getContentPane();
         contentPane.setLayout(new BorderLayout());
 
-        //======== dialogPane ========
         {
             dialogPane.setBorder(new EmptyBorder(12, 12, 12, 12));
             dialogPane.setLayout(new BorderLayout());
 
-            //======== contentPanel ========
             {
 
-                //---- numberLabel ----
                 numberLabel.setText("Numero");
 
-                //---- countryLabel ----
                 countryLabel.setText("Pa\u00eds");
 
-                //======== scrollPane1 ========
                 {
                     scrollPane1.setViewportView(figuritasTable);
                 }
 
-                //---- filterButton ----
                 filterButton.setText("FILTRAR");
 
-                //---- figuritaStateLabel ----
                 figuritaStateLabel.setText("Estado");
 
-                //---- cancelButton ----
                 cancelButton.setText("CANCELAR");
 
                 GroupLayout contentPanelLayout = new GroupLayout(contentPanel);
@@ -298,10 +281,8 @@ public class PickFiguritaFrame extends JFrame {
         contentPane.add(dialogPane, BorderLayout.CENTER);
         pack();
         setLocationRelativeTo(getOwner());
-        // JFormDesigner - End of component initialization  //GEN-END:initComponents  @formatter:on
     }
 
-    // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables  @formatter:off
     private JPanel dialogPane;
     private JPanel contentPanel;
     private JLabel numberLabel;
@@ -314,5 +295,4 @@ public class PickFiguritaFrame extends JFrame {
     private JLabel figuritaStateLabel;
     private JComboBox figuritaStateComboBox;
     private JButton cancelButton;
-    // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
 }

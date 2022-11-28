@@ -8,14 +8,7 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-/*
- * Created by JFormDesigner on Fri Nov 04 20:25:12 UYT 2022
- */
 
-
-/**
- * @author unknown
- */
 public class LoginFrame extends JFrame {
     public LoginFrame() {
         initComponents();
@@ -25,7 +18,6 @@ public class LoginFrame extends JFrame {
     }
 
     private void initComponents() {
-        // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
         dialogPane = new JPanel();
         contentPanel = new JPanel();
         documentTextField = new JTextField();
@@ -36,78 +28,70 @@ public class LoginFrame extends JFrame {
         registerButton = new JButton();
         errorLabel = new JLabel();
 
-        //======== this ========
         setResizable(false);
         setTitle("INICIAR SESI\u00d3N");
         var contentPane = getContentPane();
         contentPane.setLayout(new BorderLayout());
 
-        //======== dialogPane ========
         {
             dialogPane.setBorder(new EmptyBorder(12, 12, 12, 12));
             dialogPane.setLayout(new BorderLayout());
 
-            //======== contentPanel ========
             {
 
-                //---- documentLabel ----
                 documentLabel.setText("Documento");
 
-                //---- passwordLabel ----
                 passwordLabel.setText("Contrase\u00f1a");
 
-                //---- loginButton ----
                 loginButton.setText("INGRESAR");
 
-                //---- registerButton ----
                 registerButton.setText("REGISTRARSE");
 
-                //---- errorLabel ----
                 errorLabel.setText("Documento o contrase\u00f1a incorrectos");
 
                 GroupLayout contentPanelLayout = new GroupLayout(contentPanel);
                 contentPanel.setLayout(contentPanelLayout);
                 contentPanelLayout.setHorizontalGroup(
-                    contentPanelLayout.createParallelGroup()
-                        .addGroup(contentPanelLayout.createSequentialGroup()
-                            .addGroup(contentPanelLayout.createParallelGroup()
+                        contentPanelLayout.createParallelGroup()
                                 .addGroup(contentPanelLayout.createSequentialGroup()
-                                    .addGap(87, 87, 87)
-                                    .addComponent(errorLabel))
-                                .addGroup(contentPanelLayout.createSequentialGroup()
-                                    .addGap(48, 48, 48)
-                                    .addGroup(contentPanelLayout.createParallelGroup()
-                                        .addGroup(contentPanelLayout.createSequentialGroup()
-                                            .addGroup(contentPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-                                                .addComponent(documentLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(passwordLabel, GroupLayout.PREFERRED_SIZE, 96, GroupLayout.PREFERRED_SIZE))
-                                            .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                                            .addGroup(contentPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-                                                .addComponent(documentTextField)
-                                                .addComponent(passwordTextField, GroupLayout.PREFERRED_SIZE, 168, GroupLayout.PREFERRED_SIZE)))
-                                        .addGroup(contentPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(registerButton, GroupLayout.DEFAULT_SIZE, 276, Short.MAX_VALUE)
-                                            .addComponent(loginButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
-                            .addGap(50, 50, 50))
+                                        .addGroup(contentPanelLayout.createParallelGroup()
+                                                .addGroup(contentPanelLayout.createSequentialGroup()
+                                                        .addGap(87, 87, 87)
+                                                        .addComponent(errorLabel))
+                                                .addGroup(contentPanelLayout.createSequentialGroup()
+                                                        .addGap(48, 48, 48)
+                                                        .addGroup(contentPanelLayout.createParallelGroup()
+                                                                .addGroup(contentPanelLayout.createSequentialGroup()
+                                                                        .addGroup(contentPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+                                                                                .addComponent(documentLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                                                .addComponent(passwordLabel, GroupLayout.PREFERRED_SIZE, 96, GroupLayout.PREFERRED_SIZE))
+                                                                        .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                                                                        .addGroup(contentPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+                                                                                .addComponent(documentTextField)
+                                                                                .addComponent(passwordTextField, GroupLayout.PREFERRED_SIZE, 168, GroupLayout.PREFERRED_SIZE)))
+                                                                .addGroup(contentPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+                                                                        .addComponent(registerButton, GroupLayout.DEFAULT_SIZE, 276, Short.MAX_VALUE)
+                                                                        .addComponent(loginButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                                        .addGap(50, 50, 50))
                 );
                 contentPanelLayout.setVerticalGroup(
-                    contentPanelLayout.createParallelGroup()
-                        .addGroup(contentPanelLayout.createSequentialGroup()
-                            .addGap(18, 18, 18)
-                            .addComponent(errorLabel)
-                            .addGap(36, 36, 36)
-                            .addGroup(contentPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                .addComponent(documentTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                .addComponent(documentLabel))
-                            .addGap(18, 18, 18)
-                            .addGroup(contentPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                .addComponent(passwordTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                .addComponent(passwordLabel))
-                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
-                            .addComponent(loginButton)
-                            .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(registerButton)
-                            .addGap(17, 17, 17))
+                        contentPanelLayout.createParallelGroup()
+                                .addGroup(contentPanelLayout.createSequentialGroup()
+                                        .addGap(18, 18, 18)
+                                        .addComponent(errorLabel)
+                                        .addGap(36, 36, 36)
+                                        .addGroup(contentPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                                .addComponent(documentTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(documentLabel))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(contentPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                                .addComponent(passwordTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(passwordLabel))
+                                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
+                                        .addComponent(loginButton)
+                                        .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(registerButton)
+                                        .addGap(17, 17, 17))
                 );
             }
             dialogPane.add(contentPanel, BorderLayout.CENTER);
@@ -115,7 +99,6 @@ public class LoginFrame extends JFrame {
         contentPane.add(dialogPane, BorderLayout.CENTER);
         pack();
         setLocationRelativeTo(getOwner());
-        // JFormDesigner - End of component initialization  //GEN-END:initComponents  @formatter:on
     }
 
     private void buttonActions() {
@@ -141,7 +124,6 @@ public class LoginFrame extends JFrame {
         });
     }
 
-    // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables  @formatter:off
     private JPanel dialogPane;
     private JPanel contentPanel;
     private JTextField documentTextField;
@@ -151,5 +133,4 @@ public class LoginFrame extends JFrame {
     private JPasswordField passwordTextField;
     private JButton registerButton;
     private JLabel errorLabel;
-    // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
 }

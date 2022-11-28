@@ -1,7 +1,3 @@
-/*
- * Created by JFormDesigner on Sat Nov 19 16:55:56 UYT 2022
- */
-
 package frames;
 
 import controller.PublicationController;
@@ -22,9 +18,6 @@ import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-/**
- * @author unknown
- */
 public class CreateOfferFrame extends JFrame {
     public CreateOfferFrame() {
         initComponents();
@@ -128,7 +121,6 @@ public class CreateOfferFrame extends JFrame {
     }
 
     private void initComponents() {
-        // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
         dialogPane = new JPanel();
         contentPanel = new JPanel();
         cancelButton = new JButton();
@@ -145,34 +137,26 @@ public class CreateOfferFrame extends JFrame {
         addFiguritaButton = new JButton();
         deleteFiguritaButton = new JButton();
 
-        //======== this ========
         setTitle("CREAR OFERTA");
         var contentPane = getContentPane();
         contentPane.setLayout(new BorderLayout());
 
-        //======== dialogPane ========
         {
             dialogPane.setBorder(new EmptyBorder(12, 12, 12, 12));
             dialogPane.setLayout(new BorderLayout());
 
-            //======== contentPanel ========
             {
 
-                //---- cancelButton ----
                 cancelButton.setText("CANCELAR");
 
-                //---- createButton ----
                 createButton.setText("CREAR");
 
-                //======== scrollPane1 ========
                 {
                     scrollPane1.setViewportView(offeredFiguritasTable);
                 }
 
-                //---- addFiguritaButton ----
                 addFiguritaButton.setText("AGREGAR");
 
-                //---- deleteFiguritaButton ----
                 deleteFiguritaButton.setText("ELIMINAR");
 
                 GroupLayout contentPanelLayout = new GroupLayout(contentPanel);
@@ -213,10 +197,8 @@ public class CreateOfferFrame extends JFrame {
         contentPane.add(dialogPane, BorderLayout.CENTER);
         pack();
         setLocationRelativeTo(getOwner());
-        // JFormDesigner - End of component initialization  //GEN-END:initComponents  @formatter:on
     }
 
-    // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables  @formatter:off
     private JPanel dialogPane;
     private JPanel contentPanel;
     private JButton cancelButton;
@@ -225,5 +207,4 @@ public class CreateOfferFrame extends JFrame {
     private JTable offeredFiguritasTable;
     private JButton addFiguritaButton;
     private JButton deleteFiguritaButton;
-    // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
 }

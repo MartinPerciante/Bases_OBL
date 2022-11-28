@@ -1,13 +1,9 @@
-/*
- * Created by JFormDesigner on Sat Nov 19 16:54:06 UYT 2022
- */
-
 package frames;
 
 import controller.PublicationController;
 import controller.ViewController;
 import entities.Usuario;
-import utils.Utils;
+import panels.PublicationPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,16 +13,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-/**
- * @author unknown
- */
 public class MyPublicationsFrame extends JFrame {
     public MyPublicationsFrame() throws SQLException {
         initComponents();
         publicationPanelArrayList = new ArrayList<>();
         buttonActions();
         populatePublications();
-//        setResizable(false);
+        setResizable(false);
     }
 
     int xPosition = 0;
@@ -79,8 +72,21 @@ public class MyPublicationsFrame extends JFrame {
                 }
             }
         }
-        getContentPane().add(publicationsPanel);
-        SwingUtilities.updateComponentTreeUI(this);
+        int panelsArrayListSize = publicationPanelArrayList.size();
+        GroupLayout publicationsPanelLayout = new GroupLayout(publicationsPanel);
+        publicationsPanel.setLayout(publicationsPanelLayout);
+        publicationsPanelLayout.setHorizontalGroup(
+                publicationsPanelLayout.createParallelGroup()
+                        .addGap(0, panelsArrayListSize > 1 ? 1610 : 805, Short.MAX_VALUE)
+        );
+        publicationsPanelLayout.setVerticalGroup(
+                publicationsPanelLayout.createParallelGroup()
+                        .addGap(0, (panelsArrayListSize % 2 == 0 ? panelsArrayListSize / 2 : (panelsArrayListSize + 1) / 2) * (height + 5), Short.MAX_VALUE)
+        );
+        scrollPane1.setViewportView(publicationsPanel);
+        getContentPane().add(scrollPane1, BorderLayout.CENTER);
+        pack();
+        setLocationRelativeTo(getOwner());
     }
 
     private void buttonActions() {
@@ -93,64 +99,62 @@ public class MyPublicationsFrame extends JFrame {
     }
 
     private void initComponents() {
-        // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
         buttonsPanel = new JPanel();
         goBackButton = new JButton();
+        scrollPane1 = new JScrollPane();
         publicationsPanel = new JPanel();
 
-        //======== this ========
         setTitle("MIS PUBLICACIONES");
         var contentPane = getContentPane();
         contentPane.setLayout(new BorderLayout());
 
-        //======== buttonsPanel ========
         {
 
-            //---- goBackButton ----
             goBackButton.setText("VOLVER");
 
             GroupLayout buttonsPanelLayout = new GroupLayout(buttonsPanel);
             buttonsPanel.setLayout(buttonsPanelLayout);
             buttonsPanelLayout.setHorizontalGroup(
-                buttonsPanelLayout.createParallelGroup()
-                    .addGroup(buttonsPanelLayout.createSequentialGroup()
-                        .addGap(372, 372, 372)
-                        .addComponent(goBackButton, GroupLayout.PREFERRED_SIZE, 114, GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(402, Short.MAX_VALUE))
+                    buttonsPanelLayout.createParallelGroup()
+                            .addGroup(buttonsPanelLayout.createSequentialGroup()
+                                    .addGap(372, 372, 372)
+                                    .addComponent(goBackButton, GroupLayout.PREFERRED_SIZE, 114, GroupLayout.PREFERRED_SIZE)
+                                    .addContainerGap(402, Short.MAX_VALUE))
             );
             buttonsPanelLayout.setVerticalGroup(
-                buttonsPanelLayout.createParallelGroup()
-                    .addGroup(buttonsPanelLayout.createSequentialGroup()
-                        .addGap(38, 38, 38)
-                        .addComponent(goBackButton)
-                        .addContainerGap(38, Short.MAX_VALUE))
+                    buttonsPanelLayout.createParallelGroup()
+                            .addGroup(buttonsPanelLayout.createSequentialGroup()
+                                    .addGap(38, 38, 38)
+                                    .addComponent(goBackButton)
+                                    .addContainerGap(38, Short.MAX_VALUE))
             );
         }
         contentPane.add(buttonsPanel, BorderLayout.NORTH);
 
-        //======== publicationsPanel ========
         {
 
-            GroupLayout publicationsPanelLayout = new GroupLayout(publicationsPanel);
-            publicationsPanel.setLayout(publicationsPanelLayout);
-            publicationsPanelLayout.setHorizontalGroup(
-                publicationsPanelLayout.createParallelGroup()
-                    .addGap(0, 888, Short.MAX_VALUE)
-            );
-            publicationsPanelLayout.setVerticalGroup(
-                publicationsPanelLayout.createParallelGroup()
-                    .addGap(0, 498, Short.MAX_VALUE)
-            );
+            {
+
+                GroupLayout publicationsPanelLayout = new GroupLayout(publicationsPanel);
+                publicationsPanel.setLayout(publicationsPanelLayout);
+                publicationsPanelLayout.setHorizontalGroup(
+                        publicationsPanelLayout.createParallelGroup()
+                                .addGap(0, 886, Short.MAX_VALUE)
+                );
+                publicationsPanelLayout.setVerticalGroup(
+                        publicationsPanelLayout.createParallelGroup()
+                                .addGap(0, 502, Short.MAX_VALUE)
+                );
+            }
+            scrollPane1.setViewportView(publicationsPanel);
         }
-        contentPane.add(publicationsPanel, BorderLayout.CENTER);
+        contentPane.add(scrollPane1, BorderLayout.CENTER);
         pack();
         setLocationRelativeTo(getOwner());
-        // JFormDesigner - End of component initialization  //GEN-END:initComponents  @formatter:on
     }
 
-    // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables  @formatter:off
     private JPanel buttonsPanel;
     private JButton goBackButton;
+    private JScrollPane scrollPane1;
     private JPanel publicationsPanel;
-    // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
 }

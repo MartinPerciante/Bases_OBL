@@ -1,8 +1,4 @@
-/*
- * Created by JFormDesigner on Sat Nov 19 15:29:57 UYT 2022
- */
-
-package frames;
+package panels;
 
 import controller.PublicationController;
 import controller.ViewController;
@@ -19,9 +15,9 @@ import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-/**
- * @author unknown
- */
+import static enums.EOfferState.ACEPTADA;
+import static enums.EOfferState.CONTRAOFERTADA;
+
 public class OfferPanel extends JPanel {
     public OfferPanel(Boolean isOwner, int x, int y, int width, int height) {
         setBounds(x, y, width, height);
@@ -41,10 +37,10 @@ public class OfferPanel extends JPanel {
                 try {
                     PublicationController.getInstance().setOfertaSelected(new Oferta(ofertanteDocumentLabel.getText(), ofertanteOfferDateLabel.getText()));
                     PublicationController.getInstance().setPublicacionSelected(new Publicacion(documentLabel.getText(), dateLabel.getText()));
-                    if (offerStateLabel.getText().equals("CONTRAOFERTADA")) {
-                        ViewController.getInstance().goToMyOffers((JFrame) getParent().getParent().getParent().getParent().getParent(), true, null, null);
+                    if (offerStateLabel.getText().equals(CONTRAOFERTADA)) {
+                        ViewController.getInstance().goToMyOffers((JFrame) getParent().getParent().getParent().getParent().getParent().getParent().getParent(), true, null, null);
                     } else {
-                        ViewController.getInstance().goToCreateCounterOfferFrame((JFrame) getParent().getParent().getParent().getParent().getParent(), true);
+                        ViewController.getInstance().goToCreateCounterOfferFrame((JFrame) getParent().getParent().getParent().getParent().getParent().getParent().getParent(), true);
                     }
                 } catch (SQLException ex) {
                     throw new RuntimeException(ex);
@@ -55,7 +51,7 @@ public class OfferPanel extends JPanel {
         acceptButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (!offerStateLabel.getText().equals("ACEPTADA")) {
+                if (!offerStateLabel.getText().equals(ACEPTADA)) {
                     PublicationController.getInstance().acceptOffer(documentLabel.getText(), ofertanteDocumentLabel.getText(), dateLabel.getText(), ofertanteOfferDateLabel.getText());
                 }
                 String usernameToShow = "";
@@ -65,7 +61,7 @@ public class OfferPanel extends JPanel {
                     usernameToShow = documentLabel.getText();
                 }
                 try {
-                    ViewController.getInstance().goToInfoUserFrame((JFrame) getParent().getParent().getParent().getParent().getParent(), usernameToShow);
+                    ViewController.getInstance().goToInfoUserFrame((JFrame) getParent().getParent().getParent().getParent().getParent().getParent().getParent(), usernameToShow);
                 } catch (SQLException ex) {
                     throw new RuntimeException(ex);
                 }
@@ -77,7 +73,7 @@ public class OfferPanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 PublicationController.getInstance().rejectOffer(documentLabel.getText(), ofertanteDocumentLabel.getText(), dateLabel.getText(), ofertanteOfferDateLabel.getText());
                 try {
-                    ViewController.getInstance().goToMyOffers((JFrame) getParent().getParent().getParent().getParent().getParent(), false, documentLabel.getText(), dateLabel.getText());
+                    ViewController.getInstance().goToMyOffers((JFrame) getParent().getParent().getParent().getParent().getParent().getParent().getParent(), false, documentLabel.getText(), dateLabel.getText());
                 } catch (SQLException ex) {
                     throw new RuntimeException(ex);
                 }
@@ -110,12 +106,12 @@ public class OfferPanel extends JPanel {
             defaultTableModel.addRow(iconsRows);
         }
         offeredFiguritasTable.setModel(defaultTableModel);
-        if (offerState.equals("ACEPTADA")) {
+        if (offerState.equals(ACEPTADA)) {
             counterOfferButton.setVisible(false);
             rejectButton.setVisible(false);
             acceptButton.setText("CONTACTO");
             acceptButton.setVisible(true);
-        } else if (offerState.equals("CONTRAOFERTADA")) {
+        } else if (offerState.equals(CONTRAOFERTADA)) {
             rejectButton.setVisible(false);
             acceptButton.setVisible(false);
             counterOfferButton.setText("VER CONTRAOFERTA");
@@ -127,7 +123,6 @@ public class OfferPanel extends JPanel {
     }
 
     private void initComponents() {
-        // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
         publishedFiguritaLabel = new JLabel();
         figuritaImageLabel = new JLabel();
         documentLabel = new JLabel();
@@ -156,32 +151,22 @@ public class OfferPanel extends JPanel {
         rejectButton = new JButton();
         acceptButton = new JButton();
 
-        //======== this ========
-
-        //---- publishedFiguritaLabel ----
         publishedFiguritaLabel.setText("Figurita publicada");
 
-        //---- figuritaStateLabel ----
         figuritaStateLabel.setText("Estado:");
 
-        //---- offeredFiguritasLabel ----
         offeredFiguritasLabel.setText("Figuritas ofrecidas");
 
-        //======== scrollPane1 ========
         {
             scrollPane1.setViewportView(offeredFiguritasTable);
         }
 
-        //---- counterOfferButton ----
         counterOfferButton.setText("CONTRAOFERTAR");
 
-        //---- ofertanteLabel ----
         ofertanteLabel.setText("OFERTANTE");
 
-        //---- rejectButton ----
         rejectButton.setText("RECHAZAR");
 
-        //---- acceptButton ----
         acceptButton.setText("ACEPTAR");
 
         GroupLayout layout = new GroupLayout(this);
@@ -280,10 +265,8 @@ public class OfferPanel extends JPanel {
                                                 .addComponent(acceptButton)))
                                 .addGap(40, 40, 40))
         );
-        // JFormDesigner - End of component initialization  //GEN-END:initComponents  @formatter:on
     }
 
-    // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables  @formatter:off
     private JLabel publishedFiguritaLabel;
     private JLabel figuritaImageLabel;
     private JLabel documentLabel;
@@ -301,5 +284,4 @@ public class OfferPanel extends JPanel {
     private JLabel ofertanteOfferDateLabel;
     private JButton rejectButton;
     private JButton acceptButton;
-    // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
 }

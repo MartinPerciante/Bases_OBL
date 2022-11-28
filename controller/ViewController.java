@@ -10,48 +10,39 @@ public class ViewController {
     private static ViewController instance;
     private LoginFrame loginFrame;
 
-    public LoginFrame getLoginFrame() {
-        //if (loginFrame == null) {
+    public LoginFrame getLoginFrame() throws SQLException {
+        PublicationController.getInstance().updateStatusOffers();
         loginFrame = new LoginFrame();
         loginFrame.setBounds(500, 200, 435, 320);
         loginFrame.setVisible(true);
-        //}
         return loginFrame;
     }
 
     private ChangePasswordFrame changePasswordFrame;
 
     public ChangePasswordFrame getChangePasswordFrame() {
-        //if (changePasswordFrame == null) {
         changePasswordFrame = new ChangePasswordFrame();
-        //}
         return changePasswordFrame;
     }
 
     private MenuFrame menuFrame;
 
     public MenuFrame getMenuFrame() {
-        //if (menuFrame == null) {
         menuFrame = new MenuFrame();
-        //}
         return menuFrame;
     }
 
     private UserDataFrame userDataFrame;
 
     public UserDataFrame getUserDataFrame() {
-        //if (userDataFrame == null) {
         userDataFrame = new UserDataFrame();
-        //}
         return userDataFrame;
     }
 
     private CreateUserFrame createUserFrame;
 
     public CreateUserFrame getCreateUserFrame() {
-        //if (createUserFrame == null) {
         createUserFrame = new CreateUserFrame();
-        //}
         return createUserFrame;
     }
 
@@ -68,19 +59,16 @@ public class ViewController {
     private PickFiguritaFrame pickFiguritaFrame;
 
     public PickFiguritaFrame getPickFiguritaFrame() throws SQLException {
-//        if (newFrame) {
         pickFiguritaFrame = new PickFiguritaFrame();
         pickFiguritaFrame.setSize(725, 520);
-//        }
         return pickFiguritaFrame;
     }
 
     private ShowPublicationsFrame showPublicationsFrame;
 
     public ShowPublicationsFrame getShowPublicationsFrame() throws SQLException {
-        //if (showPublicationsFrame == null) {
         showPublicationsFrame = new ShowPublicationsFrame();
-        //}
+        showPublicationsFrame.setSize(1200, 700);
         return showPublicationsFrame;
     }
 
@@ -97,9 +85,8 @@ public class ViewController {
     private MyPublicationsFrame myPublicationsFrame;
 
     public MyPublicationsFrame getMyPublicationsFrame() throws SQLException {
-        //if (myPublicationsFrame == null) {
         myPublicationsFrame = new MyPublicationsFrame();
-        //}
+        myPublicationsFrame.setSize(1200, 700);
         return myPublicationsFrame;
     }
 
@@ -107,6 +94,7 @@ public class ViewController {
 
     public MyOffersFrame getMyOffersFrame(Boolean isCounterOffer, String document, String date) throws SQLException {
         myOffersFrame = new MyOffersFrame(isCounterOffer, document, date);
+        myOffersFrame.setSize(1200, 700);
         return myOffersFrame;
     }
 
@@ -127,6 +115,7 @@ public class ViewController {
     }
 
     private InfoUserFrame infoUserFrame;
+
     public InfoUserFrame getInfoUserFrame(String username) throws SQLException {
         infoUserFrame = new InfoUserFrame(username);
         return infoUserFrame;
@@ -142,7 +131,7 @@ public class ViewController {
         goToFrom(getCreatePublicationFrame(newFrame), origin);
     }
 
-    public void goToLogin(JFrame origin) {
+    public void goToLogin(JFrame origin) throws SQLException {
         goToFrom(getLoginFrame(), origin);
     }
 

@@ -9,8 +9,8 @@ public class Usuario {
 
     private static Usuario instance;
 
-    public static Usuario getInstance(){
-        if (instance == null){
+    public static Usuario getInstance() {
+        if (instance == null) {
             instance = new Usuario();
         }
         return instance;
