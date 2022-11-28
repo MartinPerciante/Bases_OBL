@@ -1,4 +1,5 @@
 package database;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -48,19 +49,19 @@ public class DBService {
         return id;
     }
 
-    public static void setImagen(ArrayList<Integer> numeros, ArrayList<String> paises, ArrayList<String> paths)throws SQLException {
-        try{
+    public static void setImagen(ArrayList<Integer> numeros, ArrayList<String> paises, ArrayList<String> paths) throws SQLException {
+        try {
 
             int cantMax = numeros.size();
             String query = "insert into figurita values (?, ?, ?)";
-            for (int j = 0; j < cantMax - 1; j++){
+            for (int j = 0; j < cantMax - 1; j++) {
                 query += ", (?, ?, ?)";
             }
 
             ArrayList<FileInputStream> streams = new ArrayList<>();
 
             PreparedStatement p = connect().prepareStatement(query);
-            for(int i = 0; i < cantMax; i++){
+            for (int i = 0; i < cantMax; i++) {
                 String path = paths.get(i);
                 String pais = paises.get(i);
                 int numero = numeros.get(i);
@@ -70,13 +71,13 @@ public class DBService {
 
                 p.setInt(1 + i * 3, numero);
                 p.setString(2 + i * 3, pais);
-                p.setBinaryStream(3 + i * 3, s, (int)f.length());
+                p.setBinaryStream(3 + i * 3, s, (int) f.length());
             }
             p.executeUpdate();
             for (FileInputStream stream : streams) {
                 stream.close();
             }
-            System.out.println("Se termino de ingresar las figuritas");
+            System.out.println("Se han ingresado todas las figuritas");
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         } catch (IOException e) {

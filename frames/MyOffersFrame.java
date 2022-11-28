@@ -1,14 +1,10 @@
-/*
- * Created by JFormDesigner on Sat Nov 19 16:54:06 UYT 2022
- */
-
 package frames;
 
 import controller.PublicationController;
 import controller.ViewController;
-import entities.Oferta;
 import entities.Publicacion;
 import entities.Usuario;
+import panels.OfferPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,9 +14,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-/**
- * @author unknown
- */
 public class MyOffersFrame extends JFrame {
     public MyOffersFrame(Boolean isCounterOffer, String document, String date) throws SQLException {
         initComponents();
@@ -33,7 +26,7 @@ public class MyOffersFrame extends JFrame {
             setTitle("CONTRAOFERTA");
         }
         populateOffers(isCounterOffer, document, date);
-//        setResizable(false);
+        setResizable(false);
     }
 
     int xPosition = 0;
@@ -95,8 +88,21 @@ public class MyOffersFrame extends JFrame {
                 }
             }
         }
-        getContentPane().add(offersPanel);
-        SwingUtilities.updateComponentTreeUI(this);
+        int offersPanelArrayListSize = offerPanelArrayList.size();
+        GroupLayout publicationsPanelLayout = new GroupLayout(offersPanel);
+        offersPanel.setLayout(publicationsPanelLayout);
+        publicationsPanelLayout.setHorizontalGroup(
+                publicationsPanelLayout.createParallelGroup()
+                        .addGap(0, offersPanelArrayListSize > 1 ? 1610 : 805, Short.MAX_VALUE)
+        );
+        publicationsPanelLayout.setVerticalGroup(
+                publicationsPanelLayout.createParallelGroup()
+                        .addGap(0, (offersPanelArrayListSize % 2 == 0 ? offersPanelArrayListSize / 2 : (offersPanelArrayListSize + 1) / 2) * (height + 5), Short.MAX_VALUE)
+        );
+        scrollPane1.setViewportView(offersPanel);
+        getContentPane().add(scrollPane1, BorderLayout.CENTER);
+        pack();
+        setLocationRelativeTo(getOwner());
     }
 
     private void buttonActions() {
@@ -109,20 +115,17 @@ public class MyOffersFrame extends JFrame {
     }
 
     private void initComponents() {
-        // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
         buttonsPanel = new JPanel();
         goBackButton = new JButton();
+        scrollPane1 = new JScrollPane();
         offersPanel = new JPanel();
 
-        //======== this ========
         setTitle("MIS OFERTAS");
         var contentPane = getContentPane();
         contentPane.setLayout(new BorderLayout());
 
-        //======== buttonsPanel ========
         {
 
-            //---- goBackButton ----
             goBackButton.setText("VOLVER");
 
             GroupLayout buttonsPanelLayout = new GroupLayout(buttonsPanel);
@@ -144,29 +147,30 @@ public class MyOffersFrame extends JFrame {
         }
         contentPane.add(buttonsPanel, BorderLayout.NORTH);
 
-        //======== offersPanel ========
         {
 
-            GroupLayout offersPanelLayout = new GroupLayout(offersPanel);
-            offersPanel.setLayout(offersPanelLayout);
-            offersPanelLayout.setHorizontalGroup(
-                    offersPanelLayout.createParallelGroup()
-                            .addGap(0, 888, Short.MAX_VALUE)
-            );
-            offersPanelLayout.setVerticalGroup(
-                    offersPanelLayout.createParallelGroup()
-                            .addGap(0, 504, Short.MAX_VALUE)
-            );
+            {
+
+                GroupLayout offersPanelLayout = new GroupLayout(offersPanel);
+                offersPanel.setLayout(offersPanelLayout);
+                offersPanelLayout.setHorizontalGroup(
+                        offersPanelLayout.createParallelGroup()
+                                .addGap(0, 886, Short.MAX_VALUE)
+                );
+                offersPanelLayout.setVerticalGroup(
+                        offersPanelLayout.createParallelGroup()
+                                .addGap(0, 502, Short.MAX_VALUE)
+                );
+            }
+            scrollPane1.setViewportView(offersPanel);
         }
-        contentPane.add(offersPanel, BorderLayout.CENTER);
+        contentPane.add(scrollPane1, BorderLayout.CENTER);
         pack();
         setLocationRelativeTo(getOwner());
-        // JFormDesigner - End of component initialization  //GEN-END:initComponents  @formatter:on
     }
 
-    // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables  @formatter:off
     private JPanel buttonsPanel;
     private JButton goBackButton;
+    private JScrollPane scrollPane1;
     private JPanel offersPanel;
-    // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
 }

@@ -1,12 +1,9 @@
-/*
- * Created by JFormDesigner on Sat Nov 19 16:54:06 UYT 2022
- */
-
 package frames;
 
 import controller.PublicationController;
 import controller.ViewController;
 import entities.Usuario;
+import panels.PublicationPanel;
 import utils.Utils;
 
 import javax.swing.*;
@@ -19,16 +16,13 @@ import java.util.ArrayList;
 
 import static utils.Utils.EMPTY_ITEM;
 
-/**
- * @author unknown
- */
 public class ShowPublicationsFrame extends JFrame {
     public ShowPublicationsFrame() throws SQLException {
         initComponents();
         publicationPanelArrayList = new ArrayList<>();
         buttonActions();
         loadComboBoxData();
-//        setResizable(false);
+        setResizable(false);
     }
 
     int xPosition = 0;
@@ -81,8 +75,22 @@ public class ShowPublicationsFrame extends JFrame {
                 }
             }
         }
-        getContentPane().add(publicationsPanel);
-        SwingUtilities.updateComponentTreeUI(this);
+        int panelsArrayListSize = publicationPanelArrayList.size();
+        GroupLayout publicationsPanelLayout = new GroupLayout(publicationsPanel);
+        publicationsPanel.setLayout(publicationsPanelLayout);
+        publicationsPanelLayout.setHorizontalGroup(
+                publicationsPanelLayout.createParallelGroup()
+                        .addGap(0, panelsArrayListSize > 1 ? 1610 : 805, Short.MAX_VALUE)
+        );
+        publicationsPanelLayout.setVerticalGroup(
+                publicationsPanelLayout.createParallelGroup()
+                        .addGap(0, (panelsArrayListSize % 2 == 0 ? panelsArrayListSize / 2 : (panelsArrayListSize + 1) / 2) * (height + 5), Short.MAX_VALUE)
+        );
+        scrollPane1.setViewportView(publicationsPanel);
+        getContentPane().add(scrollPane1, BorderLayout.CENTER);
+        pack();
+        setLocationRelativeTo(getOwner());
+        setSize(1200, 700);
     }
 
     private void loadComboBoxData() throws SQLException {
@@ -119,7 +127,6 @@ public class ShowPublicationsFrame extends JFrame {
     }
 
     private void initComponents() {
-        // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
         filterPanel = new JPanel();
         numberLabel = new JLabel();
         numberComboBox = new JComboBox();
@@ -127,26 +134,21 @@ public class ShowPublicationsFrame extends JFrame {
         countryComboBox = new JComboBox();
         filterButton = new JButton();
         cancelButton = new JButton();
+        scrollPane1 = new JScrollPane();
         publicationsPanel = new JPanel();
 
-        //======== this ========
         setTitle("PUBLICACIONES");
         var contentPane = getContentPane();
         contentPane.setLayout(new BorderLayout());
 
-        //======== filterPanel ========
         {
 
-            //---- numberLabel ----
             numberLabel.setText("Numero");
 
-            //---- countryLabel ----
             countryLabel.setText("Pa\u00eds");
 
-            //---- filterButton ----
             filterButton.setText("FILTRAR");
 
-            //---- cancelButton ----
             cancelButton.setText("CANCELAR");
 
             GroupLayout filterPanelLayout = new GroupLayout(filterPanel);
@@ -156,7 +158,7 @@ public class ShowPublicationsFrame extends JFrame {
                             .addGroup(GroupLayout.Alignment.TRAILING, filterPanelLayout.createSequentialGroup()
                                     .addContainerGap()
                                     .addComponent(cancelButton, GroupLayout.PREFERRED_SIZE, 114, GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 340, Short.MAX_VALUE)
+                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 352, Short.MAX_VALUE)
                                     .addComponent(numberLabel, GroupLayout.PREFERRED_SIZE, 67, GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                     .addComponent(numberComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
@@ -187,27 +189,28 @@ public class ShowPublicationsFrame extends JFrame {
         }
         contentPane.add(filterPanel, BorderLayout.NORTH);
 
-        //======== publicationsPanel ========
         {
 
-            GroupLayout publicationsPanelLayout = new GroupLayout(publicationsPanel);
-            publicationsPanel.setLayout(publicationsPanelLayout);
-            publicationsPanelLayout.setHorizontalGroup(
-                    publicationsPanelLayout.createParallelGroup()
-                            .addGap(0, 888, Short.MAX_VALUE)
-            );
-            publicationsPanelLayout.setVerticalGroup(
-                    publicationsPanelLayout.createParallelGroup()
-                            .addGap(0, 498, Short.MAX_VALUE)
-            );
+            {
+
+                GroupLayout publicationsPanelLayout = new GroupLayout(publicationsPanel);
+                publicationsPanel.setLayout(publicationsPanelLayout);
+                publicationsPanelLayout.setHorizontalGroup(
+                        publicationsPanelLayout.createParallelGroup()
+                                .addGap(0, 886, Short.MAX_VALUE)
+                );
+                publicationsPanelLayout.setVerticalGroup(
+                        publicationsPanelLayout.createParallelGroup()
+                                .addGap(0, 502, Short.MAX_VALUE)
+                );
+            }
+            scrollPane1.setViewportView(publicationsPanel);
         }
-        contentPane.add(publicationsPanel, BorderLayout.CENTER);
+        contentPane.add(scrollPane1, BorderLayout.CENTER);
         pack();
         setLocationRelativeTo(getOwner());
-        // JFormDesigner - End of component initialization  //GEN-END:initComponents  @formatter:on
     }
 
-    // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables  @formatter:off
     private JPanel filterPanel;
     private JLabel numberLabel;
     private JComboBox numberComboBox;
@@ -215,6 +218,6 @@ public class ShowPublicationsFrame extends JFrame {
     private JComboBox countryComboBox;
     private JButton filterButton;
     private JButton cancelButton;
+    private JScrollPane scrollPane1;
     private JPanel publicationsPanel;
-    // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
 }

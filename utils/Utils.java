@@ -6,7 +6,6 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
 import java.io.File;
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -85,24 +84,20 @@ public class Utils {
         for (String pais : paises) {
             int limite = pais.equals("FWC") ? 28 : 20;
 
-            File dir = new File("Figuritas/" + pais);
+            File dir = new File("figuritas/" + pais);
             String[] figuritasList = dir.list();
             Map<Integer, String> map = new HashMap<Integer, String>();
             for (String figuritaNom : figuritasList) {
                 ArrayList<String> array = new ArrayList<>(Arrays.stream(figuritaNom.split("-")).toList());
-                //System.out.println("Estoy en " + figuritaNom);
                 int numFigurita = Integer.parseInt(array.get(0));
                 map.put(numFigurita, figuritaNom);
             }
-
-            Connection connection = DBService.connect();
             for (int i = 1; i < limite; i++) {
                 numeros.add(i);
                 paisesArray.add(pais);
                 String imagePath = dir + "/" + map.get(i);
                 paths.add(imagePath);
             }
-
         }
         try {
             DBService.setImagen(numeros, paisesArray, paths);
@@ -111,4 +106,3 @@ public class Utils {
         }
     }
 }
-

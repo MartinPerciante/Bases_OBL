@@ -1,4 +1,3 @@
-import controller.PublicationController;
 import controller.ViewController;
 import utils.Utils;
 
@@ -8,7 +7,6 @@ public class Main {
 
     public static void main(String[] args) throws SQLException {
         ViewController.getInstance().getLoginFrame();
-        PublicationController.getInstance().updateStatusOffers();
-        //Utils.cargarFigus();
+//        Utils.cargarFigus();
     }
 }

@@ -1,12 +1,7 @@
-/*
- * Created by JFormDesigner on Sat Nov 12 14:38:04 UYT 2022
- */
-
 package frames;
 
 import controller.PublicationController;
 import controller.ViewController;
-import database.DBService;
 import entities.Figurita;
 import entities.Usuario;
 import enums.EPickFigurita;
@@ -25,21 +20,11 @@ import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-/**
- * @author unknown
- */
 public class CreatePublicationFrame extends JFrame {
     public CreatePublicationFrame() throws SQLException {
         initComponents();
         buttonActions();
         interestedFiguritasList = new ArrayList<>();
-        //estas 4 lineas van en el init, lo pongo aca pa q no se borre por ahora y al final lo movemos
-        figuritaImageLabel.setText("Haga click para seleccionar una figurita");
-        documentValueLabel.setText(Usuario.getInstance().getUsername());
-        interestedFiguritasTable.setPreferredScrollableViewportSize(interestedFiguritasTable.getPreferredSize());
-        interestedFiguritasTable.setRowHeight(312);
-        interestedFiguritasTable.setTableHeader(null);
-        //
         setResizable(false);
         ResultSet resultSet = PublicationController.getInstance().getFiguritasState();
         while (resultSet.next()) {
@@ -109,7 +94,7 @@ public class CreatePublicationFrame extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 if (figuritaImageLabel.getIcon() != null) {
                     String actualDate = Utils.formatLocalDateTimeToString(LocalDateTime.now());
-                    DBService.executeUpdate("INSERT INTO publicacion VALUES ('" + documentValueLabel.getText() + "', '" + actualDate + "', 'ACTIVA', " + figuritaPublicated.getNumero() + ", '" + figuritaPublicated.getPais() + "', '" + figuritaStateComboBox.getSelectedItem().toString() + "')");
+                    PublicationController.getInstance().createPublication(documentValueLabel.getText(), actualDate, figuritaPublicated.getNumero(), figuritaPublicated.getPais(), figuritaStateComboBox.getSelectedItem().toString());
                     if (interestedFiguritasTable.getRowCount() > 0) {
                         StringBuilder stringBuilderQuery = new StringBuilder();
                         stringBuilderQuery.append("INSERT INTO publicacion_tiene_interesada_figurita VALUES ");
@@ -120,7 +105,7 @@ public class CreatePublicationFrame extends JFrame {
                             stringBuilderQuery.append(actualDate + "'),");
                         }
                         String query = stringBuilderQuery.toString();
-                        DBService.executeUpdate(query.substring(0, query.length() - 1));
+                        PublicationController.getInstance().insertPublicationInterestedFiguritas(query.substring(0, query.length() - 1));
                     }
                     viewController.goToMenu(CreatePublicationFrame.this);
                 }
@@ -145,9 +130,7 @@ public class CreatePublicationFrame extends JFrame {
         });
     }
 
-    //añadir a table metodo getColumnClass con return Icon.class
     public void initComponents() {
-        // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
         dialogPane = new JPanel();
         contentPanel = new JPanel();
         documentLabel = new JLabel();
@@ -160,56 +143,48 @@ public class CreatePublicationFrame extends JFrame {
                 return Icon.class;
             }
         };
+        figuritaImageLabel.setText("Haga click para seleccionar una figurita");
+        interestedFiguritasTable.setPreferredScrollableViewportSize(interestedFiguritasTable.getPreferredSize());
+        interestedFiguritasTable.setRowHeight(312);
         interestedFiguritasTable.setTableHeader(null);
         interestedFiguritasTable.setBorder(Utils.blackBorder1);
         figuritasStateLabel = new JLabel();
         documentValueLabel = new JLabel();
+        documentValueLabel.setText(Usuario.getInstance().getUsername());
         figuritaStateComboBox = new JComboBox();
         cancelButton = new JButton();
         createButton = new JButton();
         addFiguritaButton = new JButton();
         deleteFiguritaButton = new JButton();
 
-        //======== this ========
         setTitle("CREAR PUBLICACI\u00d3N");
         var contentPane = getContentPane();
         contentPane.setLayout(new BorderLayout());
 
-        //======== dialogPane ========
         {
             dialogPane.setBorder(new EmptyBorder(12, 12, 12, 12));
             dialogPane.setLayout(new BorderLayout());
 
-            //======== contentPanel ========
             {
 
-                //---- documentLabel ----
                 documentLabel.setText("Documento del usuario:");
 
-                //---- offeredFiguritaLabel ----
                 offeredFiguritaLabel.setText("Figurita ofrecida");
 
-                //---- interestedFiguritasLabel ----
                 interestedFiguritasLabel.setText("Figuritas interesadas");
 
-                //======== scrollPane1 ========
                 {
                     scrollPane1.setViewportView(interestedFiguritasTable);
                 }
 
-                //---- figuritasStateLabel ----
                 figuritasStateLabel.setText("Estado:");
 
-                //---- cancelButton ----
                 cancelButton.setText("CANCELAR");
 
-                //---- createButton ----
                 createButton.setText("CREAR");
 
-                //---- addFiguritaButton ----
                 addFiguritaButton.setText("AGREGAR");
 
-                //---- deleteFiguritaButton ----
                 deleteFiguritaButton.setText("ELIMINAR");
 
                 GroupLayout contentPanelLayout = new GroupLayout(contentPanel);
@@ -287,10 +262,8 @@ public class CreatePublicationFrame extends JFrame {
         contentPane.add(dialogPane, BorderLayout.CENTER);
         pack();
         setLocationRelativeTo(getOwner());
-        // JFormDesigner - End of component initialization  //GEN-END:initComponents  @formatter:on
     }
 
-    // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables  @formatter:off
     private JPanel dialogPane;
     private JPanel contentPanel;
     private JLabel documentLabel;
@@ -306,5 +279,4 @@ public class CreatePublicationFrame extends JFrame {
     private JButton createButton;
     private JButton addFiguritaButton;
     private JButton deleteFiguritaButton;
-    // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
 }

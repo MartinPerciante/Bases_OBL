@@ -11,6 +11,11 @@ import javax.swing.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import static enums.EOfferState.*;
+import static enums.EOfferType.CONTRAOFERTA;
+import static enums.EOfferType.OFERTA;
+import static enums.EPublicationState.*;
+
 public class PublicationController {
 
     private static PublicationController instance;
@@ -48,10 +53,22 @@ public class PublicationController {
         return instance;
     }
 
+    public ResultSet getActivePublicationsFromUser(String document) {
+        return DBService.executeQuery("SELECT * FROM publicacion WHERE ci_usuario = '" + document + "' AND estado = '" + ACTIVA + "'");
+    }
+
+    public void createPublication(String document, String date, Integer figuritaNumber, String figuritaCountry, String figuritaState) {
+        DBService.executeUpdate("INSERT INTO publicacion VALUES ('" + document + "', '" + date + "', '" + ACTIVA + "', " + figuritaNumber + ", '" + figuritaCountry + "', '" + figuritaState + "')");
+    }
+
+    public void insertPublicationInterestedFiguritas(String query) {
+        DBService.executeUpdate(query);
+    }
+
     public void updateOffer(String documentUserCounterOffer, String documentUserOffer, String dateCounterOffer, String dateOffer, String datePublication) {
         DBService.executeUpdate("UPDATE oferta SET ci_usuario_contraoferta = '" + documentUserCounterOffer + "', " +
                 "fecha_contraoferta = '" + dateCounterOffer + "', " +
-                "estado = 'CONTRAOFERTADA' WHERE ci_usuario_oferta = '" + documentUserOffer + "' " +
+                "estado = '" + CONTRAOFERTADA + "' WHERE ci_usuario_oferta = '" + documentUserOffer + "' " +
                 "AND ci_usuario_publicacion = '" + documentUserCounterOffer + "' " +
                 "AND fecha_oferta = '" + dateOffer + "' " +
                 "AND fecha_publicacion = '" + datePublication + "'");
@@ -60,7 +77,7 @@ public class PublicationController {
     public void insertOffer(String userDocument, String publicationUserDocument, String offerDate, String publicationDate, Boolean isOffer) {
         DBService.executeUpdate("INSERT INTO oferta VALUES ('" + userDocument + "', '"
                 + publicationUserDocument + "', '" + offerDate + "', '" + publicationDate + "', '"
-                + (isOffer ? "OFERTA'" : "CONTRAOFERTA'") + ", 'PENDIENTE', null, null)");
+                + (isOffer ? OFERTA.toString() : CONTRAOFERTA.toString()) + "' , '" + PENDIENTE + "', null, null)");
     }
 
     public void insertOfferHasFigurita(String query) {
@@ -92,13 +109,13 @@ public class PublicationController {
         query.append("SELECT ci, nombre, apellido, fecha, estado, estado_figurita, foto FROM publicacion p " +
                 "INNER JOIN usuario u on p.ci_usuario = u.ci " +
                 "INNER JOIN figurita f on p.numero_figurita = f.numero and p.pais_figurita = f.pais " +
-                "AND p.estado = 'ACTIVA'");
+                "AND p.estado = '" + ACTIVA + "'");
         if (!figuritaNumber.equals(Utils.EMPTY_ITEM) && !figuritaCountry.equals(Utils.EMPTY_ITEM)) {
-            query.append("WHERE estado = 'ACTIVA' AND p.numero_figurita = ").append(figuritaNumber).append(" AND p.pais_figurita = '").append(figuritaCountry).append("'");
+            query.append("WHERE estado = '" + ACTIVA + "' AND p.numero_figurita = ").append(figuritaNumber).append(" AND p.pais_figurita = '").append(figuritaCountry).append("'");
         } else if (!figuritaNumber.equals(Utils.EMPTY_ITEM)) {
-            query.append("WHERE estado = 'ACTIVA' AND p.numero_figurita = ").append(figuritaNumber);
+            query.append("WHERE estado = '" + ACTIVA + "' AND p.numero_figurita = ").append(figuritaNumber);
         } else if (!figuritaCountry.equals(Utils.EMPTY_ITEM)) {
-            query.append("WHERE estado = 'ACTIVA' AND p.pais_figurita = '").append(figuritaCountry).append("'");
+            query.append("WHERE estado = '" + ACTIVA + "' AND p.pais_figurita = '").append(figuritaCountry).append("'");
         }
         return DBService.executeQuery(query.toString());
     }
@@ -108,7 +125,7 @@ public class PublicationController {
         query.append("SELECT ci, nombre, apellido, fecha, estado, estado_figurita, foto FROM publicacion p " +
                 "INNER JOIN usuario u on p.ci_usuario = u.ci " +
                 "INNER JOIN figurita f on p.numero_figurita = f.numero and p.pais_figurita = f.pais " +
-                "WHERE p.ci_usuario = '" + userDocument + "' AND estado != 'INACTIVA'");
+                "WHERE p.ci_usuario = '" + userDocument + "' AND estado != '" + INACTIVA + "'");
         return DBService.executeQuery(query.toString());
     }
 
@@ -126,13 +143,13 @@ public class PublicationController {
                     "INNER JOIN usuario u ON o.ci_usuario_publicacion = u.ci " +
                     "INNER JOIN publicacion p ON o.ci_usuario_publicacion = p.ci_usuario AND o.fecha_publicacion = p.fecha " +
                     "INNER JOIN figurita f on p.numero_figurita = f.numero and p.pais_figurita = f.pais " +
-                    "WHERE p.ci_usuario = '" + documentOwner + "' AND p.fecha = '" + dateOwner + "' AND o.estado != 'RECHAZADA'");
+                    "WHERE p.ci_usuario = '" + documentOwner + "' AND p.fecha = '" + dateOwner + "' AND o.estado != '" + RECHAZADA + "'");
         } else {
             query.append("SELECT ci_usuario_oferta, fecha_oferta, ci, nombre, apellido, fecha_publicacion, estado_figurita, o.estado, foto FROM oferta o " +
                     "INNER JOIN usuario u ON o.ci_usuario_publicacion = u.ci " +
                     "INNER JOIN publicacion p ON o.ci_usuario_publicacion = p.ci_usuario AND o.fecha_publicacion = p.fecha " +
                     "INNER JOIN figurita f on p.numero_figurita = f.numero and p.pais_figurita = f.pais " +
-                    "WHERE o.ci_usuario_oferta = '" + userDocument + "' AND o.estado != 'RECHAZADA'");
+                    "WHERE o.ci_usuario_oferta = '" + userDocument + "' AND o.estado != '" + RECHAZADA + "'");
         }
         return DBService.executeQuery(query.toString());
     }
@@ -190,56 +207,55 @@ public class PublicationController {
         //Traigo las publicaciones activas que ya pasaron una semana y deberian desactivarse
         String query = "SELECT p.ci_usuario, p.fecha FROM publicacion p " +
                 "WHERE DATE_PART('day', NOW() - p.fecha) > 7.0 " +
-                "AND p.estado = 'ACTIVA'";
+                "AND p.estado = '" + ACTIVA + "'";
         ResultSet result = DBService.executeQuery(query);
         if (result != null) {
             while (result.next()) {
                 String document = result.getString("ci_usuario");
                 String date = result.getString("fecha");
                 DBService.executeUpdate("UPDATE publicacion SET " +
-                        "estado = 'INACTIVA' " +
+                        "estado = '" + INACTIVA + "' " +
                         "WHERE ci_usuario = '" + document + "' " +
                         "AND fecha = '" + date + "'");
                 //Actualizamos las ofertas y contraofertas
                 DBService.executeUpdate("UPDATE oferta SET " +
-                        "estado = 'RECHAZADA' " +
+                        "estado = '" + RECHAZADA + "' " +
                         "WHERE ci_usuario_publicacion = '" + document + "' " +
                         "AND fecha_publicacion = '" + date + "'");
             }
         }
     }
 
-    //Acepta tanto ofertas como contraofertas
     public void acceptOffer(String userDocumentPublication, String userDocumentOffer, String datePublication, String dateOffer) {
         DBService.executeUpdate("UPDATE oferta SET " +
-                "estado = 'ACEPTADA' " +
+                "estado = '" + ACEPTADA + "' " +
                 "WHERE ci_usuario_publicacion = '" + userDocumentPublication + "' " +
                 "AND fecha_publicacion = '" + datePublication + "' " +
                 "AND ci_usuario_oferta = '" + userDocumentOffer + "' " +
                 "AND fecha_oferta = '" + dateOffer + "'");
 
         DBService.executeUpdate("UPDATE publicacion SET " +
-                "estado = 'CONCRETADA' " +
+                "estado = '" + CONCRETADA + "' " +
                 "WHERE ci_usuario = '" + userDocumentPublication + "' " +
                 "AND fecha = '" + datePublication + "' ");
 
         DBService.executeUpdate("UPDATE oferta SET " +
-                "estado = 'RECHAZADA' " +
+                "estado = '" + "RECHAZADA" + "' " +
                 "WHERE ci_usuario_publicacion = '" + userDocumentPublication + "' " +
                 "AND fecha_publicacion = '" + datePublication + "' " +
-                "AND ci_usuario_contraoferta != '" + userDocumentOffer + "' AND fecha_contraoferta != '" + dateOffer + "' AND estado != 'ACEPTADA'");
+                "AND (ci_usuario_contraoferta != '" + userDocumentOffer + "' OR ci_usuario_contraoferta IS NULL) AND (fecha_contraoferta != '" + dateOffer + "'  OR fecha_contraoferta IS NULL) AND estado != '" + "ACEPTADA" + "'");
     }
 
     public void rejectOffer(String userDocumentPublication, String userDocumentOffer, String datePublication, String dateOffer) {
         DBService.executeUpdate("UPDATE oferta SET " +
-                "estado = 'RECHAZADA' " +
+                "estado = '" + RECHAZADA + "' " +
                 "WHERE ci_usuario_publicacion = '" + userDocumentPublication + "' " +
                 "AND fecha_publicacion = '" + datePublication + "' " +
                 "AND ci_usuario_oferta = '" + userDocumentOffer + "' " +
                 "AND fecha_oferta = '" + dateOffer + "'");
 
         DBService.executeUpdate("UPDATE oferta SET " +
-                "estado = 'RECHAZADA' " +
+                "estado = '" + RECHAZADA + "' " +
                 "WHERE ci_usuario_publicacion = '" + userDocumentPublication + "' " +
                 "AND fecha_publicacion = '" + datePublication + "' " +
                 "AND ci_usuario_contraoferta = '" + userDocumentOffer + "' " +
